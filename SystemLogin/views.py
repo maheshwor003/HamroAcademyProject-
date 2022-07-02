@@ -3,8 +3,9 @@ from .forms import SignUpForm,LoginForm
 from django.contrib.auth import authenticate, login
 
 
-def home(request):
+def homepage(request):
     return render (request,'homepage.html')
+
 
 
 def register(request):
@@ -14,7 +15,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             msg = 'user created'
-            return redirect('home')
+            return redirect('homepage')
         else:
             msg = 'form is not valid'
     else:
