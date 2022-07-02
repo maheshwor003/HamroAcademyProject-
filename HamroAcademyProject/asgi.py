@@ -1,5 +1,5 @@
 """
-ASGI config for hamroacademy project.
+ASGI config for HamroAcademyProject project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'hamroacademy.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'HamroAcademyProject.settings')
 
 application = get_asgi_application()
