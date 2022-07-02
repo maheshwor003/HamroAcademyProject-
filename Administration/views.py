@@ -7,3 +7,14 @@ from django.shortcuts import render
 
 def adminpage(request):
     return render (request,'adminpage.html')
+
+
+
+
+
+def teacher(request):
+    return render(request,'teacherpage.html')
+
+
+def student(request):
+    return render(request,'studentpage.html')
