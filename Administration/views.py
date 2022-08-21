@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+from .models import Course, Instructor
+from django.http import JsonResponse
+from django.core import serializers
 # Create your views here.
 
 
@@ -28,6 +30,17 @@ def all_teacher(request):
     
 def all_course(request):
     return render (request,'allcourse.html')
+
+def list_coursedata(request):
+    if request.method == "GET":
+          stud =Course.objects.all()
+        #   test = Instructor.objects.filter()))
+          print(stud)
+          student_data =serializers.serialize('json',stud)
+          return JsonResponse(student_data,safe=False)
+    return JsonResponse({'message':'wrongvalidation'})
+   
+
 
 def add_course(request):
     return render (request,'addcourse.html')
