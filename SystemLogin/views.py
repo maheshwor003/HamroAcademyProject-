@@ -34,7 +34,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None and user.is_admin:
                 login(request, user)
-                return redirect('adminpage')
+                return redirect('dashboard')
             elif user is not None and user.is_student:
                 login(request, user)
                 return redirect('studentpage')
