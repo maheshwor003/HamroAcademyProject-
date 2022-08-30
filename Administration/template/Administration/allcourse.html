@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 
@@ -264,6 +265,11 @@ with font-awesome or any other icon font library -->
             </div>
             <!-- /.sidebar -->
         </aside>
+=======
+{% extends "base.html" %}
+<!-- Content Wrapper. Contains page content -->
+{% block content %}
+>>>>>>> 41d9295c0f64bf01eddcbcbd4214c8c29997d2a7
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
@@ -293,7 +299,7 @@ with font-awesome or any other icon font library -->
                     <div class="Allpost">
                         <div class="flexcreate">
                             <div>
-                                <a href="add-teacher.html" class="btn btn-primary">Add Course</a>
+                                <a href="{% url 'addcourse' %}" class="btn btn-primary">Add Course</a>
                             </div>
                             <div>
                                 <input type="text" class="form-control" placeholder="Search">
@@ -303,7 +309,11 @@ with font-awesome or any other icon font library -->
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
+<<<<<<< HEAD
 
+=======
+                                        <th>S.N</th>
+>>>>>>> 41d9295c0f64bf01eddcbcbd4214c8c29997d2a7
                                         <th>Course Code</th>
                                         <th>Course Name</th>
                                         <th>Maximum number of students</th>
@@ -313,9 +323,24 @@ with font-awesome or any other icon font library -->
 
                                     </tr>
                                 </thead>
+<<<<<<< HEAD
                                 <tbody id="tblcourse">
 
 
+=======
+                                <tbody id="tbody">
+                                    {% for st in data_read %} 
+                                    <tr>
+                                       <td>{{st.id}}</td>
+                                       <td>{{st.course_code}}</td>
+                                       <td>{{st.course_name}}</td>
+                                       <td>{{st.max_numb_students}}</td>
+                                       <td>{{st.instructors.name}}</td>
+                                       <td> <input type="button" data-sid="{{st.id}}" value="Edit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm btn-edit" />   <input type="button" id="delete" data-sid="{{st.id}}" value="Delete" class="btn btn-danger btn-sm btn-del" />
+                                     </td>
+                                   </tr> 
+                                   {% endfor %} 
+>>>>>>> 41d9295c0f64bf01eddcbcbd4214c8c29997d2a7
                                 </tbody>
                             </table>
                         </div>
@@ -323,6 +348,7 @@ with font-awesome or any other icon font library -->
                 </div>
             </section>
             <!-- /.content -->
+
 
 
         </div>
@@ -339,43 +365,71 @@ with font-awesome or any other icon font library -->
         </aside>
         <!-- /.control-sidebar -->
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Course </h5>
+
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+             <div class="card-body">
+                                <div class="form-group">
+                                    <label for="inputName">course Code</label>
+                                    <input type="hidden" id="ids" class="form-control">
+                                    <input type="text" id="coursecode" class="form-control">
+                                    <div class="form-group">
+                                        <label for="inputName">course Name</label>
+                                        <input type="text" id="coursename" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="form-group ">
+                                    <label for="inputnumber ">Maximum number of students</label>
+                                    <input type="number" id="maxstudent" name="max-no" min="1" max="999999999" class="form-control">
+                                </div>
+                                <div class="form-group ">
+                                    <label for="inputStatus ">Subject teacher name</label>
+                                    <select id="instrust" class="form-control-sm custom-select">
+                                        <option selected disabled>Choose Instructor</option>
+                                        {% for subject in subjects %}
+                                        <option value="{{subject.id}}">{{subject.name}}</option>
+                                        {% endfor %}
+                                      </select>
+                                </select> 
+                                </div>
+                            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" onclick="Update();">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <script type="text/javascript ">
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('.image-upload-wrap').hide();
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-
-                    $('.image-title').html(input.files[0].name);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-
-            } else {
-                removeUpload();
+        const BASE_URL="http://127.0.0.1:8000/"
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
             }
         }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
 
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-        }
-        $('.image-upload-wrap').bind('dragover', function() {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function() {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
 
-  
-    </script>
+       
+  </script>
     <!-- ./wrapper -->
     <script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
     <!-- jQuery -->
@@ -392,6 +446,7 @@ with font-awesome or any other icon font library -->
     <!-- ChartJS -->
 
     <script>
+<<<<<<< HEAD
         $('document').ready(function () {
             toastr.success("Welcome to this Table  Page");
             CourseList();
@@ -410,6 +465,118 @@ with font-awesome or any other icon font library -->
                     debugger;
                     $.each(obj, function (key, item) {
                         es += '<tr>';
+=======
+                    $('document').ready(function () {
+      toastr.success("Welcome to this Table  Page");
+   
+    //  CourseList();
+
+   });
+   
+$("#tbody").on("click",".btn-del",function() {
+
+debugger;
+let id =$(this).attr("data-sid");
+
+let csr=csrftoken
+mydata={id:id,csrfmiddlewaretoken: csr };
+mythis=this;
+$.ajax({
+ url:"{% url 'delete' %}",
+ method: "POST",
+ data: mydata,
+ success: function(data){
+  if(data.status ==1){
+    toastr.success("Data Deleted Successfully");
+    $(mythis).closest('tr').fadeOut();
+  }
+  if(data.status==0){
+   toastr.error("Unable to Delete data!");
+      
+  }
+ },
+});
+}); 
+
+function Update()
+    {
+      debugger;
+       es= "";
+       let id= $("#ids").val();
+       let cc= $("#coursecode").val();
+       let nm= $("#coursename").val();
+    
+       let max= $("#maxstudent").val();
+      let ins= $("#instrust").val();
+      let csr=csrftoken
+      if(nm == ""){
+        console.log("Enter Name");
+       }
+    
+    
+     else{
+        datas={course_code:cc,course_name:nm,max_numb_students:max,instructors:ins,csrfmiddlewaretoken:csr };
+      $.ajax({
+          url:`${BASE_URL}Administration/updatecourse/${id}/`,
+          method:"POST",
+          data: datas,
+          success : function (data)
+          {
+              debugger;
+              x=data.student_data;
+           if(data.status =="Save"){
+        
+         location.reload();
+     
+           }
+           if(data.status==0){
+            toastr.error("Unable to insert data!");
+               
+           }
+          },
+      });
+    }
+  }
+
+$("#tbody").on("click",".btn-edit",function() {
+  
+  debugger;
+  let id =$(this).attr("data-sid");
+  let csr=csrftoken
+
+ mydata={sid:id,csrfmiddlewaretoken: csr };
+
+ $.ajax({
+    url:`${BASE_URL}Administration/edit/`,
+
+   method: "POST",
+   data: mydata,
+   dataType:"json",
+   success: function(data){
+    console.log(data)
+   $("#ids").val(data.id);
+   $("#coursecode").val(data.course_code);
+   $("#coursename").val(data.course_name);
+   $("#maxstudent").val(data.max_numb_students);
+  
+   $("#instrust").val(data.instructors);
+   },
+ });
+});
+   function  CourseList(){
+debugger;
+    $.ajax({
+       url:"{% url 'listcoursedata' %}",
+       method: 'GET',
+       dataType: 'json',
+       success : function (data)
+        {   var es = '';
+            var obj= jQuery.parseJSON(data);
+                var i = 1;
+                debugger;
+                $.each(obj, function (key, item) {
+                    es += '<tr>';
+>>>>>>> 41d9295c0f64bf01eddcbcbd4214c8c29997d2a7
 
                         es += '<td>' + item.pk + '</td>';
 
@@ -417,6 +584,7 @@ with font-awesome or any other icon font library -->
                         es += '<td>' + item.fields.max_numb_students + '</td>';
                         es += '<td>' + item.fields.name + '</td>';
 
+<<<<<<< HEAD
                         es += "<td><input type='button' value='Edit' class='btn btn-warning btn-sm btn-edit' data-sid=" + item.pk + "> <input type='button' value='Delete' class='btn btn-danger btn-sm '  data-toggle='modal' data-target='#deleteee' onclick='Delete(" + item.pk + ");'></td>";
                         es += '</tr>';
 
@@ -458,14 +626,14 @@ with font-awesome or any other icon font library -->
         $(function () {
             // Summernote
             $('#summernote').summernote()
+=======
+               toastr.error("Unable to retreive data");
+           }
+       });
+   }
+>>>>>>> 41d9295c0f64bf01eddcbcbd4214c8c29997d2a7
 
-            // CodeMirror
-            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo "), {
-                mode: "htmlmixed ",
-                theme: "monokai "
-            });
-        })
+
     </script>
-</body>
-
-</html>
+    <!-- JavaScript Bundle with Popper -->
+{% endblock %}
