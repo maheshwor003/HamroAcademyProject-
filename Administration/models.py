@@ -2,17 +2,17 @@ from django.db import models
 
 # Create your models here.
 class Instructor(models.Model):
-    uid = models.CharField(max_length=6)
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=25, null=True)
 
     def __str__(self):
-        return f'{self.uid} {self.name}'
+        return self.name
         
 class Course(models.Model):
-    course_number = models.CharField(max_length=5, primary_key=True)
-    course_name = models.CharField(max_length=40)
-    max_numb_students = models.CharField(max_length=65)
-    instructors = models.ManyToManyField(Instructor)
-    
+    course_code = models.CharField(max_length=5, null=True)
+    course_name = models.CharField(max_length=40, null=True)
+    max_numb_students = models.CharField(max_length=65, null=True)
+    instructors = models.ForeignKey(Instructor,on_delete=models.CASCADE,null=True,blank=True)
+
+
         
 
