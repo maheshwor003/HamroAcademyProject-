@@ -14,7 +14,7 @@ class Instructor(models.Model):
 
 
 class Course(models.Model):
-    course_number = models.CharField(max_length=5, null=True)
+    course_code = models.CharField(max_length=5, null=True)
     course_name = models.CharField(max_length=40, null=True)
     max_numb_students = models.CharField(
         max_length=65, null=True)
