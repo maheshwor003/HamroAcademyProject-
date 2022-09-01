@@ -25,16 +25,30 @@ class Course(models.Model):
 
         return self.course_name
 
+    def __str__(self):
+
+        return self.course_name
 
 class Room(models.Model):
     Room_number = models.IntegerField(primary_key=True)
     Seat_capacity = models.CharField(max_length=10, null=True)
 
+<<<<<<< HEAD
+=======
+class Room(models.Model):
+    Room_number = models.IntegerField(primary_key=True)
+    Seat_capacity = models.CharField(max_length=10, null=True)
+
+>>>>>>> 681da95ea1504ab72808b4785ec81da7a497f308
     def __str__(self):
 
         return str(self.Room_number)
 
 
+<<<<<<< HEAD
+=======
+        return str(self.Room)
+>>>>>>> 681da95ea1504ab72808b4785ec81da7a497f308
 class Meetingtime(models.Model):
     Mid = models.IntegerField(primary_key=True)
     time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
@@ -62,8 +76,13 @@ class Section(models.Model):
     Meetingtime = models.ForeignKey(
         Meetingtime, on_delete=models.CASCADE, null=True)
     Room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
+<<<<<<< HEAD
     Instructor = models.ForeignKey(
         Instructor, on_delete=models.CASCADE, null=True)
+=======
+    instructors = models.ForeignKey(
+        Instructor, on_delete=models.CASCADE, null=True,blank=True)
+>>>>>>> 681da95ea1504ab72808b4785ec81da7a497f308
 
     def __str__(self):
 
