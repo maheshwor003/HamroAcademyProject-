@@ -14,17 +14,16 @@ class Instructor(models.Model):
 
 
 class Course(models.Model):
-    course_number = models.CharField(max_length=5, null=True)
+    course_code = models.CharField(max_length=5, null=True)
     course_name = models.CharField(max_length=40, null=True)
-    max_numb_students = models.CharField(
-        max_length=65, null=True)
-    Instructor = models.ForeignKey(
-        Instructor, on_delete=models.CASCADE, null=True, default=True, related_name='teachername')
+    max_numb_students = models.CharField(max_length=65, null=True)
+    instructors = models.ForeignKey(Instructor,on_delete=models.CASCADE,null=True,blank=True)
 
     def __str__(self):
 
         return self.course_name
 
+        
 
 class Room(models.Model):
     Room_number = models.IntegerField(primary_key=True)
@@ -35,6 +34,7 @@ class Room(models.Model):
         return str(self.Room_number)
 
 
+        return str(self.Room)
 class Meetingtime(models.Model):
     Mid = models.IntegerField(primary_key=True)
     time = models.TimeField(auto_now=False, auto_now_add=False, null=True)
@@ -62,8 +62,8 @@ class Section(models.Model):
     Meetingtime = models.ForeignKey(
         Meetingtime, on_delete=models.CASCADE, null=True)
     Room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True)
-    Instructor = models.ForeignKey(
-        Instructor, on_delete=models.CASCADE, null=True)
+    instructors = models.ForeignKey(
+        Instructor, on_delete=models.CASCADE, null=True,blank=True)
 
     def __str__(self):
 
