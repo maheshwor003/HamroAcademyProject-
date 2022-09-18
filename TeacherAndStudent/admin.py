@@ -5,9 +5,9 @@ from django.contrib.auth.admin import UserAdmin
 from django.http import HttpResponseRedirect
 from django.urls import path
 
-from .models import Courses, Departments, Departments, Class, Student, Attendance, Courses, Teacher, Assign, AssignTime, AttendanceClass
+from .models import Courses, Departments, Class, Student, Attendance, Courses, Teacher, Assign, AssignTime, AttendanceClass
 from .models import StudentCourse, Marks, AttendanceRange
-from SystemLogin.models import User
+
 
 # Register your models here.
 
