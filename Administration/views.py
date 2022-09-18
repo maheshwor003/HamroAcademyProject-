@@ -1,7 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+
+from TeacherAndStudent.models import Departments
 from .models import Course, Instructor
 from django.http import JsonResponse
 from django.core import serializers
+from .models import *
+from TeacherAndStudent.models import *
+
+from. forms import *
 # Create your views here.
 
 
@@ -9,10 +15,6 @@ from django.core import serializers
 
 def adminpage(request):
     return render (request,'adminpage.html')
-
-
-
-
 
 def teacher(request):
     return render(request,'teacherpage.html')
@@ -32,25 +34,35 @@ def all_teacher(request):
 #     return render (request,'allcourse.html')
     
 def all_course(request):
-    subjects=Instructor.objects.all()
+   
+    subjects=Courses.objects.all()
     dataread=Course.objects.all()
     context = {'subjects':subjects,'data_read':dataread}
     return render (request,'allcourse.html',context)
+
+def delete_course(request, pk):
+    crs = Course.objects.filter(pk=pk)
+    crss = Courses.objects.filter(pk=pk)
+    if request.method == 'POST':
+        crs.delete()
+        crss.delete()
+        return redirect('allcourse')
 
 
 def savecourse_data(request):
      if request.method == "POST":
            
-           course_code= request.POST.get('course_code')
-           course_name= request.POST['course_name']
-           max_numb_students=request.POST['max_numb_students']
-           instructors= request.POST['instructors']
-           ins=Instructor.objects.get(id=instructors)
+           course_number= request.POST.get('course_number')
+           course_name= request.POST['name']
+           description=request.POST['description']
+           status=request.POST['status']
+           depart= request.POST['department']
+           ins=Departments.objects.get(id=depart)
          
-           usr= Course(course_code=course_code,course_name=course_name,max_numb_students=max_numb_students,instructors=ins)
-         
+           usr= Courses(course_number=course_number,name=course_name,description=description,status=status,department=ins)
+           print(usr)
            usr.save()
-           stud =Course.objects.values()
+           stud =Courses.objects.values()
            student_data =list(stud)
            return JsonResponse({'status':'Save',
            'course_data':student_data})
@@ -91,17 +103,34 @@ def list_coursedata(request):
 
 def delete_data(request):
      if request.method == "POST":
-      id=request.POST.get('id');
+      id=request.POST.get('course_name');
       pi=Course.objects.get(pk=id)
       pi.delete();
       return JsonResponse({'status':1})
      else:
       return JsonResponse({'status':0})
 
+# def add_course(request):
+#     subjectss=Instructor.objects.all()
+#     context = {'subjectss':subjectss}
+#     return render (request,'addcourse.html',context)
+
+
 def add_course(request):
-    subjectss=Instructor.objects.all()
-    context = {'subjectss':subjectss}
-    return render (request,'addcourse.html',context)
+    listdepartment=Departments.objects.all()
+    form = CourseForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('addcourse')
+        else:
+            print('Invalid')
+    context = {
+        'form': form,'departments':listdepartment
+    }
+    return render(request, 'addcourse.html', context)
+
 
 def instruct_list(request):
     csw = {'subjects':Instructor.objects.all()}
@@ -127,8 +156,221 @@ def all_room(request):
 def add_room(request):
     return render (request,'addroom.html')
 
-def all_time(request):
-    return render (request,'alltime.html')
+class Data:
+    def __init__(self):
+        self._rooms = Room.objects.all()
+        self._meetingTimes = MeetingTime.objects.all()
+        self._instructors = Instructor.objects.all()
+        self._courses = Course.objects.all()
+        self._depts = Department.objects.all()
+
+    def get_rooms(self): return self._rooms
+
+    def get_instructors(self): return self._instructors
+
+    def get_courses(self): return self._courses
+
+    def get_depts(self): return self._depts
+
+    def get_meetingTimes(self): return self._meetingTimes
+
+
+
+
+class Schedule:
+    def __init__(self):
+        self._data = data
+        self._classes = []
+        self._numberOfConflicts = 0
+        self._fitness = -1
+        self._classNumb = 0
+        self._isFitnessChanged = True
+
+    def get_classes(self):
+        self._isFitnessChanged = True
+        return self._classes
+
+    def get_numbOfConflicts(self): return self._numberOfConflicts
+
+    def get_fitness(self):
+        if self._isFitnessChanged:
+            self._fitness = self.calculate_fitness()
+            self._isFitnessChanged = False
+        return self._fitness
+
+    def initialize(self):
+        sections = Section.objects.all()
+        for section in sections:
+            dept = section.department
+            n = section.num_class_in_week
+            if n <= len(MeetingTime.objects.all()):
+                courses = dept.courses.all()
+                for course in courses:
+                    for i in range(n // len(courses)):
+                        crs_inst = course.instructors.all()
+                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        self._classNumb += 1
+                        newClass.set_meetingTime(data.get_meetingTimes()[rnd.randrange(0, len(MeetingTime.objects.all()))])
+                        newClass.set_room(data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
+                        newClass.set_instructor(crs_inst[rnd.randrange(0, len(crs_inst))])
+                        self._classes.append(newClass)
+            else:
+                n = len(MeetingTime.objects.all())
+                courses = dept.courses.all()
+                for course in courses:
+                    for i in range(n // len(courses)):
+                        crs_inst = course.instructors.all()
+                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        self._classNumb += 1
+                        newClass.set_meetingTime(data.get_meetingTimes()[rnd.randrange(0, len(MeetingTime.objects.all()))])
+                        newClass.set_room(data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
+                        newClass.set_instructor(crs_inst[rnd.randrange(0, len(crs_inst))])
+                        self._classes.append(newClass)
+
+        return self
+
+        
+    def calculate_fitness(self):
+        self._numberOfConflicts = 0
+        classes = self.get_classes()
+        for i in range(len(classes)):
+            if classes[i].room.seating_capacity < int(classes[i].course.max_numb_students):
+                self._numberOfConflicts += 1
+            for j in range(len(classes)):
+                if j >= i:
+                    if (classes[i].meeting_time == classes[j].meeting_time) and \
+                            (classes[i].section_id != classes[j].section_id) and (classes[i].section == classes[j].section):
+                        if classes[i].room == classes[j].room:
+                            self._numberOfConflicts += 1
+                        if classes[i].instructor == classes[j].instructor:
+                            self._numberOfConflicts += 1
+        return 1 / (1.0 * self._numberOfConflicts + 1)
+
+
+
+
+
+class Class:
+    def __init__(self, id, dept, section, course):
+        self.section_id = id
+        self.department = dept
+        self.course = course
+        self.instructor = None
+        self.meeting_time = None
+        self.room = None
+        self.section = section
+
+    def get_id(self): return self.section_id
+
+    def get_dept(self): return self.department
+
+    def get_course(self): return self.course
+
+    def get_instructor(self): return self.instructor
+
+    def get_meetingTime(self): return self.meeting_time
+
+    def get_room(self): return self.room
+
+    def set_instructor(self, instructor): self.instructor = instructor
+
+    def set_meetingTime(self, meetingTime): self.meeting_time = meetingTime
+
+    def set_room(self, room): self.room = room
+
+data = Data()
+
+class GeneticAlgorithm:
+    def evolve(self, population):
+        return self._mutate_population(self._crossover_population(population))
+
+    def _crossover_population(self, pop):
+        crossover_pop = Population(0)
+        for i in range(NUMB_OF_ELITE_SCHEDULES):
+            crossover_pop.get_schedules().append(pop.get_schedules()[i])
+        i = NUMB_OF_ELITE_SCHEDULES
+        while i < POPULATION_SIZE:
+            schedule1 = self._select_tournament_population(pop).get_schedules()[0]
+            schedule2 = self._select_tournament_population(pop).get_schedules()[0]
+            crossover_pop.get_schedules().append(self._crossover_schedule(schedule1, schedule2))
+            i += 1
+        return crossover_pop
+
+    def _mutate_population(self, population):
+        for i in range(NUMB_OF_ELITE_SCHEDULES, POPULATION_SIZE):
+            self._mutate_schedule(population.get_schedules()[i])
+        return population
+
+    def _crossover_schedule(self, schedule1, schedule2):
+        crossoverSchedule = Schedule().initialize()
+        for i in range(0, len(crossoverSchedule.get_classes())):
+            if rnd.random() > 0.5:
+                crossoverSchedule.get_classes()[i] = schedule1.get_classes()[i]
+            else:
+                crossoverSchedule.get_classes()[i] = schedule2.get_classes()[i]
+        return crossoverSchedule
+
+    def _mutate_schedule(self, mutateSchedule):
+        schedule = Schedule().initialize()
+        for i in range(len(mutateSchedule.get_classes())):
+            if MUTATION_RATE > rnd.random():
+                mutateSchedule.get_classes()[i] = schedule.get_classes()[i]
+        return mutateSchedule
+
+    def _select_tournament_population(self, pop):
+        tournament_pop = Population(0)
+        i = 0
+        while i < TOURNAMENT_SELECTION_SIZE:
+            tournament_pop.get_schedules().append(pop.get_schedules()[rnd.randrange(0, POPULATION_SIZE)])
+            i += 1
+        tournament_pop.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        return tournament_pop
+
+
+
+class Population:
+    def __init__(self, size):
+        self._size = size
+        self._data = data
+        self._schedules = [Schedule().initialize() for i in range(size)]
+
+    def get_schedules(self):
+        return self._schedules
+
+def context_manager(schedule):
+    classes = schedule.get_classes()
+    context = []
+    cls = {}
+    for i in range(len(classes)):
+        cls["section"] = classes[i].section_id
+        cls['dept'] = classes[i].department.dept_name
+        cls['course'] = f'{classes[i].course.course_name} ({classes[i].course.course_number}, ' \
+                        f'{classes[i].course.max_numb_students}'
+        cls['room'] = f'{classes[i].room.r_number} ({classes[i].room.seating_capacity})'
+        cls['instructor'] = f'{classes[i].instructor.name} ({classes[i].instructor.uid})'
+        cls['meeting_time'] = [classes[i].meeting_time.pid, classes[i].meeting_time.day, classes[i].meeting_time.time]
+        context.append(cls)
+        print(context)
+    return context
+
+
+def alltime(request):
+    schedule = []
+    population = Population(POPULATION_SIZE)
+    generation_num = 0
+    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+    geneticAlgorithm = GeneticAlgorithm()
+    while population.get_schedules()[0].get_fitness() != 1.0:
+        generation_num += 1
+        print('\n> Generation #' + str(generation_num))
+        population = geneticAlgorithm.evolve(population)
+        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        schedule = population.get_schedules()[0].get_classes()
+      
+    return render(request, 'alltime.html', {'schedule': schedule, 'sections': Section.objects.all(),
+                                              'times': MeetingTime.objects.all()})
+
+
 
 def add_time(request):
     return render (request,'addtime.html')
@@ -155,23 +397,23 @@ def signup(request):
     
 
 def course(request):
-    return render(request,'course.html') 
+    return render(request,'course.html',{'navbar':'course'}) 
     
 def about(request):
-    return render(request,'about.html') 
+    return render(request,'about.html',{'navbar':'about'}) 
 
 def single(request):
-    return render(request,'single.html') 
+    return render(request,'single.html',{'navbar':'single'}) 
 
 def contact(request):
-    return render(request,'contact.html') 
+    return render(request,'contact.html',{'navbar':'contact'}) 
 
 def basepage(request):
     return render(request,'base.html') 
 
 def teacher(request):
-    return render(request,'teacher.html')
+    return render(request,'teacher.html',{'navbar':'teacher'})
 def homepage(request):
-    return render(request,'homepage.html')
+    return render(request,'homepage.html',{'navbar':'homepage'})
 def homepage(request):
-    return render (request,'homepage.html')
+    return render (request,'homepage.html',{'navbar':'homepage'})

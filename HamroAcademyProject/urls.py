@@ -21,4 +21,5 @@ urlpatterns = [
     path('', views.homepage, name='homepage'),
     path('SystemLogin/', include('SystemLogin.urls')),
     path('Administration/', include('Administration.urls')),
+    # path('TeacherAndStudent/', include('TeacherAndStudent.urls')),
 ]

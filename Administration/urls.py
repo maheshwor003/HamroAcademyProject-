@@ -18,7 +18,7 @@ urlpatterns = [
     path('adddepartment/',views.add_department,name='adddepartment'),
     path('allroom/',views.all_room,name='allroom'),
     path('addroom/',views.add_room,name='addroom'),
-    path('alltime/',views.all_time,name='alltime'),
+    path('alltime/',views.alltime,name='alltime'),
     path('addtime/',views.add_time,name='addtime'),
     path('allsection/',views.all_section,name='allsection'),
     path('addsection/',views.add_section,name='addsection'),
@@ -36,5 +36,6 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('base/', views.basepage, name='base'),
     path('savecourse/',views.savecourse_data,name='savecourse'),
+    path('delete_course/<str:pk>/', views.delete_course, name='deletecourse'),
     path('delete/',views.delete_data,name = "delete"),
 ]

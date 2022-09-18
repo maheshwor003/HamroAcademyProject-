@@ -11,3 +11,4 @@ class User(AbstractUser):
     is_student = models.BooleanField('Is student', default=False)
     is_teacher = models.BooleanField('Is teacher', default=False)
     address = models.CharField(max_length=50,null=True,blank=True)
+
