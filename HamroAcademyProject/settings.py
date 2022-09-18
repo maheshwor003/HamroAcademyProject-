@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SystemLogin',
     'Administration',
+    'TeacherAndStudent',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ './SystemLogin/template/SystemLogin',
         './Administration/template/Administration',
+          './TeacherAndStudent/templates/info',
             os.path.join(BASE_DIR, 'template') ,
             ],
         'APP_DIRS': True,

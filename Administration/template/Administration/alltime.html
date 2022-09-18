@@ -290,231 +290,44 @@ with font-awesome or any other icon font library -->
                     <div class="Allpost">
                         <div class="flexcreate">
                             <div>
-                                <a href="addtime.html" class="btn btn-primary">Add Meeting Time</a>
+                                <div class="crdbtn">
+                                    <a href="{% url 'alltime' %}" class="btn">Generate Timetable</a>
+                            
+                                </div>
                             </div>
                             <div>
                                 <input type="text" class="form-control" placeholder="Search">
                             </div>
                         </div>
-                        <div class="postable TBL">
+                        {% for section in sections %}
+                        <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
                             <table class="table table-striped table-bordered">
                                 <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th>Pid</th>
-                                        <th>Meeting time</th>
-                                        <th>Date</th>
-                                    </tr>
-                                </thead>
+                          
+                         
+                              <tr>
+                                <th>Class #</th>
+                                <th>Course</th>
+                                <th>Venue(Block- Room)</th>
+                                <th>Instructor</th>
+                                <th>Class Timing</th>
+                              </tr>
+                              <thead>
                                 <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="">
-                                        </td>
-                                        <td>0089</td>
-                                        <td>3:30</td>
-                                        <td>2020-06-20</td>
-                                        <td>
-                                            <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                            <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                        </td>
-
-                                    </tr>
-
-                                </tbody>
+                              {% for class in schedule %}
+                                {% if class.section == section.section_id %}
+                                <tr>
+                                  <th>{{class.section_id}}</th>
+                                  <td>{{class.course}}</td>
+                                  <td>{{class.room}}</td>
+                                  <td>{{class.instructor}}</td>
+                                  <td>{{class.meeting_time}}</td>
+                                </tr>
+                                {% endif %}
+                              {% endfor %}
+                            </tbody>
                             </table>
-                        </div>
+                            {% endfor %}
                     </div>
                 </div>
             </section>

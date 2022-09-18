@@ -29,6 +29,7 @@
     <link rel="stylesheet" type="text/css" href="../../static/css/owncss.css">
 </head>
 
+
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
@@ -301,7 +302,7 @@ with font-awesome or any other icon font library -->
                 </button>
                                 </div>
                             </div>
-                            <div class="card-body">
+                            <!-- <div class="card-body">
                                 <div class="form-group">
                                     <label for="inputName">course Code</label>
                                     <input type="text" id="coursecode" class="form-control">
@@ -327,17 +328,48 @@ with font-awesome or any other icon font library -->
                                       </select>
                                
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- /.card-body -->
+                            <form method="post">
+                                {% csrf_token %}
+                                <fieldset>
+                            <div class="tabcontent" id="new">
+                                <div class="form-group">
+                                {{ form.as_p }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputName">Description</label>
+                                    <input type="text" id="desp" class="form-control">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="1" id="status">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                     Status
+                                    </label>
+                                  </div>
+                                  <div class="form-group ">
+                                    <label for="inputStatus ">Department</label>
+                                  
+                                 
+                                    <select id="depart" class="form-control-sm custom-select">
+                                        <option selected >Choose Department</option>
+                                        {% for depart in departments %}
+                                        <option value="{{depart.id}}">  {{depart.name}}</option>
+                                        {% endfor %}
+                                      </select>
+                            <input type="submit" value="Submit" onclick="InsertCourse();"  class="submit">
+                            </div>
+                        </fieldset>
+                            </form>
                         </div>
                         <!-- /.card -->
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                         <a href="#" class="btn btn-secondary">Cancel</a>
                         <input type="submit" value="Submit" onclick="InsertCourse();" class="btn btn-success float-right">
-                    </div>
+                    </div> -->
                 </div>
             </section>
             <!-- /.content -->
@@ -382,19 +414,20 @@ const csrftoken = getCookie('csrftoken');
     {
       debugger;
        es= "";
-       let cc= $("#coursecode").val();
-       let nm= $("#coursename").val();
-    
-       let max= $("#maxstudent").val();
-      let ins= $("#instrust").val();
+       let cccode= $("#id_course_number").val();
+       let cname= $("#id_course_name").val();
+       let desc= $("#desp").val();
+       let dep=$("#depart").val();
+   
+   
       let csr=csrftoken
-      if(nm == ""){
+      if(cname == ""){
         console.log("Enter Name");
        }
     
     
      else{
-        datas={course_code:cc,course_name:nm,max_numb_students:max,instructors:ins,csrfmiddlewaretoken:csr };
+        datas={course_number:cccode,name:cname,description:desc,status:$('#status').val(),department:dep,csrfmiddlewaretoken:csr };
       $.ajax({
           url:"{% url 'savecourse' %}",
           method:"POST",
