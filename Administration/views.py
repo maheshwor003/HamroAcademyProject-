@@ -397,23 +397,23 @@ def signup(request):
     
 
 def course(request):
-    return render(request,'course.html') 
+    return render(request,'course.html',{'navbar':'course'}) 
     
 def about(request):
-    return render(request,'about.html') 
+    return render(request,'about.html',{'navbar':'about'}) 
 
 def single(request):
-    return render(request,'single.html') 
+    return render(request,'single.html',{'navbar':'single'}) 
 
 def contact(request):
-    return render(request,'contact.html') 
+    return render(request,'contact.html',{'navbar':'contact'}) 
 
 def basepage(request):
     return render(request,'base.html') 
 
 def teacher(request):
-    return render(request,'teacher.html')
+    return render(request,'teacher.html',{'navbar':'teacher'})
 def homepage(request):
-    return render(request,'homepage.html')
+    return render(request,'homepage.html',{'navbar':'homepage'})
 def homepage(request):
-    return render (request,'homepage.html')
+    return render (request,'homepage.html',{'navbar':'homepage'})

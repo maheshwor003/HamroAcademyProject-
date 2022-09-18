@@ -1,3 +1,4 @@
+from tkinter import Widget
 from tkinter.ttk import Style
 from django.forms import ModelForm
 from. models import *
@@ -41,13 +42,19 @@ class CourseForm(ModelForm):
   error_css_class='error-field'
   required_css_class='requiredfield'
   course_name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Course Name"}))
+  course_number=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Course Number"}))
+  INTEGER_CHOICES= [tuple([x,x]) for x in range(1,100)]
+  max_numb_students= forms.IntegerField(label="Maximum Number Of Students", widget=forms.Select(choices=INTEGER_CHOICES))
   instructors = forms.ModelMultipleChoiceField(
-        queryset=Instructor.objects.all(),
-        widget=forms.CheckboxSelectMultiple)
-  
+    queryset=Instructor.objects.all(),
+    widget=forms.CheckboxSelectMultiple
+  )
+  short_name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"short name"}))
+
+
   class Meta:
         model = Course
-        fields = ['course_number', 'course_name', 'max_numb_students', 'instructors']
+        fields = ['course_number', 'course_name', 'max_numb_students', 'instructors','short_name']
 
 
 class DepartmentForm(ModelForm):
