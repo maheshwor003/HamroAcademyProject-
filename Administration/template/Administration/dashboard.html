@@ -47,21 +47,35 @@
 
             </ul>
 
+            
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        {{ request.user.id }}  ||    {{ request.user.username }}    <i class="nav-icon fas fa-fw fa-user "></i>
+                    
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    
+                  
+                  
+            
+                    
+                      <div class="dropdown-divider"></div>
+                      <a href="#" class="dropdown-item dropdown-footer">Logout</a>
+                    </div>
+                  </li>
 
 
-
+               
                 <li class="nav-item">
                     <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                        <i class="fas fa-expand-arrows-alt"></i>
+                   <i class="fas fa-expand-arrows-alt"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-
-                </li>
+              
             </ul>
         </nav>
         <!-- /.navbar -->

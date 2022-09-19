@@ -18,6 +18,8 @@ def index(request):
     return render(request, 'info/logout.html')
 
 def test(request):
+    current_user = request.user
+    print(current_user.id)
     return render(request,'info/homepage.html')
 
 

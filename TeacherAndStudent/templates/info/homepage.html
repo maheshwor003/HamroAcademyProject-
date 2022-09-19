@@ -57,7 +57,7 @@
 
       <!-- Page Features -->
       <div class="row text-center">
-
+        {{username}}
         <div class="col-lg-3 col-md-6 mb-4">
           <div class="card">
    
@@ -70,7 +70,11 @@
                   also displayed as list of classes that were conducted.</p>
             </div>
             <div class="card-footer">
-         
+              {% if user.is_student %}
+              <a class="nav-link text-capitalize">{{ user.student.name }}</a>
+          {% elif user.is_teacher %}
+              <a class="nav-link text-capitalize">{{ user.teacher.name }}</a>
+          {% endif %}
                 <a class="btn btn-primary" role="button" href=""> View Attendance</a>
             </div>
           </div>
