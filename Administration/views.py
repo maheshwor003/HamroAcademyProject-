@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.core import serializers
 from .models import *
 from TeacherAndStudent.models import *
-
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from. forms import *
 # Create your views here.
 
@@ -22,6 +22,10 @@ def teacher(request):
 
 def student(request):
     return render(request,'studentpage.html')
+
+def logout_out(request):
+    logout(request)
+    return redirect('homepage')
 
 def base(request):
     return render (request,'dashboard.html')
@@ -130,6 +134,18 @@ def add_course(request):
         'form': form,'departments':listdepartment
     }
     return render(request, 'addcourse.html', context)
+
+def add_instructor(request):
+    form = InstructorForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('addinstructor')
+    context = {
+        'form': form
+    }
+    return render(request, 'add-teacher.html', context)
+
 
 
 def instruct_list(request):

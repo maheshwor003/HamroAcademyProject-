@@ -51,8 +51,8 @@
                 </button>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group">
+                    <!-- <div class="card-body"> -->
+                        <!-- <div class="form-group">
                             <label for="inputName">Teachers ID</label>
                             <input type="text" id="inputName" class="form-control">
                         </div>
@@ -113,10 +113,22 @@
                                 <div class="image-title-wrap">
                                     <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
                                 </div>
-                            </div>
-                        </div>
+                            </div> -->
+                       
                         <!-- /.card-body -->
                     </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            <h1 class="tablink" onclick="openPage('new')" id="defaultOpen">Add Instructor</h1>
+                          
+                            <div class="tabcontent" id="new">
+                                {{ form.as_p }}
+                            <input type="submit" value="Submit" class="submit">
+                            </div>
+                        </fieldset>
+                    </form></div>
                     <!-- /.card -->
                 </div>
             </div>
