@@ -41,6 +41,12 @@ urlpatterns = [
     path('attendence/',views.attendence,name='attendence'),
     path('result/',views.result,name='result'),
     path('studentprofile/', views.studentprofile, name='studentprofile'),
+    path('teachernavbar/', views.teachernavbar, name='teachernavbar'),
+    path('t_attendence/',views.t_attendence,name='t_attendence'),
+    path('t_result/',views.result,name='t_result'),
+    path('teacherprofile/', views.teacherprofile, name='teacherprofile'),
+    path('teacherdashboard/', views.teacherdashboard, name='teacherdashboard'),
+    path('routine/', views.routine, name='routine'),
     
 
 ]

@@ -58,12 +58,18 @@ class CourseForm(ModelForm):
 
 
 class DepartmentForm(ModelForm):
+
+    
     class Meta:
         model = Department
         fields = ['dept_name', 'courses']
 
 
 class SectionForm(ModelForm):
-    class Meta:
+  error_css_class='error-field'
+  required_css_class='requiredfield'
+  course_name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Course Name"}))
+  course_number=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Course Number"}))
+  class Meta:
         model = Section
         fields = ['section_id', 'department', 'num_class_in_week']

@@ -430,3 +430,15 @@ def studentpage(request):
 
 def result(request):
     return render (request,'result.html')
+def teachernavbar(request):
+    return render (request,'teachernavbar.html')
+def t_result(request):
+    return render (request,'t_result.html')
+def t_attendence(request):
+    return render (request,'t_attendence.html')
+def teacherprofile(request):
+    return render (request,'teacherprofile.html')
+def teacherdashboard(request):
+    return render (request,'teacherdashboard.html')
+def routine(request):
+    return render (request,'routine.html')
