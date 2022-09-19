@@ -417,3 +417,16 @@ def homepage(request):
     return render(request,'homepage.html',{'navbar':'homepage'})
 def homepage(request):
     return render (request,'homepage.html',{'navbar':'homepage'})
+def attendence(request):
+    return render (request,'attendence.html')
+def studentnavbar(request):
+    return render (request,'studentnavbar.html')
+
+def studentprofile(request):
+    return render (request,'studentprofile.html')
+
+def studentpage(request):
+    return render (request,'studentpage.html')
+
+def result(request):
+    return render (request,'result.html')

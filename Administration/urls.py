@@ -38,4 +38,9 @@ urlpatterns = [
     path('savecourse/',views.savecourse_data,name='savecourse'),
     path('delete_course/<str:pk>/', views.delete_course, name='deletecourse'),
     path('delete/',views.delete_data,name = "delete"),
+    path('attendence/',views.attendence,name='attendence'),
+    path('result/',views.result,name='result'),
+    path('studentprofile/', views.studentprofile, name='studentprofile'),
+    
+
 ]
