@@ -20,12 +20,13 @@ time_slots = (
     ('4:30 - 5:30', '4:30 - 5:30'),
 )
 DAYS_OF_WEEK = (
+    ('Sunday', 'Sunday'),
     ('Monday', 'Monday'),
     ('Tuesday', 'Tuesday'),
     ('Wednesday', 'Wednesday'),
     ('Thursday', 'Thursday'),
     ('Friday', 'Friday'),
-    ('Saturday', 'Saturday'),
+
 )
 
 POPULATION_SIZE = 9

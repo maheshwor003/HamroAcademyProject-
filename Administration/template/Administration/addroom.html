@@ -31,8 +31,8 @@
             <div class="col-md-6">
                 <div class="card card-secondary">
                     <div class="card-header">
-                        <h3 class="card-title">Room add</h3>
-
+                        <h3 class="card-title">Update room form
+                        </h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                   <i class="fas fa-minus"></i>
@@ -40,28 +40,19 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group ">
-                            <label for="quantity">Room number</label>
-                            <input type="number" id="quantity" name="quantity" min="1" max="100" class="form-control">
-                            </select>
-                        </div>
-                        <div class="form-group ">
-                            <label for="quantity">seat capicity</label>
-                            <input type="number" id="quantity" name="quantity" min="1" max="500" class="form-control">
-                            </select>
-                        </div>
+                        <form action="" method="post">
+                            {% csrf_token %} {{ form.as_p }}
+                            <input type="submit" value="update" class="btn btn-success float-right">
+
+
+                        </form>
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="#" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Submit" class="btn btn-success float-right">
-            </div>
-        </div>
+
     </section>
     <!-- /.content -->
 </div>
@@ -70,51 +61,5 @@
 
 
 
-<!-- /.content-wrapper -->
-<footer class="main-footer ">
-    <strong>Copyright  <a href="addcourse.html">Hamro academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block ">
-    </div>
-</footer>
 
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark ">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<script type="text/javascript ">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('.image-upload-wrap').hide();
-
-                $('.file-upload-image').attr('src', e.target.result);
-                $('.file-upload-content').show();
-
-                $('.image-title').html(input.files[0].name);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-
-        } else {
-            removeUpload();
-        }
-    }
-
-    function removeUpload() {
-        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-        $('.file-upload-content').hide();
-        $('.image-upload-wrap').show();
-    }
-    $('.image-upload-wrap').bind('dragover', function() {
-        $('.image-upload-wrap').addClass('image-dropping');
-    });
-    $('.image-upload-wrap').bind('dragleave', function() {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
-</script>
 {% endblock %}

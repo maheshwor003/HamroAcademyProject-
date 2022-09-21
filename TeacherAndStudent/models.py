@@ -29,12 +29,13 @@ time_slots = (
 )
 
 DAYS_OF_WEEK = (
+    ('Sunday', 'Sunday'),
     ('Monday', 'Monday'),
     ('Tuesday', 'Tuesday'),
     ('Wednesday', 'Wednesday'),
     ('Thursday', 'Thursday'),
     ('Friday', 'Friday'),
-    ('Saturday', 'Saturday'),
+    
 )
 
 test_name = (
@@ -263,12 +264,13 @@ def daterange(start_date, end_date):
 
 
 days = {
-    'Monday': 1,
-    'Tuesday': 2,
-    'Wednesday': 3,
-    'Thursday': 4,
-    'Friday': 5,
-    'Saturday': 6,
+    'Sunday': 1,
+    'Monday': 2,
+    'Tuesday': 3,
+    'Wednesday': 4,
+    'Thursday': 5,
+    'Friday': 6,
+    
 }
 
 

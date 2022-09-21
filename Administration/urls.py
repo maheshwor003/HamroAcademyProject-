@@ -8,8 +8,6 @@ urlpatterns = [
     path('teacherpage/', views.teacher, name='teacherpage'),
     path('studentpage/', views.student, name='studentpage'),
     path('logout/', views.logout_out, name='logout'),
-   
-   
     path('allteacher/',views.all_teacher,name='allteacher'),
     path('addteacher/',views.add_teacher,name='addteacher'),
     path('addcourse/',views.add_course,name='addcourse'),
@@ -31,13 +29,22 @@ urlpatterns = [
     path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('course/', views.course, name='course'),
-    path('updatecourse/<str:id>/', views.updatecourse_data, name='updatecourse'),
+    path('updatecourse/<str:course_number>', views.updatecourse_data, name='updatecourse'),
+    path('updateinstructor/<str:uid>', views.updateinstructor_data, name='updateinstructor'),
+    path('updatedepartment/<str:id>', views.updatedepartment_data, name='updatedepartment'),
+    path('updatesection/<str:section_id>',views.updatesection_data,name = "updatesection"),
+    path('update/<str:id>',views.update_data,name = "updatedata"),
     path('teacher/', views.teacher, name='teacher'),
     path('single/', views.single, name='single'),
     path('contact/', views.contact, name='contact'),
     path('base/', views.basepage, name='base'),
     path('savecourse/',views.savecourse_data,name='savecourse'),
     path('delete_course/<str:pk>/', views.delete_course, name='deletecourse'),
+    path('delete_instructor/<str:uid>/', views.delete_instructor, name='deleteinstructor'),
+    path('delete_room/<str:r_number>/', views.delete_room, name='deleteroom'),
+    path('delete_department/<str:id>/', views.delete_department, name='deletedepartment'),
+    path('delete_section/<str:section_id>/', views.delete_section, name='deletesection'),
+    path('delete_time/<str:id>/', views.delete_time, name='deletetime'),
     path('delete/',views.delete_data,name = "delete"),
     path('student/<slug:stud_id>/marks_list/', views.marks_list, name='marks_list'),
     path('student/attendance/<slug:stud_id>/', views.studentattendence, name='attendance'),
@@ -49,7 +56,13 @@ urlpatterns = [
     path('t_result/',views.t_result,name='t_result'),
     path('routine/',views.routine,name='routine'),
     path('studentprofile/', views.studentprofile, name='studentprofile'),
+    path('teachernavbar/', views.teachernavbar, name='teachernavbar'),
+    path('t_attendence/',views.t_attendence,name='t_attendence'),
+    path('t_result/',views.result,name='t_result'),
+    path('teacherprofile/', views.teacherprofile, name='teacherprofile'),
+    path('teacherdashboard/', views.teacherdashboard, name='teacherdashboard'),
+    path('routine/', views.routine, name='routine'),
 
-    
+
 
 ]

@@ -32,7 +32,6 @@
                 <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Add Meeting Time</h3>
-
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                   <i class="fas fa-minus"></i>
@@ -40,32 +39,28 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group ">
-                            <label for="quantity">Pid</label>
-                            <input type="number" id="quantity" name="quantity" min="1" max="100" class="form-control">
-                            </select>
-                        </div>
-                        <div class="form-group ">
-                            <label for="appt">Meeting time</label>
-                            <input type="time" id="appt" name="appt" class="form-control">
-                        </div>
-                        <div class="form-group ">
-                            <label for="birthday">Birthday:</label>
-                            <input type="date" id="birthday" name="birthday" class="form-control">
-                            </select>
-                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <fieldset>
+                                <div class="tabcontent" id="new">
+                                    {{ form.as_p }}
+
+                                </div>
+                            </fieldset>
+                            <div class="row">
+                                <div class="col-12">
+                                    <a href="{% url 'addtime' %}" class="btn btn-secondary">Cancel</a>
+                                    <input type="submit" value="Submit" class="btn btn-success float-right">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <!-- /.card-body -->
                 </div>
                 <!-- /.card -->
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <a href="#" class="btn btn-secondary">Cancel</a>
-                <input type="submit" value="Submit" class="btn btn-success float-right">
-            </div>
-        </div>
+
     </section>
     <!-- /.content -->
 </div>
