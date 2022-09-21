@@ -52,6 +52,22 @@
                 <!-- Navbar Search -->
 
 
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        {{ request.user.student.USN}}  ||    {{ request.user.username }}    <i class="nav-icon fas fa-fw fa-user "></i>
+                    
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    
+                  
+                  
+            
+                    
+                      <div class="dropdown-divider"></div>
+                      <a href="{% url 'logout' %}" class="dropdown-item dropdown-footer">Logout</a>
+                    </div>
+                  </li>
+
 
 
                 <li class="nav-item">
@@ -94,7 +110,7 @@
                             </a>
 
                         </li>
-                        <a href="#" class="nav-link">
+                      
 
                             <li class="nav-item">
                                 <a href="{% url 'studentprofile' %}" class="nav-link">
@@ -104,31 +120,30 @@
                                 </a>
                             </li>
 
-                        </a>
-
-
-                        <a href="#" class="nav-link">
-
+                      
+                            <!-- {{ request.user.student.USN}}
+                            <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
+                         
+                      -->
                             <li class="nav-item">
-                                <a href="{% url 'attendence' %}" class="nav-link">
+                                <a href="{% url 'attendance' request.user.student.USN %}" class="nav-link">
                                     <i class="nav-icon fas  ion ion-stats-bars "></i>
                                     <p>View Attendence</p>
                                 </a>
                             </li>
 
-                        </a>
-                        <a href="#" class="nav-link">
+                    
+                       
 
                             <li class="nav-item">
-                                <a href="{% url 'result' %}" class="nav-link">
+                                <a href="{% url 'marks_list' request.user.student.USN %}" class="nav-link">
                                     <i class="nav-icon fas  ion ion-stats-bars"></i>
                                     <p>View Result</p>
                                 </a>
                             </li>
 
-                        </a>
-                        <a href="#" class="nav-link">
-
+                       
+                       
                             <li class="nav-item">
                                 <a href="{% url 'routine' %}" class="nav-link">
                                     <i class="nav-icon far fa-calendar-alt"></i>
@@ -136,7 +151,7 @@
                                 </a>
                             </li>
 
-                        </a>
+                       
 
                         <!-- /.sidebar-menu -->
             </div>

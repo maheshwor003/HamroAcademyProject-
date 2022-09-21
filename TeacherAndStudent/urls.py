@@ -7,7 +7,7 @@ urlpatterns = [
     
     path('test/', views.test, name='test'),
     path('', views.index, name='index'),
-    path('student/<slug:stud_id>/attendance/', views.attendance, name='attendance'),
+    #path('student/<slug:stud_id>/attendance/', views.attendance, name='attendance'),
     path('student/<slug:stud_id>/<slug:course_id>/attendance/', views.attendance_detail, name='attendance_detail'),
     path('student/<slug:class_id>/timetable/', views.timetable, name='timetable'),
     # path('student/<slug:class_id>/search/', views.student_search, name='student_search'),

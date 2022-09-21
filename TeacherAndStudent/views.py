@@ -23,18 +23,18 @@ def test(request):
     return render(request,'info/homepage.html')
 
 
-def attendance(request, stud_id):
-    stud = Student.objects.get(USN=stud_id)
-    ass_list = Assign.objects.filter(class_id_id=stud.class_id)
-    att_list = []
-    for ass in ass_list:
-        try:
-            a = AttendanceTotal.objects.get(student=stud, course=ass.course)
-        except AttendanceTotal.DoesNotExist:
-            a = AttendanceTotal(student=stud, course=ass.course)
-            a.save()
-        att_list.append(a)
-    return render(request, 'info/attendance.html', {'att_list': att_list})
+# def attendance(request, stud_id):
+#     stud = Student.objects.get(USN=stud_id)
+#     ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+#     att_list = []
+#     for ass in ass_list:
+#         try:
+#             a = AttendanceTotal.objects.get(student=stud, course=ass.course)
+#         except AttendanceTotal.DoesNotExist:
+#             a = AttendanceTotal(student=stud, course=ass.course)
+#             a.save()
+#         att_list.append(a)
+#     return render(request, 'info/attendance.html', {'att_list': att_list})
 
 
 @login_required()
@@ -47,7 +47,7 @@ def attendance_detail(request, stud_id, course_id):
 
 # Teacher Views
 
-@login_required
+
 def t_clas(request, teacher_id, choice):
     teacher1 = get_object_or_404(Teacher, id=teacher_id)
     return render(request, 'info/t_clas.html', {'teacher1': teacher1, 'choice': choice})

@@ -1,0 +1,158 @@
+
+
+.brand-link img{
+	width: 233px;
+}
+.nav-sidebar .nav-header:not(:first-of-type) {
+    padding: 1.7rem 1rem .5rem;
+}
+textarea{
+  width: 100%;
+  padding: 5px;
+}
+.clickbox{
+  border: 1px solid;
+  padding: 74px 95px;
+}
+.Metades textarea{
+  min-height: 70px;
+}
+.Publish{
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+.padd10{
+  padding:0 30px;
+  margin: 20px 0;
+}
+.Allpost{
+	padding: 10px;
+	background: #fff;
+	border-radius: 10px;
+}
+.flexcreate {
+	display: flex;
+	justify-content: space-between;
+}
+.flexcreat {
+	display: flex;
+	justify-content: space-around;
+}
+.TBL{
+	margin-top: 1%;
+	overflow: auto;
+}
+.Description .note-editable{
+height: 301px;
+}
+.flexcreat input{
+	    transform: scale(1.5);
+}
+.file-upload {
+  background-color: #ffffff;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.file-upload-btn {
+  width: 100%;
+  margin: 0;
+  color: #fff;
+  background: #1FB264;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #15824B;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.file-upload-btn:hover {
+  background: #1AA059;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.file-upload-btn:active {
+  border: 0;
+  transition: all .2s ease;
+}
+
+.file-upload-content {
+  display: none;
+  text-align: center;
+}
+
+.file-upload-input {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.image-upload-wrap {
+  margin-top: 20px;
+  border: 1px solid #1FB264;
+  position: relative;
+}
+
+.image-dropping,
+.image-upload-wrap:hover {
+  background-color: #f0f0f0;
+}
+
+.image-title-wrap {
+  padding: 0 15px 15px 15px;
+  color: #222;
+}
+
+.drag-text {
+  text-align: center;
+}
+
+.drag-text h3 {
+  font-weight: 100;
+  text-transform: uppercase;
+  color: #000;
+  padding: 60px 0;
+}
+
+.file-upload-image {
+  max-width: 100%;
+  margin: auto;
+  padding: 20px;
+}
+
+.remove-image {
+  width: 200px;
+  margin: 0;
+  color: #fff;
+  background: #cd4535;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  border-bottom: 4px solid #b02818;
+  transition: all .2s ease;
+  outline: none;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.remove-image:hover {
+  background: #c13b2a;
+  color: #ffffff;
+  transition: all .2s ease;
+  cursor: pointer;
+}
+
+.remove-image:active {
+  border: 0;
+  transition: all .2s ease;
+}

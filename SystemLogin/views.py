@@ -41,7 +41,7 @@ def login_view(request):
                 return redirect('studentpage')
             elif user is not None and user.is_teacher:
                 login(request, user)
-                return redirect('test')
+                return redirect('teacherdashboard')
             else:
                 msg= 'invalid credentials'
         else:

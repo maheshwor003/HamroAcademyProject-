@@ -431,21 +431,87 @@ def teacher(request):
     return render(request,'teacher.html',{'navbar':'teacher'})
 def homepage(request):
     return render(request,'homepage.html',{'navbar':'homepage'})
-def homepage(request):
-    return render (request,'homepage.html',{'navbar':'homepage'})
-def attendence(request):
-    return render (request,'attendence.html')
+
+
+# def attendance(request, stud_id):
+#     stud = Student.objects.get(USN=stud_id)
+#     ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+#     att_list = []
+#     for ass in ass_list:
+#         try:
+#             a = AttendanceTotal.objects.get(student=stud, course=ass.course)
+#         except AttendanceTotal.DoesNotExist:
+#             a = AttendanceTotal(student=stud, course=ass.course)
+#             a.save()
+#         att_list.append(a)
+#     return render(request, 'attendance.html', {'att_list': att_list})
+
+
 def studentnavbar(request):
     return render (request,'studentnavbar.html')
 
 def studentprofile(request):
     return render (request,'studentprofile.html')
 
+def studentattendence(request,stud_id):
+      stud = Student.objects.get(USN=stud_id)
+      ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+      att_list = []
+      for ass in ass_list:
+          try:
+              a = AttendanceTotal.objects.get(student=stud, course=ass.course)
+          except AttendanceTotal.DoesNotExist:
+              a = AttendanceTotal(student=stud, course=ass.course)
+              a.save()
+          att_list.append(a)
+      return render(request, 'attendence.html', {'att_list': att_list})
+
+
+def marks_list(request, stud_id):
+    stud = Student.objects.get(USN=stud_id, )
+    ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+    sc_list = []
+    for ass in ass_list:
+        try:
+            sc = StudentCourse.objects.get(student=stud, course=ass.course)
+        except StudentCourse.DoesNotExist:
+            sc = StudentCourse(student=stud, course=ass.course)
+            sc.save()
+            sc.marks_set.create(type='I', name='Internal test 1')
+            sc.marks_set.create(type='I', name='Internal test 2')
+            sc.marks_set.create(type='I', name='Internal test 3')
+            sc.marks_set.create(type='E', name='Event 1')
+            sc.marks_set.create(type='E', name='Event 2')
+            sc.marks_set.create(type='S', name='Semester End Exam')
+        sc_list.append(sc)
+
+    return render(request, 'result.html', {'sc_list': sc_list})
+
+# # def attendance(request, stud_id):
+# #     stud = Student.objects.get(USN=stud_id)
+# #     ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+# #     att_list = []
+# #     for ass in ass_list:
+# #         try:
+# #             a = AttendanceTotal.objects.get(student=stud, course=ass.course)
+# #         except AttendanceTotal.DoesNotExist:
+# #             a = AttendanceTotal(student=stud, course=ass.course)
+# #             a.save()
+# #         att_list.append(a)
+# #     return render(request, 'attendance.html', {'att_list': att_list})
+
+
+# def studentattendence(request):
+#      return render (request,'attendence.html')
+
 def studentpage(request):
     return render (request,'studentpage.html')
 
 def result(request):
     return render (request,'result.html')
+
+
+    
 def teachernavbar(request):
     return render (request,'teachernavbar.html')
 def t_result(request):

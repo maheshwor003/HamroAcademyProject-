@@ -1,191 +1,259 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-
+<head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hamro academy</title>
+    {% load static %}
 
-    <title>{% block title %}{% endblock %}</title>
-      {% load static %}
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{%static '/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="../../static/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->   <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
 
-    <!-- Bootstrap core CSS-->
-    <link href="{% static '/info/bootstrap/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static '/css/icheck-bootstrap.min.css' %}">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="../../static/css/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static '/css/adminlte.min.css' %}">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="{% static '/css/OverlayScrollbars.min.css' %}">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="{% static '/css/daterangepicker.css' %}">
+    <!-- summernote -->
+    <link rel="stylesheet" href="{static '/css/summernote-bs4.min.css' %} ">
+    <link rel="stylesheet" type="text/css" href="../../static/css/owncss.css">
+</head>
 
-    <!-- Custom fonts for this template-->
-    <link href="{% static '/info/bootstrap/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
 
-    <!-- Page level plugin CSS-->
-    <link href="{% static '/info/bootstrap/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+        <!-- Preloader
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="../../static/design/images/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        </div> -->
 
-    <!-- Custom styles for this template-->
-    <link href="{% static '/info/bootstrap/css/sb-admin.css' %}" rel="stylesheet">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fas fa-bars"></i></a>
+                </li>
 
-    <!-- Latest compiled and minified CSS -->
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
 
 
-      {% block css %}
-      {% endblock %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        {{ request.user.student.USN}}  ||    {{ request.user.username }}    <i class="nav-icon fas fa-fw fa-user "></i>
+                    
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    
+                  
+                  
+            
+                    
+                      <div class="dropdown-divider"></div>
+                      <a href="{% url 'logout' %}" class="dropdown-item dropdown-footer">Logout</a>
+                    </div>
+                  </li>
 
-  </head>
 
-  <body id="page-top">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
 
-      <a class="navbar-brand mr-1" href="{% url 'index' %}">College Management System</a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
 
-      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-        <i class="fas fa-bars"></i>
-      </button>
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="{% url 'studentpage' %}" class="brand-link">
+                <img src="../../static/design/images/hamroacademy.jpg" alt="Logo">
+            </a>
 
-      <!-- Navbar -->
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                {% if request.user.is_student %}
-                    <a class="nav-link text-capitalize">{{ request.user.student.name }}</a>
-                {% elif request.user.is_teacher %}
-                    <a class="nav-link text-capitalize">{{ request.user.teacher.name }}</a>
-                {% endif %}
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
-            </li>
-          </ul>
-        </div>
+            <!-- Sidebar -->
+            <div class="sidebar">
 
-    </nav>
 
-    <div id="wrapper">
 
-      <!-- Sidebar -->
-      <ul class="sidebar navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'index' %}">
-                <span>Home</span>
-              </a>
-            </li>
-        {% if request.user.is_student %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
-                <span>Attendance</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
-                <span>Attendance By Subject</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'marks_list' request.user.student.USN %}">
-                <span>Marks</span>
-              </a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="{% url 'timetable' request.user.student.class_id_id %}">
-                <span>Time Table</span>
-              </a>
-            </li>
 
-        {% elif request.user.is_teacher %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 't_clas' request.user.teacher.id 1 %}">
-                <span>Attendance</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 't_clas' request.user.teacher.id 2 %}">
-                <span>Marks</span>
-              </a>
-            </li>
-              <li class="nav-item">
-              <a class="nav-link" href="{% url 't_timetable' request.user.teacher.id %}">
-                <span>Time Table</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 't_clas' request.user.teacher.id 3 %}">
-                <span>Reports</span>
-              </a>
-            </li>
-        {% endif %}
-      </ul>
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+       with font-awesome or any other icon font library -->
+                        <li class="nav-item menu-open">
+                            <a href="{% url 'studentpage' %}" class="nav-link active">
+                                <i class="nav-icon fas fa-solid fa-house-user"></i>
 
-      <div id="content-wrapper">
+                                <p>
+                                    Home
+                                </p>
+                            </a>
 
-        <div class="container-fluid">
+                        </li>
+                      
 
-          <!-- Breadcrumbs-->
-{#          <ol class="breadcrumb">#}
-{#            <li class="breadcrumb-item">#}
-{#              <a href="index.html">Dashboard</a>#}
-{#            </li>#}
-{#            <li class="breadcrumb-item active">Blank Page</li>#}
-{#          </ol>#}
+                            <li class="nav-item">
+                                <a href="{% url 'studentprofile' %}" class="nav-link">
+                                    <i class="nav-icon fas fa-solid fa-user nav-icon"></i>
 
-          <!-- Page Content -->
-            {% block content %}
-            {% endblock %}
+                                    <p>View Profile</p>
+                                </a>
+                            </li>
 
-        </div>
-        <!-- /.container-fluid -->
+                      
+                            <!-- {{ request.user.student.USN}}
+                            <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
+                         
+                      -->
+                            <li class="nav-item">
+                                <a href="{% url 'attendance' request.user.student.USN %}" class="nav-link">
+                                    <i class="nav-icon fas  ion ion-stats-bars "></i>
+                                    <p>View Attendence</p>
+                                </a>
+                            </li>
 
-        <!-- Sticky Footer -->
-{#        <footer class="sticky-footer">#}
-{#          <div class="container my-auto">#}
-{#            <div class="copyright text-center my-auto">#}
-{#              <span>Copyright © Your Website 2018</span>#}
-{#            </div>#}
-{#          </div>#}
-{#        </footer>#}
+                    
+                       
 
-      </div>
-      <!-- /.content-wrapper -->
+                            <li class="nav-item">
+                                <a href="{% url 'marks_list' request.user.student.USN %}" class="nav-link">
+                                    <i class="nav-icon fas  ion ion-stats-bars"></i>
+                                    <p>View Result</p>
+                                </a>
+                            </li>
 
+                       
+                       
+                            <li class="nav-item">
+                                <a href="{% url 'routine' %}" class="nav-link">
+                                    <i class="nav-icon far fa-calendar-alt"></i>
+                                    <p>View Routine</p>
+                                </a>
+                            </li>
+
+                       
+
+                        <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Content Wrapper. Contains page content -->
+
+
+        {% block content %} {% endblock %}
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark ">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
-    <!-- /#wrapper -->
+    <script type="text/javascript ">
+        function readURL(input) {
+            if (input.files && input.files[0]) {
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+                var reader = new FileReader();
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="/accounts/logout">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
+                reader.onload = function(e) {
+                    $('.image-upload-wrap').hide();
 
+                    $('.file-upload-image').attr('src', e.target.result);
+                    $('.file-upload-content').show();
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static '/info/bootstrap/vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static '/info/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+                    $('.image-title').html(input.files[0].name);
+                };
 
-    <!-- Core plugin JavaScript-->
-    <script src="{% static '/info/bootstrap/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+                reader.readAsDataURL(input.files[0]);
 
-    <!-- Custom scripts for all pages-->
-    <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
+            } else {
+                removeUpload();
+            }
+        }
 
-   {% block scripts %}
-    {% endblock %}
-  </body>
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+            $('.file-upload-content').hide();
+            $('.image-upload-wrap').show();
+        }
+        $('.image-upload-wrap').bind('dragover', function() {
+            $('.image-upload-wrap').addClass('image-dropping');
+        });
+        $('.image-upload-wrap').bind('dragleave', function() {
+            $('.image-upload-wrap').removeClass('image-dropping');
+        });
+    </script>
+    <!-- ./wrapper -->
+    <script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
+    <!-- jQuery -->
+    <script src="../../static/js/jquery.min.js "></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="../../static/js/jquery-ui.min.js "></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="../../static/js/bootstrap.bundle.min.js "></script>
+    <!-- ChartJS -->
+    <script src=../../static/js/Chart.min.js "></script>
+                                    <!-- Sparkline -->
+                                    <script src="../../static/js/sparkline.js "></script>
+                                    <!-- JQVMap -->
+                                    <script src="../../static/js/jquery.vmap.min.js "></script>
+                                    <script src="../../static/js/jquery.vmap.usa.js "></script>
+                                    <!-- jQuery Knob Chart -->
+                                    <script src="../../static/js/jquery.knob.min.js "></script>
+                                    <!-- daterangepicker -->
+                                    <script src="../../static/js/moment.min.js "></script>
+                                    <script src="../../static/js/daterangepicker.js "></script>
+                                    <!-- Tempusdominus Bootstrap 4 -->
+                                    <script src="../../static/js/tempusdominus-bootstrap-4.min.js "></script>
+                                    <!-- Summernote -->
+                                    <script src="../../static/js/summernote-bs4.min.js "></script>
+                                    <!-- overlayScrollbars -->
+                                    <script src=../../static/js/jquery.overlayScrollbars.min.js "></script>
+    <!-- AdminLTE App -->
+    <script src="../../static/js/adminlte.js "></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="../../static/js/demo.js "></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="../../static/js/dashboard.js "></script>
+    <script>
+        $(function() {
+            // Summernote
+            $('#summernote').summernote()
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo "), {
+                mode: "htmlmixed ",
+                theme: "monokai "
+            });
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+
+</body>
 
 </html>
