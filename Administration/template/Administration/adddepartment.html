@@ -7,7 +7,8 @@
     <title>Hamro academy</title>
 
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="../../static/css/all.min.css">
     <!-- Ionicons -->
@@ -81,7 +82,8 @@
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
 with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
@@ -297,43 +299,50 @@ with font-awesome or any other icon font library -->
                                 </h3>
 
                                 <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                        title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="inputName">Department ID</label>
+                                    <!-- <label for="inputName">Department ID</label>
                                     <input type="text" id="inputName" class="form-control">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="inputStatus ">Department</label>
-                                    <select id="inputStatus " class="form-control custom-select ">
-                                 <option selected disabled>Select one</option>
-                                 <option>Computer Department</option>
-                                <option>Civil Department</option>
-                                <option>Electrical and communication Department</option>
-                                </select>
-                                </div>
-                                <div class="form-group ">
-                                    <label for="inputcourse ">Course</label>
-                                    <select name="test[]" size="5" multiple class="form-control">
+                                </div> -->
+                                    <div class="form-group ">
+                                        <label for="inputName ">Department</label>
+
+                                        <input type="text" id="dept_name" class="form-control">
+
+                                    </div>
+                                    <div class="form-group ">
+                                        <label for="inputcourse ">Course</label>
+                                        <select id="coursess" class="form-control-sm custom-select">
+                                            <option selected>Choose Course</option>
+                                            {% for se in coursess %}
+                                            <option value="{{se.id}}"> {{se.course_name}}</option>
+                                            {% endfor %}
+                                    </div>
+
+                                    <!-- <select name="test[]" size="5" multiple class="form-control">
                                         <option selected disabled>Select subjects</option>
                                         <option>Economics
                                         <option>Digital signal analysis and processing
                                         <option>Social and professional issues in IT
-                                    </select>
-                                </div>
-                                <div class="form-group ">
+                                    </select> -->
+                                    <!-- </div> -->
+
+
+                                    <!-- <div class="form-group ">
                                     <label for="inputStatus ">Subject teacher name</label>
                                     <select id="inputStatus " class="form-control custom-select ">
                   <option selected disabled>Select one</option>
                   <option>Ram</option>
                   <option>Kishor</option>
                   <option>Maheshwor</option>
-                </select>
-                                </div>
+                </select> -->
+                                    <!-- </div>
 
                                 <div class="form-group ">
                                     <label for="inputStatus ">Head Of Department</label>
@@ -343,27 +352,28 @@ with font-awesome or any other icon font library -->
                   <option>Kishor</option>
                   <option>Maheshwor</option>
                 </select>
-                                </div>
-                                <div class="form-group ">
+                                </div> -->
+                                    <!-- <div class="form-group ">
                                     <label for="appt">Meeting time</label>
                                     <input type="time" id="appt" name="appt" class="form-control">
                                 </div>
 
 
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
+                                /.card-body -->
+                                    <!-- </div> -->
+                                    <!-- /.card -->
+                                    <!-- </div>
                     </div>
 
 
-                </div>
-                <div class="row ">
-                    <div class="col-12 ">
-                        <a href="# " class="btn btn-secondary ">Cancel</a>
-                        <input type="submit " value="submit " class="btn btn-success float-right ">
-                    </div>
-                </div>
+                </div> -->
+                                    <div class="row ">
+                                        <div class="col-12 ">
+                                            <a href="# " class="btn btn-secondary ">Cancel</a>
+                                            <input type="submit " value="submit " onclick="InsertDepartment();"
+                                                class="btn btn-success float-right ">
+                                        </div>
+                                    </div>
             </section>
             <!-- /.content -->
 
@@ -375,7 +385,7 @@ with font-awesome or any other icon font library -->
 
         <!-- /.content-wrapper -->
         <footer class="main-footer ">
-            <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
+            <strong>Copyright <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
             <div class="float-right d-none d-sm-inline-block ">
             </div>
         </footer>
@@ -387,38 +397,59 @@ with font-awesome or any other icon font library -->
         <!-- /.control-sidebar -->
     </div>
     <script type="text/javascript ">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
 
-                var reader = new FileReader();
-
-                reader.onload = function(e) {
-                    $('.image-upload-wrap').hide();
-
-                    $('.file-upload-image').attr('src', e.target.result);
-                    $('.file-upload-content').show();
-
-                    $('.image-title').html(input.files[0].name);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-
-            } else {
-                removeUpload();
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
             }
         }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+   function InsertDepartment()
+    {
+      debugger;
+       es= "";
+       let dp= $("#dept_name").val();
+       let cm= $("#coursess").val();
+      let csr=csrftoken
+      if(dp == ""){
+        alert("Enter Name");
+       }
+    
+    
+     else{
+        datas={dept_name:dp,coursess:cm,csrfmiddlewaretoken:csr };
+      $.ajax({
+          url:"{% url 'savedepartmet' %}",
+          method:"POST",
+          data: datas,
+          success : function (data)
+          {
+              debugger;
+          
+           if(data.status =="Save"){
+        
+         
+            location.reload();
+           }
+           if(data.status==0){
+        alert("Unable to insert data!");
+               
+           }
+          },
+      });
+    }
+  }
 
-        function removeUpload() {
-            $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-            $('.file-upload-content').hide();
-            $('.image-upload-wrap').show();
-        }
-        $('.image-upload-wrap').bind('dragover', function() {
-            $('.image-upload-wrap').addClass('image-dropping');
-        });
-        $('.image-upload-wrap').bind('dragleave', function() {
-            $('.image-upload-wrap').removeClass('image-dropping');
-        });
     </script>
     <!-- ./wrapper -->
     <script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
@@ -435,19 +466,19 @@ with font-awesome or any other icon font library -->
     <!-- ChartJS -->
     <script src=../../static/js/Chart.min.js "></script>
                                     <!-- Sparkline -->
-                                    <script src="../../static/js/sparkline.js "></script>
+                                    <script src=" ../../static/js/sparkline.js "></script>
                                     <!-- JQVMap -->
-                                    <script src="../../static/js/jquery.vmap.min.js "></script>
-                                    <script src="../../static/js/jquery.vmap.usa.js "></script>
+                                    <script src=" ../../static/js/jquery.vmap.min.js "></script>
+                                    <script src=" ../../static/js/jquery.vmap.usa.js "></script>
                                     <!-- jQuery Knob Chart -->
-                                    <script src="../../static/js/jquery.knob.min.js "></script>
+                                    <script src=" ../../static/js/jquery.knob.min.js "></script>
                                     <!-- daterangepicker -->
-                                    <script src="../../static/js/moment.min.js "></script>
-                                    <script src="../../static/js/daterangepicker.js "></script>
+                                    <script src=" ../../static/js/moment.min.js "></script>
+                                    <script src=" ../../static/js/daterangepicker.js "></script>
                                     <!-- Tempusdominus Bootstrap 4 -->
-                                    <script src="../../static/js/tempusdominus-bootstrap-4.min.js "></script>
+                                    <script src=" ../../static/js/tempusdominus-bootstrap-4.min.js "></script>
                                     <!-- Summernote -->
-                                    <script src="../../static/js/summernote-bs4.min.js "></script>
+                                    <script src=" ../../static/js/summernote-bs4.min.js "></script>
                                     <!-- overlayScrollbars -->
                                     <script src=../../static/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
@@ -457,7 +488,7 @@ with font-awesome or any other icon font library -->
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="../../static/js/dashboard.js "></script>
     <script>
-        $(function() {
+        $(function () {
             // Summernote
             $('#summernote').summernote()
 

@@ -1,32 +1,33 @@
 
 from django.urls import path
-from  Administration import views
+from Administration import views
 urlpatterns = [
 
-    
+
     path('adminpage/', views.adminpage, name='adminpage'),
     path('teacherpage/', views.teacher, name='teacherpage'),
     path('studentpage/', views.student, name='studentpage'),
-   
-   
-    path('allteacher/',views.all_teacher,name='allteacher'),
-    path('addteacher/',views.add_teacher,name='addteacher'),
-    path('addcourse/',views.add_course,name='addcourse'),
-    path('allcourse/',views.all_course,name='allcourse'),
-    path('listcourse/',views.list_coursedata,name = "listcoursedata"),
-    path('alldepartment/',views.all_department,name='alldepartment'),
-    path('adddepartment/',views.add_department,name='adddepartment'),
-    path('allroom/',views.all_room,name='allroom'),
-    path('addroom/',views.add_room,name='addroom'),
-    path('alltime/',views.all_time,name='alltime'),
-    path('addtime/',views.add_time,name='addtime'),
-    path('allsection/',views.all_section,name='allsection'),
-    path('addsection/',views.add_section,name='addsection'),
-    path('change/',views.all_change,name='change'),
-    path('profile/',views.all_profile,name='profile'),
-    path('dashboard/',views.all_dashboard,name='dashboard'),
-    path('edit/',views.edit_data,name = "edit"),
-    path('getinstructors/',views.instruct_list,name = "getinstructors"),
+
+
+    path('allteacher/', views.all_teacher, name='allteacher'),
+    path('addteacher/', views.add_teacher, name='addteacher'),
+    path('addcourse/', views.add_course, name='addcourse'),
+    path('allcourse/', views.all_course, name='allcourse'),
+    path('listcourse/', views.list_coursedata, name="listcoursedata"),
+    path('alldepartment/', views.all_department, name='alldepartment'),
+    path('adddepartment/', views.add_department, name='adddepartment'),
+    path('allroom/', views.all_room, name='allroom'),
+    path('addroom/', views.add_room, name='addroom'),
+    path('alltime/', views.all_time, name='alltime'),
+    path('addtime/', views.add_time, name='addtime'),
+    path('allsection/', views.all_section, name='allsection'),
+    path('addsection/', views.add_section, name='addsection'),
+    path('change/', views.all_change, name='change'),
+    path('profile/', views.all_profile, name='profile'),
+    path('dashboard/', views.all_dashboard, name='dashboard'),
+    path('edit/', views.edit_data, name="edit"),
+    path('editteacher/', views.editteacher_data, name="editteacher"),
+    path('getinstructors/', views.instruct_list, name="getinstructors"),
     path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('course/', views.course, name='course'),
@@ -35,6 +36,11 @@ urlpatterns = [
     path('single/', views.single, name='single'),
     path('contact/', views.contact, name='contact'),
     path('base/', views.basepage, name='base'),
-    path('savecourse/',views.savecourse_data,name='savecourse'),
-    path('delete/',views.delete_data,name = "delete"),
+    path('savecourse/', views.savecourse_data, name='savecourse'),
+    path('savedepartment/', views.savedepartment_data, name='savedepartmet'),
+    path('saveteacher/', views.saveteacher_data, name='saveteacher'),
+    path('delete/', views.delete_data, name="delete"),
+    path('saveroom/', views.saveroom_data, name='saveroom'),
+    path('addinstructors/', views.add_instructor, name='addinstructor'),
+
 ]

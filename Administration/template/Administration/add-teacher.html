@@ -1,77 +1,77 @@
-
-
-        <!-- Preloader
+<!-- Preloader
         <div class="preloader flex-column justify-content-center align-items-center">
             <img class="animation__shake" src="../../static/design/images/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
         </div> -->
 
-        <!-- Navbar -->
-    
-        <!-- /.navbar -->
+<!-- Navbar -->
 
-        <!-- Main Sidebar Container -->
-        {% extends "base.html" %}
-        <!-- Content Wrapper. Contains page content -->
-        {% block content %}
-        <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="container-fluid">
-                    <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1 class="m-0">Teachers</h1>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">teachers</a></li>
-                                <li class="breadcrumb-item active">Add New teachers</li>
-                            </ol>
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
+<!-- /.navbar -->
+
+<!-- Main Sidebar Container -->
+{% extends "base.html" %}
+<!-- Content Wrapper. Contains page content -->
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Teachers</h1>
                 </div>
-                <!-- /.container-fluid -->
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">teachers</a></li>
+                        <li class="breadcrumb-item active">Add New teachers</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
             </div>
-            <!-- /.content-header -->
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
 
 
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="card card-primary">
-                            <div class="card-header">
-                                <h3 class="card-title">Teacher add Form
-                                </h3>
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Teacher add Form
+                        </h3>
 
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <!-- <div class="form-group">
                                     <label for="inputName">Teachers ID</label>
                                     <input type="text" id="inputName" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputName">Teachers Name</label>
-                                    <input type="text" id="inputName" class="form-control">
-                                </div>
+                                </div> -->
+                        <div class="form-group">
+                            <label for="inputName">Teachers Name</label>
+                            <input type="text" id="teachername" class="form-control">
+                        </div>
 
-                                <div class="form-group">
-                                    <label for="inputDescription">Address</label>
-                                    <input type="text" id="inputName" class="form-control">
-                                </div>
-                                <div class="form-group">
+                        <div class="form-group">
+                            <label for="inputDescription">Address</label>
+                            <input type="text" id="teacheraddress" class="form-control">
+                        </div>
+
+
+                        <!-- <div class="form-group">
                                     <label for="phone">phone number:</label>
                                     <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" class="form-control">
-                                </div>
-                                <div class="form-group ">
+                                </div> -->
+                        <!-- <div class="form-group ">
                                     <label for="inputnumber ">Salary</label>
                                     <input type="number" name="Salary" min="1" max="999999999" class="form-control">
                                 </div>
@@ -83,8 +83,8 @@
                   <option>Class councelor</option>
                   <option>Subject teacher</option>
                 </select>
-                                </div>
-                                <div class="form-group ">
+                                </div> -->
+                        <!-- <div class="form-group ">
                                     <label for="inputcourse ">Course</label>
                                     <select name="test[]" size="5" multiple class="form-control">
                                         <option selected disabled>Select subjects</option>
@@ -92,8 +92,8 @@
                                         <option>Digital signal analysis and processing
                                         <option>Social and professional issues in IT
                                     </select>
-                                </div>
-                                <div class="form-group ">
+                                </div> -->
+                        <!-- <div class="form-group ">
                                     <label for="inputStatus ">Department</label>
                                     <select id="inputStatus " class="form-control custom-select ">
                                  <option selected disabled>Select one</option>
@@ -102,65 +102,138 @@
                                 <option>Electrical and communication Department</option>
                                 </select>
                                 </div>
-                                <label for="inputStatus ">Upload Image</label>
-                                <div class="file-upload">
-                                    <div class="image-upload-wrap">
-                                        <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                                        <div class="drag-text">
-                                            <h3>Click to Upload Image</h3>
-                                        </div>
-                                    </div>
-                                    <div class="file-upload-content">
-                                        <img class="file-upload-image" src="#" alt="your image" />
-                                        <div class="image-title-wrap">
-                                            <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
-                                        </div>
-                                    </div>
+-->
+                        <label for="inputStatus ">Upload Image</label>
+                        <div class="file-upload">
+                            <div class="image-upload-wrap">
+                                <input class="file-upload-input" type='file' id="teacherimage" onchange="readURL(this);"
+                                    accept="image/*" />
+                                <div class="drag-text">
+                                    <h3>Click to Upload Image</h3>
                                 </div>
-                                <!-- /.card-body -->
                             </div>
-                            <!-- /.card -->
+                            <div class="file-upload-content">
+                                <img class="file-upload-image" src="#" alt="your image" />
+                                <div class="image-title-wrap">
+                                    <button type="button" onclick="removeUpload()" class="remove-image">Remove <span
+                                            class="image-title">Uploaded Image</span></button>
+                                </div>
+                            </div>
                         </div>
+                        <!-- /.card-body -->
                     </div>
-
-
+                    <!-- /.card -->
                 </div>
-                <div class="row ">
-                    <div class="col-12 ">
-                        <a href="# " class="btn btn-secondary ">Cancel</a>
-                        <input type="submit " value="submit " class="btn btn-success float-right ">
-                    </div>
-                </div>
-            </section>
-            <!-- /.content -->
-
-
+            </div>
 
 
         </div>
-
-
-        <!-- /.content-wrapper -->
-        <footer class="main-footer ">
-            <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
-            <div class="float-right d-none d-sm-inline-block ">
+        <div class="row ">
+            <div class="col-12 ">
+                <a href="# " class="btn btn-secondary ">Cancel</a>
+                <input type="submit " value="submit" onclick="InsertTeacher();" class="btn btn-success float-right ">
             </div>
-        </footer>
-    </script>
-    <!-- ./wrapper -->
-    <script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
-    <!-- jQuery -->
-    <script src="../../static/js/jquery.min.js "></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="../../static/js/jquery-ui.min.js "></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src="../../static/js/bootstrap.bundle.min.js "></script>
-    <script src="../../static/js/toastr.js "></script>
-        {% endblock %}
+        </div>
+    </section>
+    <!-- /.content -->
+
+
+
+
+</div>
+
+
+<!-- /.content-wrapper -->
+<footer class="main-footer ">
+    <strong>Copyright <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
+    <div class="float-right d-none d-sm-inline-block ">
+    </div>
+</footer>
+
+
+<script type="text/javascript ">
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+   function InsertTeacher()
+    {
+      debugger;
+       es= "";
+       let tn= $("#teachername").val();
+       let ta= $("#teacheraddress").val();
+       let ti= $("#teacherimage").val();
+     // let ins= $("#instrust").val();
+      let csr=csrftoken
+      if(tn == ""){
+        alert("Enter Name");
+       }
+     else{
+        datas={nam:tn,Addre:ta, timg:ti ,csrfmiddlewaretoken:csr };
+      $.ajax({
+          url:"{% url 'saveteacher' %}",
+          method:"POST",
+          data: datas,
+          success : function (data)
+          {
+              debugger;
+           if(data.status =="Save"){
         
-        <!-- Control Sidebar -->
-      
+         
+            location.reload();
+           }
+           if(data.status==0){
+            alert("Unable to insert data!");
+               
+           }
+          },
+      });
+    }
+  }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ./wrapper -->
+<script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
+<!-- jQuery -->
+<script src="../../static/js/jquery.min.js "></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../../static/js/jquery-ui.min.js "></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="../../static/js/bootstrap.bundle.min.js "></script>
+<script src="../../static/js/toastr.js "></script>
+{% endblock %}
+
+<!-- Control Sidebar -->

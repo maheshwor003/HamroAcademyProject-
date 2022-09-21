@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SystemLogin',
     'Administration',
+    'TeacherAndStudent',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'HamroAcademyProject.urls'
@@ -56,10 +58,10 @@ ROOT_URLCONF = 'HamroAcademyProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ './SystemLogin/template/SystemLogin',
-        './Administration/template/Administration',
-            os.path.join(BASE_DIR, 'template') ,
-            ],
+        'DIRS': ['./SystemLogin/template/SystemLogin',
+                 './Administration/template/Administration',
+                 os.path.join(BASE_DIR, 'template'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +129,6 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'SystemLogin.User'
+
+MEDIA_URL = '/image/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'image/')

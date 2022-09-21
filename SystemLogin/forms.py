@@ -2,9 +2,10 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import User
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(
-        widget= forms.TextInput(
+        widget=forms.TextInput(
             attrs={
                 "class": "form-control"
             }
@@ -51,4 +52,5 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'is_admin', 'is_teacher', 'is_student')
+        fields = ('username', 'email', 'password1',
+                  'password2',  'is_teacher', 'is_student')

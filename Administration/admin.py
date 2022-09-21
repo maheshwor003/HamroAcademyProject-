@@ -1,19 +1,10 @@
 from django.contrib import admin
-from .models import Course, Instructor, Room, Section, Department, Meetingtime
+from.models import *
 
 
-# class InstructorDetails(admin.ModelAdmin):
-#      list_sdisplay= ('course_id','instructor_id')
-
-# @admin.register(Course)
-# class CourseContent(admin.ModelAdmin):
-#     list_display = ('course_code', 'course_name','max_numb_students', 'instructors')
-
-admin.site.register(Course)
-admin.site.register(Instructor)
-# Register your models here.
-
-admin.site.register(Room)
-admin.site.register(Meetingtime)
-admin.site.register(Department)
-admin.site.register(Section)
+admin.site.register(Rooms)
+admin.site.register(Instructors)
+admin.site.register(MeetingTimes)
+admin.site.register(Courses)
+admin.site.register(Departments)
+admin.site.register(Sections)
