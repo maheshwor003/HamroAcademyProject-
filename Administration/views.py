@@ -5,9 +5,10 @@ from .models import Course, Instructor
 from django.http import JsonResponse
 from django.core import serializers
 from .models import *
+from .forms import Room
 from TeacherAndStudent.models import *
 
-from. forms import *
+from .forms import *
 # Create your views here.
 
 
@@ -15,6 +16,7 @@ from. forms import *
 
 def adminpage(request):
     return render (request,'adminpage.html')
+
 
 def teacher(request):
     return render(request,'teacherpage.html')
@@ -26,12 +28,31 @@ def student(request):
 def base(request):
     return render (request,'dashboard.html')
 def add_teacher(request):
-    return render (request,'add-teacher.html')
+    form = InstructorForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('addteacher')
+        else:
+            print('Invalid')
+    context = {
+        'form': form,
+    }
+    return render(request, 'add-teacher.html', context)
 def all_teacher(request):
-    return render (request,'all-teacher.html')
+    subjects = Instructor.objects.all()
+    dataread=Instructor.objects.all()
+    context = {'teachers_view': subjects,'data_read':dataread}
+    return render(request, 'all-teacher.html', context)
     
-# def all_course(request):
-#     return render (request,'allcourse.html')
+def delete_instructor(request, uid):
+    inss = Instructor.objects.filter(uid=uid)
+    if request.method == 'POST':
+        inss.delete()
+        return redirect('allteacher')
+    
+
     
 def all_course(request):
    
@@ -47,6 +68,32 @@ def delete_course(request, pk):
         crs.delete()
         crss.delete()
         return redirect('allcourse')
+
+def delete_room(request, r_number):
+    room = Room.objects.filter(r_number=r_number)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('allroom')
+
+
+
+def delete_section(request, section_id):
+    section = Section.objects.filter(section_id=section_id)
+    if request.method == 'POST':
+        section.delete()
+        return redirect('allsection')
+
+def delete_time(request, r_number):
+    room = Room.objects.filter(r_number=r_number)
+    if request.method == 'POST':
+        room.delete()
+        return redirect('allroom')
+
+def delete_department(request, id):
+    department = Department.objects.filter(id=id)
+    if request.method == 'POST':
+        department.delete()
+        return redirect('alldepartment')
 
 
 def savecourse_data(request):
@@ -69,27 +116,70 @@ def savecourse_data(request):
      else:
            return JsonResponse({'status':0})
 
+def updatedepartment_data(request,id):
+    if request.method== 'POST':
+      dept = Department.objects.get(pk=id)
+      form = DepartmentForm(request.POST or None, instance=dept)
+      if form.is_valid():
+        form.save()
+    else:
+        dept = Department.objects.get(pk=id)
+        form = DepartmentForm(instance=dept)
+          
+    return render(request,'update.html' ,{'form':form})
 
-def updatecourse_data(request,id):
-     if request.method == "POST":
-           course_code= request.POST.get('course_code')
-           course_name= request.POST['course_name']
-           max_numb_students=request.POST['max_numb_students']
-           instructors= request.POST['instructors']
-           ins=Instructor.objects.get(id=instructors)
-           usr= Course.objects.get(id=id)
-           usr.course_code=course_code
-           usr.course_name=course_name
-           usr.max_numb_students=max_numb_students
-           usr.instructors=ins
-         
-           usr.save()
-           stud =Course.objects.values()
-           student_data =list(stud)
-           return JsonResponse({'status':'Save',
-           'course_data':student_data})
-     else:
-           return JsonResponse({'status':0})
+
+def updatecourse_data(request,course_number):
+    if request.method== 'POST':
+      course = Course.objects.get(course_number=course_number)
+      form = CourseForm(request.POST or None, instance=course)
+      if form.is_valid():
+        form.save()
+    else:
+        course = Course.objects.get(course_number=course_number)
+        form = CourseForm(instance=course)
+          
+    return render(request,'update.html' ,{'form':form})
+
+
+
+def updateinstructor_data(request,uid):
+    if request.method== 'POST':
+      ins = Instructor.objects.get(uid=uid)
+      form = InstructorForm(request.POST or None, instance=ins)
+      if form.is_valid():
+        form.save()
+    else:
+        ins = Instructor.objects.get(uid=uid)
+        form = InstructorForm(instance=ins)
+          
+    return render(request,'update.html' ,{'form':form})    
+
+def updatesection_data(request,section_id):
+    if request.method== 'POST':
+      sec = Section.objects.get(section_id=section_id)
+      form = SectionForm(request.POST or None, instance=sec)
+      if form.is_valid():
+        form.save()
+    else:
+        sec = Section.objects.get(section_id=section_id)
+        form = SectionForm(instance=sec)
+          
+    return render(request,'update.html' ,{'form':form}) 
+
+
+def update_data(request,id):
+    if request.method== 'POST':
+      roomno = Room.objects.get(r_number=id)
+      form = RoomForm(request.POST or None, instance=roomno)
+      if form.is_valid():
+        form.save()
+    else:
+        roomno = Room.objects.get(r_number=id)
+        form = RoomForm(instance=roomno)
+          
+    return render(request,'update.html' ,{'form':form})
+
 
 def list_coursedata(request):
     if request.method == "GET":
@@ -104,11 +194,16 @@ def list_coursedata(request):
 def delete_data(request):
      if request.method == "POST":
       id=request.POST.get('course_name');
+      id=request.POST.get('ins');
+      id=request.POST.get('room');
       pi=Course.objects.get(pk=id)
+      pi=Instructor.objects.get(pk=id)
+      pi=Room.objects.get(r_number=id)
       pi.delete();
       return JsonResponse({'status':1})
      else:
       return JsonResponse({'status':0})
+
 
 # def add_course(request):
 #     subjectss=Instructor.objects.all()
@@ -137,6 +232,24 @@ def instruct_list(request):
     print (csw)
     return render(request,csw)
 
+def add_section(request):
+    form = SectionForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('addsection')
+    context = {
+        'form': form
+    }
+    return render(request, 'addsection.html', context)
+
+
+def all_section(request):
+
+    subjects = Section.objects.all()
+    context = {'sections': subjects}
+    return render(request, 'allsection.html', context)
+
 def edit_data(request):
      if request.method == "POST":
       id=request.POST.get('sid')
@@ -145,16 +258,72 @@ def edit_data(request):
       return JsonResponse(course_data)
 
 def add_department(request):
-    return render (request,'adddepartment.html')
+
+    form = DepartmentForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('adddepartment')
+        else:
+            print('Invalid')
+    context = {
+        'form': form
+    }
+
+    return render(request, 'adddepartment.html', context)
+
 
 def all_department(request):
-    return render (request,'alldepartment.html')
+    subjects = Department.objects.all()
+
+    context = {'department_list': subjects}
+    return render(request, 'alldepartment.html', context)
 
 def all_room(request):
-    return render (request,'allroom.html')
+
+    subjects = Room.objects.all()
+    context = {'Room_view': subjects}
+
+    return render(request, 'allroom.html', context)
+
 
 def add_room(request):
-    return render (request,'addroom.html')
+    form = RoomForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('addroom')
+        else:
+            print('Invalid')
+    context = {
+        'form': form,
+    }
+    return render(request, 'addroom.html', context)
+
+def add_time(request):
+    form = MeetingTimeForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return redirect('addtime')
+        else:
+            print('Invalid')
+    context = {
+        'form': form,
+    }
+    return render(request, 'addtime.html', context)
+
+ 
+def all_profile(request):
+    return render (request,'profile.html')
+
+def all_change(request):
+    return render (request,'change.html')
+
+def all_dashboard(request):
+    return render (request,'dashboard.html')
 
 class Data:
     def __init__(self):
@@ -372,23 +541,7 @@ def alltime(request):
 
 
 
-def add_time(request):
-    return render (request,'addtime.html')
 
-def all_section(request):
-    return render (request,'allsection.html')
-
-def add_section(request):
-    return render (request,'addsection.html')
-    profile
-def all_profile(request):
-    return render (request,'profile.html')
-
-def all_change(request):
-    return render (request,'change.html')
-
-def all_dashboard(request):
-    return render (request,'dashboard.html')
 
 
     

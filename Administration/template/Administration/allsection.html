@@ -28,7 +28,7 @@
             <div class="Allpost">
                 <div class="flexcreate">
                     <div>
-                        <a href="{% url 'addsection' %}" class="btn btn-primary">Add section</a>
+                        <a href="{% url 'addsection' %}" class="btn btn-primary">Add Section</a>
                     </div>
                     <div>
                         <input type="text" class="form-control" placeholder="Search">
@@ -37,190 +37,66 @@
                 <div class="postable TBL">
                     <table class="table table-striped table-bordered">
                         <thead>
-                            <tr>
-                                <th></th>
-                                <th>Section ID</th>
+                            <tr class="table-headers">
+                                <th>Section Id</th>
                                 <th>Department</th>
-                                <th>No of class in a week</th>
-                                <th>Course</th>
-                                <th>Meeting time</th>
-                                <th>Room Number</th>
-                                <th>Subject Teacher name</th>
-                                <th>Action</th>
+                                <th>Total Classes</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+
 
                             </tr>
                         </thead>
+
                         <tbody>
+                            {% for sec in sections %}
                             <tr>
+                                <td>{{sec.section_id}}</td>
+                                <td>{{sec.department}}</td>
+                                <td>{{sec.num_class_in_week }}</td>
                                 <td>
-                                    <input type="checkbox" name="">
+                                    <button type="submit" class="btn btn-danger">
+                                        
+                                  
+                                    <a href="{%url 'updatesection' sec.section_id %}" > </a>
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                </button>
                                 </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
                                 <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
 
+                                    <form action="{% url 'deletesection' sec.section_id %}" method="post">
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+
+                                </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="checkbox" name="">
-                                </td>
-                                <td>101</td>
-                                <td>Computer department</td>
-                                <td>6</td>
-                                <td>Economics</td>
-                                <td>3:00</td>
-                                <td>301</td>
-                                <td>Kishor</td>
-                                <td>
-                                    <button type="button" class="btn btn-danger" title="Edit">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                                    <button type="button" class="btn btn-danger" title="Delete">
-                  <i class="far fa-trash-alt"></i>
-                </button>
-                                </td>
-
-                            </tr>
-
+                            {% endfor %}
                         </tbody>
+
                     </table>
                 </div>
+                </fieldset>
             </div>
-        </div>
     </section>
     <!-- /.content -->
 
 
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer ">
-    <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block ">
     </div>
-</footer>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer ">
+        <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
+        <div class="float-right d-none d-sm-inline-block ">
+        </div>
+    </footer>
 
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark ">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark ">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
 </div>
 <script type="text/javascript ">
     function readURL(input) {

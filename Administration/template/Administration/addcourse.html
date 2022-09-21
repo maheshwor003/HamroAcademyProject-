@@ -35,38 +35,10 @@
 
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
+                            <i class="fas fa-minus"></i>
+                            </button>
                         </div>
                     </div>
-                    <!-- <div class="card-body">
-                                <div class="form-group">
-                                    <label for="inputName">course Code</label>
-                                    <input type="text" id="coursecode" class="form-control">
-                                    <div class="form-group">
-                                        <label for="inputName">course Name</label>
-                                        <input type="text" id="coursename" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group ">
-                                    <label for="inputnumber ">Maximum number of students</label>
-                                    <input type="number" id="maxstudent" name="max-no" min="1" max="999999999" class="form-control">
-                                </div>
-                                <div class="form-group ">
-                                    <label for="inputStatus ">Subject teacher name</label>
-                                  
-                                 
-                                    <select id="instrust" class="form-control-sm custom-select">
-                                        <option selected >Choose Instructor</option>
-                                        {% for subject in subjectss %}
-                                        <option value="{{subject.id}}">  {{subject.name}}</option>
-                                        {% endfor %}
-                                      </select>
-                               
-                                </div>
-                            </div> -->
-                    <!-- /.card-body -->
                     <div class="card-body">
                         <form method="post">
                             {% csrf_token %}
@@ -74,108 +46,56 @@
                                 <div class="tabcontent" id="new">
                                     <div class="form-group">
                                         {{ form.as_p }}
-                                    </div>
 
+                                    </div>
                                     <div class="form-group ">
                                         <label for="inputStatus ">Department</label>
-
-
                                         <select id="depart" class="form-control-sm custom-select">
                                         <option selected >Choose Department</option>
                                         {% for depart in departments %}
                                         <option value="{{depart.id}}">  {{depart.name}}</option>
                                         {% endfor %}
                                       </select>
-                                        <input type="submit" value="Submit" onclick="InsertCourse();" class="submit">
                                     </div>
                             </fieldset>
-                        </form>
-                        </div>
+
+                            <div class="row ">
+                                <div class="col-12 ">
+                                    <a href="{% url 'addteacher' %}" class="btn btn-secondary ">Cancel</a>
+                                    <input type="submit" value="Submit" onclick="InsertCourse();" class="btn btn-success float-right">
+                                </div>
+                            </div>
+                            </div>
                     </div>
                     <!-- /.card -->
                 </div>
             </div>
 
+            </form>
+
+        </div>
     </section>
+
     <!-- /.content -->
-    </div>
+
     <!-- /.content-wrapper -->
+
+
+
+
+    <!-- /.content-wrapper -->
+    <footer class="main-footer ">
+        <strong>Copyright  <a href="addcourse.html">Hamro academy</a>.</strong> All rights reserved.
+        <div class="float-right d-none d-sm-inline-block ">
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark ">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
 </div>
 
-
-
-<!-- /.content-wrapper -->
-<footer class="main-footer ">
-    <strong>Copyright  <a href="addcourse.html">Hamro academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block ">
-    </div>
-</footer>
-
-<!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark ">
-    <!-- Control sidebar content goes here -->
-</aside>
-<!-- /.control-sidebar -->
-</div>
-<script type="text/javascript ">
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    const csrftoken = getCookie('csrftoken');
-
-    function InsertCourse() {
-        debugger;
-        es = "";
-        let cccode = $("#id_course_number").val();
-        let cname = $("#id_course_name").val();
-        let desc = $("#desp").val();
-        let dep = $("#depart").val();
-
-
-        let csr = csrftoken
-        if (cname == "") {
-            console.log("Enter Name");
-        } else {
-            datas = {
-                course_number: cccode,
-                name: cname,
-                description: desc,
-                status: $('#status').val(),
-                department: dep,
-                csrfmiddlewaretoken: csr
-            };
-            $.ajax({
-                url: "{% url 'savecourse' %}",
-                method: "POST",
-                data: datas,
-                success: function(data) {
-                    debugger;
-                    x = data.course_data;
-                    if (data.status == "Save") {
-
-
-                        location.reload();
-                    }
-                    if (data.status == 0) {
-                        toastr.error("Unable to insert data!");
-
-                    }
-                },
-            });
-        }
-    }
-</script>
 
 {% endblock %}

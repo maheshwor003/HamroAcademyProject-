@@ -29,7 +29,7 @@
     <section class="content">
         <div class="row">
             <div class="col-md-6">
-                <div class="card card-primary">
+                <div class="card card-secondary">
                     <div class="card-header">
                         <h3 class="card-title">Department add Form
                         </h3>
@@ -41,76 +41,34 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="inputName">Department ID</label>
-                            <input type="text" id="inputName" class="form-control">
-                        </div>
-                        <div class="form-group ">
-                            <label for="inputStatus ">Department</label>
-                            <select id="inputStatus " class="form-control custom-select ">
-                                 <option selected disabled>Select one</option>
-                                 <option>Computer Department</option>
-                                <option>Civil Department</option>
-                                <option>Electrical and communication Department</option>
-                                </select>
-                        </div>
-                        <div class="form-group ">
-                            <label for="inputcourse ">Course</label>
-                            <select name="test[]" size="5" multiple class="form-control">
-                                        <option selected disabled>Select subjects</option>
-                                        <option>Economics
-                                        <option>Digital signal analysis and processing
-                                        <option>Social and professional issues in IT
-                                    </select>
-                        </div>
-                        <div class="form-group ">
-                            <label for="inputStatus ">Subject teacher name</label>
-                            <select id="inputStatus " class="form-control custom-select ">
-                  <option selected disabled>Select one</option>
-                  <option>Ram</option>
-                  <option>Kishor</option>
-                  <option>Maheshwor</option>
-                </select>
-                        </div>
-
-                        <div class="form-group ">
-                            <label for="inputStatus ">Head Of Department</label>
-                            <select id="inputStatus " class="form-control custom-select ">
-                  <option selected disabled>Select one</option>
-                  <option>Ram</option>
-                  <option>Kishor</option>
-                  <option>Maheshwor</option>
-                </select>
-                        </div>
-                        <div class="form-group ">
-                            <label for="appt">Meeting time</label>
-                            <input type="time" id="appt" name="appt" class="form-control">
-                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <fieldset>
 
 
-                        <!-- /.card-body -->
+                                <div class="tabcontent" id="new">
+                                    {{ form.as_p }}
+
+                                </div>
+
+                            </fieldset>
+                            <div class="row ">
+                                <div class="col-12 ">
+                                    <a href="{% url 'adddepartment' %}" class="btn btn-secondary ">Cancel</a>
+                                    <input type="submit" value="Submit" onclick="InsertCourse();" class="btn btn-success float-right">
+                                </div>
+                            </div>
+
+
+                            <!-- /.card -->
                     </div>
-                    <!-- /.card -->
                 </div>
             </div>
-
-
         </div>
-        <div class="row ">
-            <div class="col-12 ">
-                <a href="# " class="btn btn-secondary ">Cancel</a>
-                <input type="submit " value="submit " class="btn btn-success float-right ">
-            </div>
-        </div>
+        </form>
     </section>
     <!-- /.content -->
-
-
-
-
 </div>
-
-
 <!-- /.content-wrapper -->
 <footer class="main-footer ">
     <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
