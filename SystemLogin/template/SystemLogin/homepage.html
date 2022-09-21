@@ -2,39 +2,6 @@
 
 
 <!-- Carousel Start -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <div class="container-fluid p-0 pb-5 mb-5">
     <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -43,25 +10,20 @@
             <li data-target="#header-carousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            {% for st in homepage_view %}
-
+         {% for st in homepage_view %}
             <div class="carousel-item active" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg"
-                    style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg" style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
-
                     <div class="p-5" style="width: 100%; max-width: 900px;">
-
-                        <h5 class="text-white text-uppercase mb-md-3">{{ st.comp_name}}</h5>
-                        <h1 class="display-3 text-white mb-md-4">{{ st.comp_title}} </h1>
+                        <h5 class="text-white text-uppercase mb-md-3">{{st.comp_name}}</h5>
+                        <h1 class="display-3 text-white mb-md-4">{{st.comp_title}}</h1>
                         <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
-                        {% endfor %}
                     </div>
                 </div>
             </div>
+          {% endfor %}
             <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg"
-                    style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg" style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -71,8 +33,7 @@
                 </div>
             </div>
             <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg"
-                    style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg" style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -81,7 +42,7 @@
                     </div>
                 </div>
             </div>
-
+         
         </div>
     </div>
 </div>
@@ -89,6 +50,7 @@
 
 
 <!-- About Start -->
+{% for st in homepage_view %}
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="row align-items-center">
@@ -100,14 +62,7 @@
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
                     <h1>For your better future</h1>
                 </div>
-                <p>Ac dictum vulputate a facilisi euismod mi adipiscing mus fames a a consectetur arcu felis accumsan
-                    parturient in fusce enim ac nostra ridiculus sit nulla at et parturient etiam.Ad risus ac elementum
-                    per sociosqu id class vestibulum suspendisse
-                    dui ut dis parturient scelerisque semper consequat turpis augue torquent eget venenatis condimentum
-                    a condimentum pharetra.Gravida vestibulum arcu cras parturient curae convallis est a arcu etiam
-                    mollis ut semper hac adipiscing taciti
-                    condimentum blandit scelerisque a curabitur dis vestibulum a a scelerisque id a.Laoreet suscipit
-                    condimentum a mus mattis.</p>
+                <p>{{st.comp_details}}</p>
                 <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
             </div>
         </div>
@@ -115,7 +70,7 @@
 </div>
 <!-- About End -->
 
-
+{% endfor %}
 <!-- Category Start -->
 <div class="container-fluid py-5">
     <div class="container pt-5 pb-3">
@@ -235,12 +190,12 @@
                     <h1 class="text-white">Register Now</h1>
                 </div>
                 <!-- <p class="text-white">Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor
-                                </p>
-                                <ul class="list-inline text-white m-0">
-                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet diam</li>
-                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum</li>
-                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Diam dolor diam elitripsum vero.</li>
-                                </ul> -->
+                            </p>
+                            <ul class="list-inline text-white m-0">
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet diam</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum</li>
+                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Diam dolor diam elitripsum vero.</li>
+                            </ul> -->
             </div>
             <div class="col-lg-5">
                 <div class="card border-0">
@@ -250,20 +205,18 @@
                     <div class="card-body rounded-bottom bg-primary p-5">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your name"
-                                    required="required" />
+                                <input type="text" class="form-control border-0 p-4" placeholder="Your name" required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your email"
-                                    required="required" />
+                                <input type="email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
                             </div>
                             <div class="form-group">
                                 <select class="custom-select border-0 px-4" style="height: 47px;">
-                                    <option selected>Select a Faculty</option>
-                                    <option value="1">Civil</option>
-                                    <option value="2">Computer</option>
-                                    <option value="3">Electronics and Communication</option>
-                                </select>
+                                                    <option selected>Select a Faculty</option>
+                                                    <option value="1">Civil</option>
+                                                    <option value="2">Computer</option>
+                                                    <option value="3">Electronics and Communication</option>
+                                                </select>
                             </div>
                             <div>
                                 <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
@@ -292,10 +245,8 @@
                         <img class="img-fluid" src="../../static/design/img/team-1.jpg" alt="">
                         <div class="team-social">
                             <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="bg-secondary p-4">
@@ -310,10 +261,8 @@
                         <img class="img-fluid" src="../../static/design/img/team-2.jpg" alt="">
                         <div class="team-social">
                             <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="bg-secondary p-4">
@@ -328,10 +277,8 @@
                         <img class="img-fluid" src="../../static/design/img/team-3.jpg" alt="">
                         <div class="team-social">
                             <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="bg-secondary p-4">
@@ -346,10 +293,8 @@
                         <img class="img-fluid" src="../../static/design/img/team-4.jpg" alt="">
                         <div class="team-social">
                             <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                     <div class="bg-secondary p-4">
@@ -403,6 +348,6 @@
         </div>
     </div>
 </div>
-
+<!-- Blog End -->
 <!-- Blog End -->
 {% endblock %}
