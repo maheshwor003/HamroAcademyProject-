@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from SystemLogin.models import Homedetails
 
 from TeacherAndStudent.models import Departments
 from .models import Course, Instructor
@@ -640,17 +639,10 @@ def signup(request):
 
 
 def course(request):
-    coursename= Courses.objects.all()
-    context={'courses':coursename}  
-    return render(request, 'course.html', context)
-
+    return render(request, 'course.html', {'navbar': 'course'})
 
 
 def about(request):
-    details= Homedetails.objects.all()
-    context={'sdet':details}  
-    return render(request, 'about.html', context)
-
     return render(request, 'about.html', {'navbar': 'about'})
 
 
@@ -671,6 +663,9 @@ def basepage(request):
 def teacher(request):
     return render(request, 'teacher.html', {'navbar': 'teacher'})
 
+
+def homepage(request):
+    return render(request, 'homepage.html', {'navbar': 'homepage'})
 
 
 # def attendance(request, stud_id):

@@ -29,7 +29,7 @@ urlpatterns = [
     path('dashboard/', views.all_dashboard, name='dashboard'),
     path('edit/', views.edit_data, name="edit"),
     path('getinstructors/', views.instruct_list, name="getinstructors"),
-   
+    path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('course/', views.course, name='course'),
     path('updatecourse/<str:course_number>',
