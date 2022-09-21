@@ -50,17 +50,27 @@
                             <tr>
                                 <td>{{st.uid}}</td>
                                 <td>{{st.name}}</td>
-
-
                                 <td>
-                                    <a href="{%url 'updateinstructor' st.uid %}" class="btn btn-danger"> Edit</a>
+                                    <a href="{%url 'updateinstructor' st.uid %}">
+                                        <button type="submit" class="btn btn-danger">
+                                   
+                                  
+
+                                    <i class='far fa-edit'></i>
+                                </button>
+                                    </a>
                                 </td>
                                 <td>
+
                                     <form action="{% url 'deleteinstructor' st.uid %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                    </form>
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+
                                 </td>
+
 
                             </tr>
                             {% endfor %}
