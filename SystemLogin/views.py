@@ -1,11 +1,14 @@
-from django.shortcuts import render,redirect
-from .forms import SignUpForm,LoginForm
+import imp
+from django.shortcuts import render, redirect
+from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
+from .models import *
 
 
 def homepage(request):
-    return render (request,'homepage.html')
-
+    mj = Homedetails.objects.all()
+    context = {'homepage_view': mj}
+    return render(request, 'homepage.html', context)
 
 
 def register(request):
@@ -20,8 +23,7 @@ def register(request):
             msg = 'form is not valid'
     else:
         form = SignUpForm()
-    return render(request,'register.html', {'form': form, 'msg': msg})
-
+    return render(request, 'register.html', {'form': form, 'msg': msg})
 
 
 def login_view(request):
@@ -31,7 +33,7 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-         
+
             user = authenticate(username=username, password=password)
             if user is not None and user.is_admin:
                 login(request, user)
@@ -43,8 +45,7 @@ def login_view(request):
                 login(request, user)
                 return redirect('teacherdashboard')
             else:
-                msg= 'invalid credentials'
+                msg = 'invalid credentials'
         else:
             msg = 'error validating form'
     return render(request, 'login.html', {'form': form, 'msg': msg})
-

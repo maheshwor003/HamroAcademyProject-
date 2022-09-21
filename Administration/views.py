@@ -12,25 +12,27 @@ from .forms import *
 # Create your views here.
 
 
-
-
 def adminpage(request):
-    return render (request,'adminpage.html')
+    return render(request, 'adminpage.html')
 
 
 def teacher(request):
-    return render(request,'teacherpage.html')
+    return render(request, 'teacherpage.html')
 
 
 def student(request):
-    return render(request,'studentpage.html')
+    return render(request, 'studentpage.html')
+
 
 def logout_out(request):
     logout(request)
     return redirect('homepage')
 
+
 def base(request):
-    return render (request,'dashboard.html')
+    return render(request, 'dashboard.html')
+
+
 def add_teacher(request):
     form = InstructorForm(request.POST or None)
     if request.method == 'POST':
@@ -44,26 +46,29 @@ def add_teacher(request):
         'form': form,
     }
     return render(request, 'add-teacher.html', context)
+
+
 def all_teacher(request):
     subjects = Instructor.objects.all()
-    dataread=Instructor.objects.all()
-    context = {'teachers_view': subjects,'data_read':dataread}
+    dataread = Instructor.objects.all()
+    context = {'teachers_view': subjects, 'data_read': dataread}
     return render(request, 'all-teacher.html', context)
-    
+
+
 def delete_instructor(request, uid):
     inss = Instructor.objects.filter(uid=uid)
     if request.method == 'POST':
         inss.delete()
         return redirect('allteacher')
-    
 
-    
+
 def all_course(request):
-   
-    subjects=Courses.objects.all()
-    dataread=Course.objects.all()
-    context = {'subjects':subjects,'data_read':dataread}
-    return render (request,'allcourse.html',context)
+
+    subjects = Courses.objects.all()
+    dataread = Course.objects.all()
+    context = {'subjects': subjects, 'data_read': dataread}
+    return render(request, 'allcourse.html', context)
+
 
 def delete_course(request, pk):
     crs = Course.objects.filter(pk=pk)
@@ -73,12 +78,12 @@ def delete_course(request, pk):
         crss.delete()
         return redirect('allcourse')
 
+
 def delete_room(request, r_number):
     room = Room.objects.filter(r_number=r_number)
     if request.method == 'POST':
         room.delete()
         return redirect('allroom')
-
 
 
 def delete_section(request, section_id):
@@ -87,11 +92,13 @@ def delete_section(request, section_id):
         section.delete()
         return redirect('allsection')
 
-def delete_time(request, r_number):
-    room = Room.objects.filter(r_number=r_number)
+
+def delete_time(request, pid):
+    section = MeetingTime.objects.filter(pid=pid)
     if request.method == 'POST':
-        room.delete()
-        return redirect('allroom')
+        section.delete()
+        return redirect('alltime')
+
 
 def delete_department(request, id):
     department = Department.objects.filter(id=id)
@@ -101,112 +108,128 @@ def delete_department(request, id):
 
 
 def savecourse_data(request):
-     if request.method == "POST":
-           
-           course_number= request.POST.get('course_number')
-           course_name= request.POST['name']
-           description=request.POST['description']
-           status=request.POST['status']
-           depart= request.POST['department']
-           ins=Departments.objects.get(id=depart)
-         
-           usr= Courses(course_number=course_number,name=course_name,description=description,status=status,department=ins)
-           print(usr)
-           usr.save()
-           stud =Courses.objects.values()
-           student_data =list(stud)
-           return JsonResponse({'status':'Save',
-           'course_data':student_data})
-     else:
-           return JsonResponse({'status':0})
+    if request.method == "POST":
 
-def updatedepartment_data(request,id):
-    if request.method== 'POST':
-      dept = Department.objects.get(pk=id)
-      form = DepartmentForm(request.POST or None, instance=dept)
-      if form.is_valid():
-        form.save()
+        course_number = request.POST.get('course_number')
+        course_name = request.POST['name']
+        description = request.POST['description']
+        status = request.POST['status']
+        depart = request.POST['department']
+        ins = Departments.objects.get(id=depart)
+
+        usr = Courses(course_number=course_number, name=course_name,
+                      description=description, status=status, department=ins)
+        print(usr)
+        usr.save()
+        stud = Courses.objects.values()
+        student_data = list(stud)
+        return JsonResponse({'status': 'Save',
+                             'course_data': student_data})
+    else:
+        return JsonResponse({'status': 0})
+
+
+def updatedepartment_data(request, id):
+    if request.method == 'POST':
+        dept = Department.objects.get(pk=id)
+        form = DepartmentForm(request.POST or None, instance=dept)
+        if form.is_valid():
+            form.save()
     else:
         dept = Department.objects.get(pk=id)
         form = DepartmentForm(instance=dept)
-          
-    return render(request,'update.html' ,{'form':form})
+
+    return render(request, 'update.html', {'form': form})
 
 
-def updatecourse_data(request,course_number):
-    if request.method== 'POST':
-      course = Course.objects.get(course_number=course_number)
-      form = CourseForm(request.POST or None, instance=course)
-      if form.is_valid():
-        form.save()
+def updatecourse_data(request, course_number):
+    if request.method == 'POST':
+        course = Course.objects.get(course_number=course_number)
+        form = CourseForm(request.POST or None, instance=course)
+        if form.is_valid():
+            form.save()
     else:
         course = Course.objects.get(course_number=course_number)
         form = CourseForm(instance=course)
-          
-    return render(request,'update.html',{'form':form})
+
+    return render(request, 'update.html', {'form': form})
 
 
-
-def updateinstructor_data(request,uid):
-    if request.method== 'POST':
-      ins = Instructor.objects.get(uid=uid)
-      form = InstructorForm(request.POST or None, instance=ins)
-      if form.is_valid():
-        form.save()
+def updateinstructor_data(request, uid):
+    if request.method == 'POST':
+        ins = Instructor.objects.get(uid=uid)
+        form = InstructorForm(request.POST or None, instance=ins)
+        if form.is_valid():
+            form.save()
     else:
         ins = Instructor.objects.get(uid=uid)
         form = InstructorForm(instance=ins)
-          
-    return render(request,'update.html' ,{'form':form})    
 
-def updatesection_data(request,section_id):
-    if request.method== 'POST':
-      sec = Section.objects.get(section_id=section_id)
-      form = SectionForm(request.POST or None, instance=sec)
-      if form.is_valid():
-        form.save()
+    return render(request, 'update.html', {'form': form})
+
+
+def updatesection_data(request, section_id):
+    if request.method == 'POST':
+        sec = Section.objects.get(section_id=section_id)
+        form = SectionForm(request.POST or None, instance=sec)
+        if form.is_valid():
+            form.save()
     else:
         sec = Section.objects.get(section_id=section_id)
         form = SectionForm(instance=sec)
-          
-    return render(request,'update.html' ,{'form':form}) 
+
+    return render(request, 'update.html', {'form': form})
 
 
-def update_data(request,id):
-    if request.method== 'POST':
-      roomno = Room.objects.get(r_number=id)
-      form = RoomForm(request.POST or None, instance=roomno)
-      if form.is_valid():
-        form.save()
+def updatetime_data(request, pid):
+    if request.method == 'POST':
+        sec = MeetingTime.objects.get(pid=pid)
+        form = MeetingTimeForm(request.POST or None, instance=sec)
+        if form.is_valid():
+            form.save()
+    else:
+        sec = MeetingTime.objects.get(pid=pid)
+        form = MeetingTimeForm(instance=sec)
+
+    return render(request, 'update.html', {'form': form})
+
+
+def update_data(request, id):
+    if request.method == 'POST':
+        roomno = Room.objects.get(r_number=id)
+        form = RoomForm(request.POST or None, instance=roomno)
+        if form.is_valid():
+            form.save()
     else:
         roomno = Room.objects.get(r_number=id)
         form = RoomForm(instance=roomno)
-          
-    return render(request,'update.html' ,{'form':form})
+
+    return render(request, 'update.html', {'form': form})
 
 
 def list_coursedata(request):
     if request.method == "GET":
-          context ={'data_read':Course.objects.all()}
+        context = {'data_read': Course.objects.all()}
 
-          print(context)
-          student_data =serializers.serialize('json',Course.objects.all())
-          print (student_data)
-          return JsonResponse(student_data,safe=False)
-    return JsonResponse({'message':'wrongvalidation'})
+        print(context)
+        student_data = serializers.serialize('json', Course.objects.all())
+        print(student_data)
+        return JsonResponse(student_data, safe=False)
+    return JsonResponse({'message': 'wrongvalidation'})
+
 
 def delete_data(request):
-     if request.method == "POST":
-      id=request.POST.get('course_name');
-      id=request.POST.get('ins');
-      id=request.POST.get('room');
-      pi=Course.objects.get(pk=id)
-      pi=Instructor.objects.get(pk=id)
-      pi=Room.objects.get(r_number=id)
-      pi.delete();
-      return JsonResponse({'status':1})
-     else:
-      return JsonResponse({'status':0})
+    if request.method == "POST":
+        id = request.POST.get('course_name')
+        id = request.POST.get('ins')
+        id = request.POST.get('room')
+        pi = Course.objects.get(pk=id)
+        pi = Instructor.objects.get(pk=id)
+        pi = Room.objects.get(r_number=id)
+        pi.delete()
+        return JsonResponse({'status': 1})
+    else:
+        return JsonResponse({'status': 0})
 
 
 # def add_course(request):
@@ -216,7 +239,7 @@ def delete_data(request):
 
 
 def add_course(request):
-    listdepartment=Departments.objects.all()
+    listdepartment = Departments.objects.all()
     form = CourseForm(request.POST or None)
     if request.method == 'POST':
 
@@ -226,9 +249,10 @@ def add_course(request):
         else:
             print('Invalid')
     context = {
-        'form': form,'departments':listdepartment
+        'form': form, 'departments': listdepartment
     }
     return render(request, 'addcourse.html', context)
+
 
 def add_instructor(request):
     form = InstructorForm(request.POST or None)
@@ -242,11 +266,11 @@ def add_instructor(request):
     return render(request, 'add-teacher.html', context)
 
 
-
 def instruct_list(request):
-    csw = {'subjects':Instructor.objects.all()}
-    print (csw)
-    return render(request,csw)
+    csw = {'subjects': Instructor.objects.all()}
+    print(csw)
+    return render(request, csw)
+
 
 def add_section(request):
     form = SectionForm(request.POST or None)
@@ -266,12 +290,15 @@ def all_section(request):
     context = {'sections': subjects}
     return render(request, 'allsection.html', context)
 
+
 def edit_data(request):
-     if request.method == "POST":
-      id=request.POST.get('sid')
-      pi=Course.objects.get(pk=id)
-      course_data={"id":pi.id,"course_code":pi.course_code,"course_name":pi.course_name,"max_numb_students":pi.max_numb_students,"instructors":pi.instructors.id}
-      return JsonResponse(course_data)
+    if request.method == "POST":
+        id = request.POST.get('sid')
+        pi = Course.objects.get(pk=id)
+        course_data = {"id": pi.id, "course_code": pi.course_code, "course_name": pi.course_name,
+                       "max_numb_students": pi.max_numb_students, "instructors": pi.instructors.id}
+        return JsonResponse(course_data)
+
 
 def add_department(request):
 
@@ -296,6 +323,7 @@ def all_department(request):
     context = {'department_list': subjects}
     return render(request, 'alldepartment.html', context)
 
+
 def all_room(request):
 
     subjects = Room.objects.all()
@@ -318,6 +346,7 @@ def add_room(request):
     }
     return render(request, 'addroom.html', context)
 
+
 def add_time(request):
     form = MeetingTimeForm(request.POST or None)
     if request.method == 'POST':
@@ -331,19 +360,30 @@ def add_time(request):
     }
     return render(request, 'addtime.html', context)
 
- 
+
+# def all_time(request):
+
+#     subjects = MeetingTime.objects.all()
+#     context = {'schedule': subjects}
+
+#     return render(request, 'alltime.html', context)
+
+
 def all_profile(request):
-    return render (request,'profile.html')
+    return render(request, 'profile.html')
+
 
 def all_change(request):
-    return render (request,'change.html')
+    return render(request, 'change.html')
+
 
 def all_dashboard(request):
 
     courses = Course.objects.count()
     teacher = Instructor.objects.count()
-    context = {'courses': courses,'teacher':teacher}
-    return render (request,'dashboard.html',context)
+    context = {'courses': courses, 'teacher': teacher}
+    return render(request, 'dashboard.html', context)
+
 
 class Data:
     def __init__(self):
@@ -362,8 +402,6 @@ class Data:
     def get_depts(self): return self._depts
 
     def get_meetingTimes(self): return self._meetingTimes
-
-
 
 
 class Schedule:
@@ -397,11 +435,15 @@ class Schedule:
                 for course in courses:
                     for i in range(n // len(courses)):
                         crs_inst = course.instructors.all()
-                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        newClass = Class(self._classNumb, dept,
+                                         section.section_id, course)
                         self._classNumb += 1
-                        newClass.set_meetingTime(data.get_meetingTimes()[rnd.randrange(0, len(MeetingTime.objects.all()))])
-                        newClass.set_room(data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
-                        newClass.set_instructor(crs_inst[rnd.randrange(0, len(crs_inst))])
+                        newClass.set_meetingTime(data.get_meetingTimes(
+                        )[rnd.randrange(0, len(MeetingTime.objects.all()))])
+                        newClass.set_room(
+                            data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
+                        newClass.set_instructor(
+                            crs_inst[rnd.randrange(0, len(crs_inst))])
                         self._classes.append(newClass)
             else:
                 n = len(MeetingTime.objects.all())
@@ -409,16 +451,19 @@ class Schedule:
                 for course in courses:
                     for i in range(n // len(courses)):
                         crs_inst = course.instructors.all()
-                        newClass = Class(self._classNumb, dept, section.section_id, course)
+                        newClass = Class(self._classNumb, dept,
+                                         section.section_id, course)
                         self._classNumb += 1
-                        newClass.set_meetingTime(data.get_meetingTimes()[rnd.randrange(0, len(MeetingTime.objects.all()))])
-                        newClass.set_room(data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
-                        newClass.set_instructor(crs_inst[rnd.randrange(0, len(crs_inst))])
+                        newClass.set_meetingTime(data.get_meetingTimes(
+                        )[rnd.randrange(0, len(MeetingTime.objects.all()))])
+                        newClass.set_room(
+                            data.get_rooms()[rnd.randrange(0, len(data.get_rooms()))])
+                        newClass.set_instructor(
+                            crs_inst[rnd.randrange(0, len(crs_inst))])
                         self._classes.append(newClass)
 
         return self
 
-        
     def calculate_fitness(self):
         self._numberOfConflicts = 0
         classes = self.get_classes()
@@ -434,9 +479,6 @@ class Schedule:
                         if classes[i].instructor == classes[j].instructor:
                             self._numberOfConflicts += 1
         return 1 / (1.0 * self._numberOfConflicts + 1)
-
-
-
 
 
 class Class:
@@ -467,7 +509,9 @@ class Class:
 
     def set_room(self, room): self.room = room
 
+
 data = Data()
+
 
 class GeneticAlgorithm:
     def evolve(self, population):
@@ -479,9 +523,12 @@ class GeneticAlgorithm:
             crossover_pop.get_schedules().append(pop.get_schedules()[i])
         i = NUMB_OF_ELITE_SCHEDULES
         while i < POPULATION_SIZE:
-            schedule1 = self._select_tournament_population(pop).get_schedules()[0]
-            schedule2 = self._select_tournament_population(pop).get_schedules()[0]
-            crossover_pop.get_schedules().append(self._crossover_schedule(schedule1, schedule2))
+            schedule1 = self._select_tournament_population(pop).get_schedules()[
+                0]
+            schedule2 = self._select_tournament_population(pop).get_schedules()[
+                0]
+            crossover_pop.get_schedules().append(
+                self._crossover_schedule(schedule1, schedule2))
             i += 1
         return crossover_pop
 
@@ -510,11 +557,11 @@ class GeneticAlgorithm:
         tournament_pop = Population(0)
         i = 0
         while i < TOURNAMENT_SELECTION_SIZE:
-            tournament_pop.get_schedules().append(pop.get_schedules()[rnd.randrange(0, POPULATION_SIZE)])
+            tournament_pop.get_schedules().append(
+                pop.get_schedules()[rnd.randrange(0, POPULATION_SIZE)])
             i += 1
         tournament_pop.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         return tournament_pop
-
 
 
 class Population:
@@ -525,6 +572,7 @@ class Population:
 
     def get_schedules(self):
         return self._schedules
+
 
 def context_manager(schedule):
     classes = schedule.get_classes()
@@ -537,7 +585,8 @@ def context_manager(schedule):
                         f'{classes[i].course.max_numb_students}'
         cls['room'] = f'{classes[i].room.r_number} ({classes[i].room.seating_capacity})'
         cls['instructor'] = f'{classes[i].instructor.name} ({classes[i].instructor.uid})'
-        cls['meeting_time'] = [classes[i].meeting_time.pid, classes[i].meeting_time.day, classes[i].meeting_time.time]
+        cls['meeting_time'] = [classes[i].meeting_time.pid,
+                               classes[i].meeting_time.day, classes[i].meeting_time.time]
         context.append(cls)
         print(context)
     return context
@@ -555,9 +604,9 @@ def routinegeneration(request):
         population = geneticAlgorithm.evolve(population)
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         schedule = population.get_schedules()[0].get_classes()
-      
+
     return render(request, 'routinegeneration.html', {'schedule': schedule, 'sections': Section.objects.all(),
-                                              'times': MeetingTime.objects.all()})
+                                                      'times': MeetingTime.objects.all()})
 
 
 
@@ -586,30 +635,37 @@ def alltime(request):
     
     
 def signup(request):
-    return render(request,'signup.html') 
-    
+    return render(request, 'signup.html')
+
 
 def course(request):
-    return render(request,'course.html',{'navbar':'course'}) 
-    
+    return render(request, 'course.html', {'navbar': 'course'})
+
+
 def about(request):
-    return render(request,'about.html',{'navbar':'about'}) 
+    return render(request, 'about.html', {'navbar': 'about'})
+
 
 def single(request):
-    return render(request,'single.html',{'navbar':'single'}) 
+    return render(request, 'single.html', {'navbar': 'single'})
+
 
 def contact(request):
-    return render(request,'contact.html',{'navbar':'contact'}) 
+    return render(request, 'contact.html', {'navbar': 'contact'})
+
 
 def basepage(request):
-    csw = {'subjects':Instructor.objects.all().count()}
-    print (csw)
-    return render(request,'base.html') 
+    csw = {'subjects': Instructor.objects.all().count()}
+    print(csw)
+    return render(request, 'base.html')
+
 
 def teacher(request):
-    return render(request,'teacher.html',{'navbar':'teacher'})
+    return render(request, 'teacher.html', {'navbar': 'teacher'})
+
+
 def homepage(request):
-    return render(request,'homepage.html',{'navbar':'homepage'})
+    return render(request, 'homepage.html', {'navbar': 'homepage'})
 
 
 # def attendance(request, stud_id):
@@ -627,23 +683,25 @@ def homepage(request):
 
 
 def studentnavbar(request):
-    return render (request,'studentnavbar.html')
+    return render(request, 'studentnavbar.html')
+
 
 def studentprofile(request):
-    return render (request,'studentprofile.html')
+    return render(request, 'studentprofile.html')
 
-def studentattendence(request,stud_id):
-      stud = Student.objects.get(USN=stud_id)
-      ass_list = Assign.objects.filter(class_id_id=stud.class_id)
-      att_list = []
-      for ass in ass_list:
-          try:
-              a = AttendanceTotal.objects.get(student=stud, course=ass.course)
-          except AttendanceTotal.DoesNotExist:
-              a = AttendanceTotal(student=stud, course=ass.course)
-              a.save()
-          att_list.append(a)
-      return render(request, 'attendance.html', {'att_list': att_list})
+
+def studentattendence(request, stud_id):
+    stud = Student.objects.get(USN=stud_id)
+    ass_list = Assign.objects.filter(class_id_id=stud.class_id)
+    att_list = []
+    for ass in ass_list:
+        try:
+            a = AttendanceTotal.objects.get(student=stud, course=ass.course)
+        except AttendanceTotal.DoesNotExist:
+            a = AttendanceTotal(student=stud, course=ass.course)
+            a.save()
+        att_list.append(a)
+    return render(request, 'attendance.html', {'att_list': att_list})
 
 
 def marks_list(request, stud_id):
@@ -684,22 +742,32 @@ def marks_list(request, stud_id):
 #      return render (request,'attendence.html')
 
 def studentpage(request):
-    return render (request,'studentpage.html')
+    return render(request, 'studentpage.html')
+
 
 def result(request):
-    return render (request,'result.html')
+    return render(request, 'result.html')
 
 
-    
 def teachernavbar(request):
-    return render (request,'teachernavbar.html')
+    return render(request, 'teachernavbar.html')
+
+
 def t_result(request):
-    return render (request,'t_result.html')
+    return render(request, 't_result.html')
+
+
 def t_attendence(request):
-    return render (request,'t_attendence.html')
+    return render(request, 't_attendence.html')
+
+
 def teacherprofile(request):
-    return render (request,'teacherprofile.html')
+    return render(request, 'teacherprofile.html')
+
+
 def teacherdashboard(request):
-    return render (request,'teacherdashboard.html')
+    return render(request, 'teacherdashboard.html')
+
+
 def routine(request):
-    return render (request,'routine.html')
+    return render(request, 'routine.html')
