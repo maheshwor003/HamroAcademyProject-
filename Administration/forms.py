@@ -3,6 +3,7 @@ from tkinter.ttk import Style
 from django.forms import ModelForm
 
 from SystemLogin.models import User
+from TeacherAndStudent.models import Student
 from. models import *
 from django import forms
 
@@ -32,11 +33,28 @@ class InstructorForm(ModelForm):
         model = Instructor
         fields = ['uid','name']
 
+class StudentForm(ModelForm):
+ error_css_class='error-field'
+ required_css_class='requiredfield'
+ USN=forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" USN"}))
+ name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" Student Name"}))
+ YEARS= [x for x in range(1940,2021)]
+ DOB= forms.DateField(label='Birthdate', widget=forms.SelectDateWidget)
+ class Meta:
+        model = Student
+        fields = [
+            'user',
+            'class_id',
+            'USN',
+            'name',
+            'sex',
+            'DOB',
+        ]
 
 class MeetingTimeForm(ModelForm):
  error_css_class='error-field'
  required_css_class='requiredfield'
- pid=forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Meeting id"}))
+ pid=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"Meeting id"}))
  class Meta:
         model = MeetingTime
         fields = [

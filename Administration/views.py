@@ -35,6 +35,8 @@ def base(request):
 
 
 def add_teacher(request):
+    use= User.objects.all()
+    depare=Departments.objects.all()
     form = InstructorForm(request.POST or None)
     if request.method == 'POST':
 
@@ -44,9 +46,26 @@ def add_teacher(request):
         else:
             print('Invalid')
     context = {
-        'form': form,
+        'form': form,'username':use,'depart':depare
     }
     return render(request, 'add-teacher.html', context)
+
+def add_student(request):
+    use= User.objects.all()
+    depare=Departments.objects.all()
+    form = StudentForm(request.POST or None)
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('addstudent')
+        else:
+            print('Invalid')
+    context = {
+        'form': form,'username':use,'depart':depare
+    }
+    return render(request, 'add-student.html', context)
+
 
 
 def all_teacher(request):
@@ -55,6 +74,12 @@ def all_teacher(request):
     context = {'teachers_view': subjects, 'data_read': dataread}
     return render(request, 'all-teacher.html', context)
 
+def all_student(request):
+  
+    dataread = Student.objects.all()
+    context = {'student_view': dataread}
+    return render(request, 'all-student.html', context)
+
 
 def delete_instructor(request, uid):
     inss = Instructor.objects.filter(uid=uid)
@@ -62,6 +87,11 @@ def delete_instructor(request, uid):
         inss.delete()
         return redirect('allteacher')
 
+def deletestudent_data(request, USN):
+    inss = Student.objects.filter(USN=USN)
+    if request.method == 'POST':
+        inss.delete()
+        return redirect('allstudent')
 
 def all_course(request):
 
@@ -191,6 +221,19 @@ def updatetime_data(request, pid):
     else:
         sec = MeetingTime.objects.get(pid=pid)
         form = MeetingTimeForm(instance=sec)
+
+    return render(request, 'update.html', {'form': form})
+
+
+def updatestudent_data(request, USN):
+    if request.method == 'POST':
+        sec = Student.objects.get(USN=USN)
+        form = StudentForm(request.POST or None, instance=sec)
+        if form.is_valid():
+            form.save()
+    else:
+        sec = Student.objects.get(USN=USN)
+        form = StudentForm(instance=sec)
 
     return render(request, 'update.html', {'form': form})
 
@@ -776,3 +819,21 @@ def teacherdashboard(request):
 
 def routine(request):
     return render(request, 'routine.html')
+
+
+def saveteacher(request):
+     if request.method == "POST":
+
+           course_code= request.POST.get('id')
+           course_name= request.POST['dept']
+           max_numb_students=request.POST['name']
+           instructors= request.POST['sex']
+           inst= request.POST['DOB']
+ 
+
+           usr= Teacher(id=course_code,dept=course_name,name=max_numb_students, sex=instructors, DOB=inst)
+
+           usr.save()
+           return JsonResponse({'status':'Save'})
+     else:
+           return JsonResponse({'status':0})

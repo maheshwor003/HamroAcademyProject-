@@ -49,8 +49,7 @@
                             <th>Venue(Block- Room)</th>
                             <th>Instructor</th>
                             <th>Class Timing</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                   
                         </tr>
                         <thead>
                             <tbody>
@@ -61,13 +60,7 @@
                                     <td>{{class.room}}</td>
                                     <td>{{class.instructor}}</td>
                                     <td>{{class.meeting_time}}</td>
-                                    <td>
-                                        <form action="{% url 'deletetime' st.uid %}" method="post">
-                                            {% csrf_token %} {{ form.as_p }}
-
-
-                                            <input type="submit" value="Delete" class="btn btn-danger"></td>
-                                </tr>
+                               </tr>
                                 {% endif %} {% endfor %}
                             </tbody>
                 </table>

@@ -54,7 +54,7 @@
                                 <td>{{st.id}}</td>
                                 <td>{{st.dept_name}}</td>
                                 <td>
-                                    <a href="{%url 'updatedepartment' st.id %}" ">
+                                    <a href="{%url 'updatedepartment' st.id %}" >
                                         <button type="submit " class="btn btn-danger ">
                                    
                                   
@@ -65,8 +65,8 @@
                                 </td>
                                 <td>
 
-                                    <form action="{% url 'deletedepartment' st.id %} " method="post ">
-                                        {% csrf_token %} {{ form.as_p }}
+                                    <form action="{% url 'deletedepartment' st.id%} " method="post ">
+                                        {% csrf_token %} 
 
                                         <button type="submit " class="btn btn-danger ">
                                                 <i class="far fa-trash-alt "></i>

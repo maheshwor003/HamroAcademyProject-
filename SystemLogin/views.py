@@ -1,7 +1,7 @@
 import imp
 from django.shortcuts import render, redirect
 
-from TeacherAndStudent.models import Courses
+from TeacherAndStudent.models import Courses, Departments,Teacher
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
 from .models import *
@@ -9,9 +9,10 @@ from .models import *
 
 def homepage(request):
     mj = Homedetails.objects.all()
-    coursename= Courses.objects.all()
-    context={'cmpss':mj,'courses':coursename}  
-    print(context) 
+    tech=Teacher.objects.all()
+    depa= Departments.objects.all()
+    courses=Courses.objects.all()
+    context={'homepage_view':mj,'wws':tech, "home_depview":depa,"courses":courses}   
     return render(request, 'homepage.html', context)
 
 

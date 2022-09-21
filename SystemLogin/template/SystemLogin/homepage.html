@@ -1,5 +1,19 @@
 {% extends "navbar.html" %} {% block content %}
 
+{% load static %}
+<!-- Carousel Start -->
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="container-fluid p-0 pb-5 mb-5">
     <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -8,8 +22,25 @@
             <li data-target="#header-carousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
+            {% for st in homepage_view %}
+
             <div class="carousel-item active" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg" style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg"
+                    style="min-height: 300px; object-fit: cover;">
+                <div class="carousel-caption d-flex align-items-center justify-content-center">
+
+                    <div class="p-5" style="width: 100%; max-width: 900px;">
+
+                        <h5 class="text-white text-uppercase mb-md-3">{{ st.comp_name}}</h5>
+                        <h1 class="display-3 text-white mb-md-4">{{ st.comp_title}} </h1>
+                        <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" style="min-height: 300px;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg"
+                    style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -19,7 +50,8 @@
                 </div>
             </div>
             <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg" style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg"
+                    style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -28,16 +60,7 @@
                     </div>
                 </div>
             </div>
-            <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg" style="min-height: 300px; object-fit: cover;">
-                <div class="carousel-caption d-flex align-items-center justify-content-center">
-                    <div class="p-5" style="width: 100%; max-width: 900px;">
-                        <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
-                        <h1 class="display-3 text-white mb-md-4">For your better future</h1>
-                        <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>
@@ -46,31 +69,32 @@
 
 <!-- About Start -->
 
-
 <div class="container-fluid py-5">
+    {% for st in homepage_view %}
     <div class="container py-5">
+
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <img class="img-fluid rounded mb-4 mb-lg-0" src="../../static/design/img/about.jpg" alt="">
+                <div>
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="../../static/design/img/about.jpg" alt="">
+                </div>
             </div>
-        
+                
+            
             <div class="col-lg-7">
                 <div class="text-left mb-4">
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
-                    <h1>For your better future</h1>
+                    <h1>{{st.comp_title}}</h1>
                 </div>
-                
-                <p>{{ cmpss.comp_name }}</p>
-                
+                <p>{{st.comp_details}}</p>
                 <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
-               
-
             </div>
-         
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- About End -->
+
 
 <!-- Category Start -->
 <div class="container-fluid py-5">
@@ -80,15 +104,20 @@
             <h1>Explore Top faculty</h1>
         </div>
         <div class="row">
-            {% for sc in courses %}
-      
-                        <h4 class="text-white font-weight-medium">{{sc.name}}</h4>
-                 
+            {% for st in home_depview %}
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="cat-item position-relative overflow-hidden rounded mb-2">
+                    <img class="img-fluid" src="../../static/design/img/cat-1.jpg" alt="">
+                    <a class="cat-overlay text-white text-decoration-none" >
+                        <h4 class="text-white font-weight-medium">{{st.name}}</h4>
+                    </a>
+                    
+                </div>
                 
-            
+            </div>
             {% endfor %}
-          
-        </div>
+            </div>
+            
     </div>
 </div>
 
@@ -101,39 +130,23 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-            <h1>Courses for Civil Faculty</h1>
+            <h1> Our Courses Include </h1>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
+            {% for sc in courses %}
+            <div class="col-lg-3 col-md-4 mb-3">
                 <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-A.jpg" alt="">
+                    
                     <div class="bg-secondary p-4">
 
-                        <a class="h5" href="">Engineering Mathmatics</a>
+                        <a class="h5" href="">{{sc.name}}</a>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-bb.jpg" alt="">
-                    <div class="bg-secondary p-4">
-
-                        <a class="h5" href="">Programming in C</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-c.jpg" alt="">
-                    <div class="bg-secondary p-4">
-
-                        <a class="h5" href="">Engineering Drawing</a>
-
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+           
+            
         </div>
     </div>
 </div>
@@ -151,12 +164,12 @@
                     <h1 class="text-white">Register Now</h1>
                 </div>
                 <!-- <p class="text-white">Invidunt lorem justo sanctus clita. Erat lorem labore ea, justo dolor lorem ipsum ut sed eos, ipsum et dolor kasd sit ea justo. Erat justo sed sed diam. Ea et erat ut sed diam sea ipsum est dolor
-                            </p>
-                            <ul class="list-inline text-white m-0">
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet diam</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum</li>
-                                <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Diam dolor diam elitripsum vero.</li>
-                            </ul> -->
+                                </p>
+                                <ul class="list-inline text-white m-0">
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Labore eos amet dolor amet diam</li>
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Etsea et sit dolor amet ipsum</li>
+                                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Diam dolor diam elitripsum vero.</li>
+                                </ul> -->
             </div>
             <div class="col-lg-5">
                 <div class="card border-0">
@@ -166,18 +179,20 @@
                     <div class="card-body rounded-bottom bg-primary p-5">
                         <form>
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your name" required="required" />
+                                <input type="text" class="form-control border-0 p-4" placeholder="Your name"
+                                    required="required" />
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
+                                <input type="email" class="form-control border-0 p-4" placeholder="Your email"
+                                    required="required" />
                             </div>
                             <div class="form-group">
                                 <select class="custom-select border-0 px-4" style="height: 47px;">
-                                                    <option selected>Select a Faculty</option>
-                                                    <option value="1">Civil</option>
-                                                    <option value="2">Computer</option>
-                                                    <option value="3">Electronics and Communication</option>
-                                                </select>
+                                    <option selected>Select a Faculty</option>
+                                    <option value="1">Civil</option>
+                                    <option value="2">Computer</option>
+                                    <option value="3">Electronics and Communication</option>
+                                </select>
                             </div>
                             <div>
                                 <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
@@ -200,71 +215,21 @@
             <h1>Meet Our Teachers</h1>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3 text-center team mb-4">
+            {% for sc in wws %}
+            <div class="col-md-6 col-lg-4 text-center team mb-4">
                 <div class="team-item rounded overflow-hidden mb-2">
                     <div class="team-img position-relative">
-                        <img class="img-fluid" src="../../static/design/img/team-1.jpg" alt="">
-                        <div class="team-social">
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+                        
+
                     </div>
                     <div class="bg-secondary p-4">
-                        <h5>Jhon Doe</h5>
-                        <p class="m-0">Web Designer</p>
+                        <h5>{{sc.name}}</h5>
+                        <p class="m-0">{{sc.dept}}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-4">
-                <div class="team-item rounded overflow-hidden mb-2">
-                    <div class="team-img position-relative">
-                        <img class="img-fluid" src="../../static/design/img/team-2.jpg" alt="">
-                        <div class="team-social">
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-secondary p-4">
-                        <h5>Jhon Doe</h5>
-                        <p class="m-0">Web Designer</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-4">
-                <div class="team-item rounded overflow-hidden mb-2">
-                    <div class="team-img position-relative">
-                        <img class="img-fluid" src="../../static/design/img/team-3.jpg" alt="">
-                        <div class="team-social">
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-secondary p-4">
-                        <h5>Jhon Doe</h5>
-                        <p class="m-0">Web Designer</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 col-lg-3 text-center team mb-4">
-                <div class="team-item rounded overflow-hidden mb-2">
-                    <div class="team-img position-relative">
-                        <img class="img-fluid" src="../../static/design/img/team-4.jpg" alt="">
-                        <div class="team-social">
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                    <div class="bg-secondary p-4">
-                        <h5>Jhon Doe</h5>
-                        <p class="m-0">Web Designer</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% endfor %}
+            
     </div>
 </div>
 <!-- Team End -->
@@ -309,8 +274,6 @@
         </div>
     </div>
 </div>
+
 <!-- Blog End -->
-<script>
-    console.log("{{ cmpss }}")
-</script>
 {% endblock %}

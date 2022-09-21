@@ -1,0 +1,180 @@
+
+
+<!-- Main Sidebar Container -->
+{% extends "base.html" %}
+<!-- Content Wrapper. Contains page content -->
+{% block content %}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Student</h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Student</a></li>
+                        <li class="breadcrumb-item active">Add New Student</li>
+                    </ol>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-secondary">
+                    <div class="card-header">
+                        <h3 class="card-title">Student add</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <fieldset>
+
+
+                                <div class="tabcontent" id="new">
+                                    {{ form.as_p }}
+
+                                </div>
+                              
+
+                             
+
+
+
+                            </fieldset>
+                            <div class="row ">
+                                <div class="col-12 ">
+                                    <a href="{% url 'addteacher' %}" class="btn btn-secondary ">Cancel</a>
+                                    <input type="submit" value="Submit" onclick="InsertTeacher();" class="btn btn-success float-right">
+                                </div>
+                            </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+
+        </form>
+
+    </section>
+    <!-- /.content -->
+
+
+    <aside class="control-sidebar control-sidebar-dark ">
+        <!-- Control sidebar content goes here -->
+    </aside>
+
+</div>
+
+
+<!-- /.content-wrapper -->
+<footer class="main-footer ">
+    <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
+    <div class="float-right d-none d-sm-inline-block ">
+    </div>
+</footer>
+
+<script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+
+    function InsertTeacher() {
+        debugger;
+        es = "";
+        let uid = $("#userid").val();
+        let ied = $("#id_uid").val();
+
+        let max = $("#depart").val();
+        let ins = $("#id_name").val();
+        let mfsts = $("#mfstatus").val();
+        let dob = $("#dtebirth").val();
+        let csr = csrftoken
+        if (ins == "") {
+            alert("Enter Name");
+        } else {
+            datas = {
+                user: uid,
+                id: ied,
+                dept: max,
+                name: ins,
+                sex: mfsts,
+                DOB: dob,
+                csrfmiddlewaretoken: csr
+            };
+            $.ajax({
+                url: "{% url 'saveteacher' %}",
+                method: "POST",
+                data: datas,
+                success: function(data) {
+                    debugger;
+                    x = data.course_data;
+                    if (data.status == "Save") {
+
+
+                        location.reload();
+                    }
+                    if (data.status == 0) {
+                        toastr.error("Unable to insert data!");
+
+                    }
+                },
+            });
+        }
+    }
+</script>
+<!-- ./wrapper -->
+<script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
+<!-- jQuery -->
+<script src="../../static/js/jquery.min.js "></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../../static/js/jquery-ui.min.js "></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="../../static/js/bootstrap.bundle.min.js "></script>
+<script src="../../static/js/toastr.js "></script>
+{% endblock %}
+
+<!-- Control Sidebar -->

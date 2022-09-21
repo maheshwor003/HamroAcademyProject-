@@ -10,6 +10,8 @@ urlpatterns = [
     path('logout/', views.logout_out, name='logout'),
     path('allteacher/',views.all_teacher,name='allteacher'),
     path('addteacher/',views.add_teacher,name='addteacher'),
+    path('allstudent/',views.all_student,name='allstudent'),
+    path('addstudent/',views.add_student,name='addstudent'),
     path('addcourse/',views.add_course,name='addcourse'),
     path('allcourse/',views.all_course,name='allcourse'),
     path('listcourse/',views.list_coursedata,name = "listcoursedata"),
@@ -42,6 +44,8 @@ urlpatterns = [
          views.updatesection_data, name="updatesection"),
     path('updatetime/<str:pid>',
          views.updatetime_data, name="updatetime"),
+     path('updatestudent/<str:USN>',
+         views.updatestudent_data, name='updatestudent'),
     path('update/<str:id>', views.update_data, name="updatedata"),
     path('teacher/', views.teacher, name='teacher'),
     path('single/', views.single, name='single'),
@@ -57,6 +61,8 @@ urlpatterns = [
          views.delete_department, name='deletedepartment'),
     path('delete_section/<str:section_id>/',
          views.delete_section, name='deletesection'),
+     path('deletetudent/<str:USN>',
+         views.deletestudent_data, name='deletestudent'),
     path('delete/', views.delete_data, name="delete"),
     path('student/<slug:stud_id>/marks_list/',
          views.marks_list, name='marks_list'),
@@ -76,6 +82,7 @@ urlpatterns = [
     path('teacherprofile/', views.teacherprofile, name='teacherprofile'),
     path('teacherdashboard/', views.teacherdashboard, name='teacherdashboard'),
     path('routine/', views.routine, name='routine'),
+    path('saveteacher/', views.saveteacher, name='saveteacher'),
 
 
 
