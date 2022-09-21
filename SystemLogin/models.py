@@ -1,5 +1,7 @@
 from contextlib import nullcontext
+from distutils.command.upload import upload
 import email
+from email.mime import image
 from statistics import mode
 from sys import maxsize
 from tokenize import blank_re
@@ -23,5 +25,6 @@ class Homedetails(models.Model):
     comp_details = models.TextField(max_length=2000, null=True, blank=True)
     comp_details_two = models.TextField(max_length=2000, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
+    image = models.ImageField(upload_to='static/', null=True)
     email = models.EmailField(max_length=100, null=True, blank=True)
     notice = models.TextField(max_length=2000, null=True, blank=True)
