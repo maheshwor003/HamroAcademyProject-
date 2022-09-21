@@ -54,17 +54,25 @@
                                 <td>{{st.id}}</td>
                                 <td>{{st.dept_name}}</td>
 
-
+                                <td>
+                                    <button type="submit" class="btn btn-danger">
+                                        
+                                  
+                                    <a href="{%url 'updatedepartment' st.id %}" > </a>
+                                    <i class='far fa-edit'></i>
+                                </button>
+                                </td>
                                 <td>
 
                                     <form action="{% url 'deletedepartment' st.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+
                                 </td>
-                                </form>
-                                <td>
-                                    <a href="{%url 'updatedepartment' st.id %}" class="btn btn-danger"> Edit</a>
-                                </td>
+
 
                             </tr>
 

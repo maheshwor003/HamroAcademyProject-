@@ -26,7 +26,12 @@ def student(request):
     return render(request,'studentpage.html')
 
 def base(request):
-    return render (request,'dashboard.html')
+   sub = Section.objects.all()
+   sub_count= sub.count()
+   print (sub_count)
+   context = {'sections': sub,'countsection': sub_count}
+   return render(request, 'dashboard.html', context)
+
 def add_teacher(request):
     form = InstructorForm(request.POST or None)
     if request.method == 'POST':
@@ -42,10 +47,19 @@ def add_teacher(request):
     return render(request, 'add-teacher.html', context)
 def all_teacher(request):
     subjects = Instructor.objects.all()
+    subjects_count= subjects.count()
     dataread=Instructor.objects.all()
-    context = {'teachers_view': subjects,'data_read':dataread}
+    context = {'teachers_view': subjects,'data_read':dataread,'subjects_count': subjects.count()}
     return render(request, 'all-teacher.html', context)
-    
+
+
+
+def all_section(request):
+
+    sub = Section.objects.all().count()
+    sub_count= Section.count()
+    context = {'sub':sub,'countsection': sub_count}
+    return render(request, 'allsection.html', context)
 def delete_instructor(request, uid):
     inss = Instructor.objects.filter(uid=uid)
     if request.method == 'POST':
@@ -205,6 +219,8 @@ def delete_data(request):
       return JsonResponse({'status':0})
 
 
+
+
 # def add_course(request):
 #     subjectss=Instructor.objects.all()
 #     context = {'subjectss':subjectss}
@@ -244,11 +260,7 @@ def add_section(request):
     return render(request, 'addsection.html', context)
 
 
-def all_section(request):
 
-    subjects = Section.objects.all()
-    context = {'sections': subjects}
-    return render(request, 'allsection.html', context)
 
 def edit_data(request):
      if request.method == "POST":

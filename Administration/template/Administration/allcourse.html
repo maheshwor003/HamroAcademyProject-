@@ -44,8 +44,6 @@
                                 <th>Course Code</th>
                                 <th>Course Name</th>
                                 <th>Maximum number of students</th>
-
-
                                 <th>Edit</th>
                                 <th>Delete</th>
 
@@ -61,20 +59,26 @@
                                 <td>{{st.course_name}}</td>
                                 <td>{{st.max_numb_students}}</td>
                                 <td>
-                                    <a href="{%url 'updatecourse' st.course_number %}" class="btn btn-danger"> Edit</a>
+                                    <a href="{%url 'updatecourse' st.course_number %}">
+                                        <button type="submit" class="btn btn-danger">
+                                        
+                                  
+                                    
+                                    <i class='far fa-edit'></i>
+                                </button>
+                                    </a>
                                 </td>
-
-
-
-                                <!-- <td> <input type="button" data-sid="{{st.id}}" value="Edit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm btn-edit" />   <input type="button" id="delete" data-sid="{{st.course_name}}" value="Delete" class="btn btn-danger btn-sm btn-del" />
-                                     </td> -->
-
                                 <td>
+
                                     <form action="{% url 'deletecourse' st.course_number %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
 
                                 </td>
+
 
                                 </form>
                             </tr>
@@ -111,25 +115,24 @@
 
                                 <!-- <td> <input type="button" data-sid="{{st.id}}" value="Edit" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-warning btn-sm btn-edit" />   <input type="button" id="delete" data-sid="{{st.course_name}}" value="Delete" class="btn btn-danger btn-sm btn-del" />
                                      </td> -->
-                                <td align="right">
-                                    <form action="{% url 'updatecourse' st.r_number %}" method="post">
-
-                                        {% csrf_token %}
-                                        <fieldset>
-
-                                            <div class="tabcontent" id="new">
-                                                {{ form.as_p }}
-                                            </div>
-                                        </fieldset>
-                                        <input type="submit" value="Edit" class="btn btn-danger">
-
-                                </td>
-                                </form>
-
                                 <td>
-                                    <form action="{% url 'deletecourse' st.r_number %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
+
+
+
+                                    <a href="{%url 'updatecourse' st.course_number %}">
+
+                                        <i class='far fa-edit'></i>
+
+                                    </a>
+                                </td>
+                                <td>
+
+                                    <form action="{% url 'deletecourse' st.course_number %}" method="post">
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                    <i class="far fa-trash-alt"></i>
+                                                </button>
 
                                 </td>
                                 </form>
