@@ -53,21 +53,26 @@
 
                                 <td>{{st.id}}</td>
                                 <td>{{st.dept_name}}</td>
+                                <td>
+                                    <a href="{%url 'updatedepartment' st.id %}" ">
+                                        <button type="submit " class="btn btn-danger ">
+                                   
+                                  
 
-
+                                    <i class='far fa-edit'></i>
+                                </button>
+                                    </a>
+                                </td>
                                 <td>
 
-                                    <form action="{% url 'deletedepartment' st.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                </td>
-                                </form>
-                                <td>
-                                    <a href="{%url 'updatedepartment' st.id %}" class="btn btn-danger"> Edit</a>
-                                </td>
+                                    <form action="{% url 'deletedepartment' st.id %} " method="post ">
+                                        {% csrf_token %} {{ form.as_p }}
 
+                                        <button type="submit " class="btn btn-danger ">
+                                                <i class="far fa-trash-alt "></i>
+                                            </button>
+                                </td>
                             </tr>
-
                             {% endfor %}
                         </tbody>
                     </table>
@@ -81,7 +86,7 @@
 </div>
 <!-- /.content-wrapper -->
 <footer class="main-footer ">
-    <strong>Copyright  <a href="add-teacher.html">Hamro academy</a>.</strong> All rights reserved.
+    <strong>Copyright  <a href="add-teacher.html ">Hamro academy</a>.</strong> All rights reserved.
     <div class="float-right d-none d-sm-inline-block ">
     </div>
 </footer>

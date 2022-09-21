@@ -43,7 +43,6 @@
                                 <th>Seat capicity</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,19 +52,25 @@
                                 <td>{{st.r_number}}</td>
                                 <td>{{st.seating_capacity}}</td>
                                 <td>
-                                    <form action="{% url 'deleteroom' st.r_number%}" method="post">
-                                        {% csrf_token %} {{ form.as_p }}
-                                        <input type="submit" value="Delete" class="btn btn-danger">
-                                    </form>
+                                    <a href="{%url 'updatedata' st.r_number %}">
+                                        <button type="submit" class="btn btn-danger">
+                                   
+                                  
+
+                                    <i class='far fa-edit'></i>
+                                </button>
+                                    </a>
                                 </td>
                                 <td>
-                                    <a href="{%url 'updatedata' st.r_number %}" class="btn btn-danger"> Edit</a>
+
+                                    <form action="{% url 'deleteroom' st.r_number%}" method="post">
+                                        {% csrf_token %} {{ form.as_p }}
+
+                                        <button type="submit" class="btn btn-danger">
+                                                <i class="far fa-trash-alt"></i>
+                                            </button>
+
                                 </td>
-
-
-
-
-
                             </tr>
                             {% endfor %}
                         </tbody>
