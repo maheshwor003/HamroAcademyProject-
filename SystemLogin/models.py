@@ -25,6 +25,6 @@ class Homedetails(models.Model):
     comp_details = models.TextField(max_length=2000, null=True, blank=True)
     comp_details_two = models.TextField(max_length=2000, null=True, blank=True)
     address = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(upload_to='static/', null=True)
+    image = models.ImageField(upload_to='images/', null=True)
     email = models.EmailField(max_length=100, null=True, blank=True)
     notice = models.TextField(max_length=2000, null=True, blank=True)

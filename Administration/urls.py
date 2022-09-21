@@ -59,9 +59,8 @@ urlpatterns = [
     path('delete/', views.delete_data, name="delete"),
     path('student/<slug:stud_id>/marks_list/',
          views.marks_list, name='marks_list'),
-    path('student/attendance/<slug:stud_id>/',
-         views.studentattendence, name='attendance'),
-    #path('attendance/', views.studentattendence, name='attendance'),
+    #  path('student/attendance/<slug:stud_id>/', views.studentattendence, name = 'attendance'),
+    path('attendance/', views.studentattendence, name='attendance'),
     path('result/', views.result, name='result'),
     path('teacherprofile/', views.teacherprofile, name='teacherprofile'),
     path('teacherdashboard/', views.teacherdashboard, name='teacherdashboard'),
@@ -75,7 +74,6 @@ urlpatterns = [
     path('teacherprofile/', views.teacherprofile, name='teacherprofile'),
     path('teacherdashboard/', views.teacherdashboard, name='teacherdashboard'),
     path('routine/', views.routine, name='routine'),
-
 
 
 ]

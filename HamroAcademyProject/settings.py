@@ -57,11 +57,11 @@ ROOT_URLCONF = 'HamroAcademyProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [ './SystemLogin/template/SystemLogin',
-        './Administration/template/Administration',
-          './TeacherAndStudent/templates/info',
-            os.path.join(BASE_DIR, 'template') ,
-            ],
+        'DIRS': ['./SystemLogin/template/SystemLogin',
+                 './Administration/template/Administration',
+                 './TeacherAndStudent/templates/info',
+                 os.path.join(BASE_DIR, 'template'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,10 +122,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'SystemLogin/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'SystemLogin.User'
+
+
+MEDIA_ROOT = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DISR = (
+    os.path.join(BASE_DIR, 'static'),
+)

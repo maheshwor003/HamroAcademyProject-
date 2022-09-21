@@ -723,6 +723,7 @@ def marks_list(request, stud_id):
 #      return render (request,'attendence.html')
 
 def studentpage(request):
+
     return render(request, 'studentpage.html')
 
 

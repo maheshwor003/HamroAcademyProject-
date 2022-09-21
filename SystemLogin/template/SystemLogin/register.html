@@ -1,80 +1,125 @@
-{% extends "navbar.html" %} {% block content %}
-<!-- Header Start -->
-<div class="container-fluid page-header" style="margin-bottom: 90px;">
-    <div class="container">
-        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-            <h3 class="display-4 text-white text-uppercase">Sign-Up</h3>
-            <div class="d-inline-flex text-white">
-                <p class="m-0 text-uppercase"><a class="text-white" href="">Home</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">Sign-Up</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hamro academy</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../../static/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid d-none d-lg-block" style="align-items:center;">
+
+        <div class="row justify-content-center">
+            <div class="row align-items-center py-4 px-xl-5">
+                <div class="col-lg-3">
+
+
+                    <a href="" class="text-decoration-none" ">
+
+                            <h1 class=" m-0"><span class="text-primary">Hamro</span>Academy</h1>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Header End -->
-<!-- Registration Start -->
-<!-- pasa work -->
-<div class="content">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6 contents">
-                <div class="row justify-content-center">
-                    <div class="col-md-12">
-                        <div class="form-block">
-                            <div class="mb-4">
-                                <h1>User Registration page</h1>
-                            </div>
-                            <span class="mb-0 text-muted">
-                                {% if msg %}
+    </div>
+    <!-- Header Start -->
+
+    <!-- Header End -->
+    <!-- Registration Start -->
+    <!-- pasa work -->
+    <div class="content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 contents">
+                    <div class="row justify-content-center">
+                        <div class="col-md-12">
+                            <div class="form-block">
+                                <div class="mb-4">
+                                    <h1>User Registration page</h1>
+                                </div>
+                                <span class="mb-0 text-muted">
+                                    {% if msg %}
                                     {{ msg | safe }}
-                                {% else %}
-                                   
-                                {% endif %}
-                              </span>
-                            <form method="post">
-                                {% csrf_token %}
-                                <div class="form-group first">
-                                    <label for="username">Username</label> {{ form.username }}
-                                </div>
-                                <div class="form-group first">
-                                    <label for="email">Email</label> {{ form.email}}
-                                </div>
-                                <div class="form-group last mb-4">
-                                    <label for="password">Password</label> {{ form.password1 }}
-                                </div>
-                                <div class="form-group last mb-4">
-                                    <label for="password">confirm Password</label> {{ form.password2 }}
-                                </div>
-                                <div class="d-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
-                                        {{ form.is_admin }}
-                                      <div class="control__indicator"></div>
-                                    </label>
-                                </div>
-                                <div class="d-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-0"><span class="caption">customer</span>
-                                        {{ form.is_student }}
-                                      <div class="control__indicator"></div>
-                                    </label>
-                                </div>
-                                <div class="d-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-0"><span class="caption">employee</span>
-                                        {{ form.is_teacher }}
-                                      <div class="control__indicator"></div>
-                                    </label>
-                                </div>
-                                <span class="text-error">{{ form.errors }}</span>
-                                <input type="submit" value="Register" class="btn btn-pill text-white btn-block btn-primary">
-                            </form>
+                                    {% else %}
+
+                                    {% endif %}
+                                </span>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group first">
+                                        <label for="username">Username</label> {{ form.username }}
+                                    </div>
+                                    <div class="form-group first">
+                                        <label for="email">Email</label> {{ form.email}}
+                                    </div>
+                                    <div class="form-group last mb-4">
+                                        <label for="password">Password</label> {{ form.password1 }}
+                                    </div>
+                                    <div class="form-group last mb-4">
+                                        <label for="password">confirm Password</label> {{ form.password2 }}
+                                    </div>
+                                    <div class="d-flex mb-5 align-items-center">
+                                        <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
+                                            {{ form.is_admin }}
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex mb-5 align-items-center">
+                                        <label class="control control--checkbox mb-0"><span
+                                                class="caption">Student</span>
+                                            {{ form.is_student }}
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex mb-5 align-items-center">
+                                        <label class="control control--checkbox mb-0"><span
+                                                class="caption">Teacher</span>
+                                            {{ form.is_teacher }}
+                                            <div class="control__indicator"></div>
+                                        </label>
+                                    </div>
+                                    <span class="text-error">{{ form.errors }}</span>
+                                    <input type="submit" value="Register"
+                                        class="btn btn-pill text-white btn-block btn-primary">
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
-</div>
-<!-- pasa work -->
-<!-- Registration End -->
-{% endblock %}
+    <!-- pasa work -->
+    <!-- Registration End -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <!-- Contact Javascript File -->
+    <script src="../../static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="../../static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../../static/js/main.js"></script>
+</body>
+
+</html>
