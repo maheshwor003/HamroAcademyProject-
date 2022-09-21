@@ -55,12 +55,14 @@
                                 <td>{{sec.department}}</td>
                                 <td>{{sec.num_class_in_week }}</td>
                                 <td>
+                                    <a href="{%url 'updatesection' sec.section_id %}" > 
                                     <button type="submit" class="btn btn-danger">
                                         
                                   
-                                    <a href="{%url 'updatesection' sec.section_id %}" > </a>
+                                 
                                     <i class="fa-regular fa-pen-to-square"></i>
                                 </button>
+                            </a>
                                 </td>
                                 <td>
 

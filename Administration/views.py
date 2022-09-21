@@ -7,7 +7,7 @@ from django.core import serializers
 from .models import *
 from .forms import Room
 from TeacherAndStudent.models import *
-
+from django.contrib.auth import logout
 from .forms import *
 # Create your views here.
 
@@ -143,7 +143,7 @@ def updatecourse_data(request,course_number):
         course = Course.objects.get(course_number=course_number)
         form = CourseForm(instance=course)
           
-    return render(request,'update.html' ,{'form':form})
+    return render(request,'update.html',{'form':form})
 
 
 
@@ -339,7 +339,11 @@ def all_change(request):
     return render (request,'change.html')
 
 def all_dashboard(request):
-    return render (request,'dashboard.html')
+
+    courses = Course.objects.count()
+    teacher = Instructor.objects.count()
+    context = {'courses': courses,'teacher':teacher}
+    return render (request,'dashboard.html',context)
 
 class Data:
     def __init__(self):
@@ -539,7 +543,7 @@ def context_manager(schedule):
     return context
 
 
-def alltime(request):
+def routinegeneration(request):
     schedule = []
     population = Population(POPULATION_SIZE)
     generation_num = 0
@@ -552,14 +556,16 @@ def alltime(request):
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         schedule = population.get_schedules()[0].get_classes()
       
-    return render(request, 'alltime.html', {'schedule': schedule, 'sections': Section.objects.all(),
+    return render(request, 'routinegeneration.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                               'times': MeetingTime.objects.all()})
 
 
 
 
 
-
+def alltime(request):
+    return render(request,'alltime.html') 
+    
     
 def signup(request):
     return render(request,'signup.html') 
@@ -578,6 +584,8 @@ def contact(request):
     return render(request,'contact.html',{'navbar':'contact'}) 
 
 def basepage(request):
+    csw = {'subjects':Instructor.objects.all().count()}
+    print (csw)
     return render(request,'base.html') 
 
 def teacher(request):
