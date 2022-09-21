@@ -7,28 +7,27 @@
     <title>Hamro academy</title>
     {% load static %}
 
-    <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{%static '/css/all.min.css' %}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet" href="../../static/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->   <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
-
-    <link rel="stylesheet" href="{% static '/css/icheck-bootstrap.min.css' %}">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="../../static/css/jqvmap.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{% static '/css/adminlte.min.css' %}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{% static '/css/OverlayScrollbars.min.css' %}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{% static '/css/daterangepicker.css' %}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{static '/css/summernote-bs4.min.css' %} ">
-    <link rel="stylesheet" type="text/css" href="../../static/css/owncss.css">
+      <link rel="stylesheet" href="{%static '/css/all.min.css' %}">
+      <!-- Ionicons -->
+      <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+      <!-- Tempusdominus Bootstrap 4 -->
+      <link rel="stylesheet" href="{% static  '/css/tempusdominus-bootstrap-4.min.css' %}">
+      <!-- iCheck -->   <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
+  
+      <link rel="stylesheet" href="{% static '/css/icheck-bootstrap.min.css' %}">
+      <!-- JQVMap -->
+      <link rel="stylesheet" href="{% static '/css/jqvmap.min.css' %}">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="{% static '/css/adminlte.min.css' %}">
+      <!-- overlayScrollbars -->
+      <link rel="stylesheet" href="{% static '/css/OverlayScrollbars.min.css' %}">
+      <!-- Daterange picker -->
+      <link rel="stylesheet" href="{% static '/css/daterangepicker.css' %}">
+      <!-- summernote -->
+      <link rel="stylesheet" href="{static '/css/summernote-bs4.min.css' %} ">
+      <link rel="stylesheet" type="text/css" href="{% static '/css/owncss.css' %}">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -88,7 +87,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="{% url 'studentpage' %}" class="brand-link">
-                <img src="../../static/design/images/hamroacademy.jpg" alt="Logo">
+                <img src="{% static '/design/images/hamroacademy.jpg' %}" alt="Logo">
             </a>
 
             <!-- Sidebar -->
@@ -207,39 +206,39 @@
     <!-- ./wrapper -->
     <script class="jsbin " src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js "></script>
     <!-- jQuery -->
-    <script src="../../static/js/jquery.min.js "></script>
+    <script src="{% static '/js/jquery.min.js' %}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="../../static/js/jquery-ui.min.js "></script>
+    <script src="{% static '/js/jquery-ui.min.js' %}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
-    <script src="../../static/js/bootstrap.bundle.min.js "></script>
+    <script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
     <!-- ChartJS -->
-    <script src=../../static/js/Chart.min.js "></script>
+    <script src="{% static '/js/Chart.min.js' %}"></script>
                                     <!-- Sparkline -->
-                                    <script src="../../static/js/sparkline.js "></script>
+                                    <script src="{% static '/js/sparkline.js' %}"></script>
                                     <!-- JQVMap -->
-                                    <script src="../../static/js/jquery.vmap.min.js "></script>
-                                    <script src="../../static/js/jquery.vmap.usa.js "></script>
+                                    <script src="{% static '/js/jquery.vmap.min.js' %}"></script>
+                                    <script src="{% static '/js/jquery.vmap.usa.js' %} "></script>
                                     <!-- jQuery Knob Chart -->
-                                    <script src="../../static/js/jquery.knob.min.js "></script>
+                                    <script src="{% static '/js/jquery.knob.min.js' %}"></script>
                                     <!-- daterangepicker -->
-                                    <script src="../../static/js/moment.min.js "></script>
-                                    <script src="../../static/js/daterangepicker.js "></script>
+                                    <script src="{% static '/js/moment.min.js' %}"></script>
+                                    <script src="{% static '/js/daterangepicker.js' %}"></script>
                                     <!-- Tempusdominus Bootstrap 4 -->
-                                    <script src="../../static/js/tempusdominus-bootstrap-4.min.js "></script>
+                                    <script src="{% static '/js/tempusdominus-bootstrap-4.min.js' %}"></script>
                                     <!-- Summernote -->
-                                    <script src="../../static/js/summernote-bs4.min.js "></script>
+                                    <script src="{% static '/js/summernote-bs4.min.js' %}"></script>
                                     <!-- overlayScrollbars -->
-                                    <script src=../../static/js/jquery.overlayScrollbars.min.js "></script>
+                                    <script src="{% static '/js/jquery.overlayScrollbars.min.js' %}"></script>
     <!-- AdminLTE App -->
-    <script src="../../static/js/adminlte.js "></script>
+    <script src="{% static '/js/adminlte.js' %}"></script>
     <!-- AdminLTE for demo purposes -->
-    <script src="../../static/js/demo.js "></script>
+    <script src="{% static '/js/demo.js' %} "></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="../../static/js/dashboard.js "></script>
+    <script src="{% static '/js/dashboard.js' %}"></script>
     <script>
         $(function() {
             // Summernote

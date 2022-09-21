@@ -135,7 +135,7 @@
 
                        
                             <li class="nav-item">
-                                <a href="{% url 't_result' %}" class="nav-link">
+                                <a href="{% url 't_clas' request.user.teacher.id 2 %}" class="nav-link">
                                     <i class="nav-icon fas  ion ion-stats-bars"></i>
                                     <p>Add Result</p>
                                 </a>
@@ -144,7 +144,7 @@
                      
 
                             <li class="nav-item">
-                                <a href="{% url 'routine' %}" class="nav-link">
+                                <a href="{% url 'teacherroutine' %}" class="nav-link">
                                     <i class="nav-icon far fa-calendar-alt"></i>
                                     <p>View Routine</p>
                                 </a>
@@ -158,13 +158,16 @@
         </aside>
         <!-- Content Wrapper. Contains page content -->
 
-
+<div class="content-wrapper">
         {% block content %} {% endblock %}
-
+    </div>
         <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark ">
-            <!-- Control sidebar content goes here -->
-        </aside>
+       <!-- /.content-wrapper -->
+<footer class="main-footer ">
+    <strong>Copyright  <a href="{% url 'dashboard' %}">Hamro academy</a>.</strong> All rights reserved.
+    <div class="float-right d-none d-sm-inline-block ">
+    </div>
+</footer>
         <!-- /.control-sidebar -->
     </div>
     <script type="text/javascript ">

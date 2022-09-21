@@ -19,6 +19,7 @@ urlpatterns = [
     path('addroom/',views.add_room,name='addroom'),
     path('alltime/',views.alltime,name='alltime'),
     path('routinegeneration/',views.routinegeneration,name='routinegeneration'),
+    path('teacherroutine/',views.teacherroutinegeneration,name='teacherroutine'),
 
     path('addtime/',views.add_time,name='addtime'),
     path('allsection/',views.all_section,name='allsection'),

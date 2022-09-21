@@ -1,6 +1,6 @@
 {% extends 'info/teachernavbar.html' %}
 {% block content %}
-
+<div class="content-wrapper">
 <form action="{% url 'confirm' assc.id %}" method="post">
             {% csrf_token %}
     <div class="card mb-3">
@@ -53,5 +53,5 @@
 
     <input class="btn btn-success" type="submit" value="Submit">
 </form>
-
+</div>
 {% endblock %}

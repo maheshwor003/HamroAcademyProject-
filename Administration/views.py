@@ -561,6 +561,24 @@ def routinegeneration(request):
 
 
 
+def teacherroutinegeneration(request):
+    schedule = []
+    population = Population(POPULATION_SIZE)
+    generation_num = 0
+    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+    geneticAlgorithm = GeneticAlgorithm()
+    while population.get_schedules()[0].get_fitness() != 1.0:
+        generation_num += 1
+        print('\n> Generation #' + str(generation_num))
+        population = geneticAlgorithm.evolve(population)
+        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        schedule = population.get_schedules()[0].get_classes()
+      
+    return render(request, 'teacherroutine.html', {'schedule': schedule, 'sections': Section.objects.all(),
+                                              'times': MeetingTime.objects.all()})
+
+
+
 
 
 def alltime(request):
@@ -625,7 +643,7 @@ def studentattendence(request,stud_id):
               a = AttendanceTotal(student=stud, course=ass.course)
               a.save()
           att_list.append(a)
-      return render(request, 'attendence.html', {'att_list': att_list})
+      return render(request, 'attendance.html', {'att_list': att_list})
 
 
 def marks_list(request, stud_id):
