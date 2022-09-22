@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from SystemLogin.models import Homedetails
 
 from TeacherAndStudent.models import Departments
 from .models import Course, Instructor
@@ -10,6 +9,11 @@ from .forms import Room
 from TeacherAndStudent.models import *
 from django.contrib.auth import logout
 from .forms import *
+import random as rnd
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
+
+
 # Create your views here.
 
 
@@ -429,6 +433,12 @@ def all_dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
+POPULATION_SIZE = 9
+NUMB_OF_ELITE_SCHEDULES = 1
+TOURNAMENT_SELECTION_SIZE = 3
+MUTATION_RATE = 0.05
+
+
 class Data:
     def __init__(self):
         self._rooms = Room.objects.all()
@@ -566,7 +576,7 @@ class GeneticAlgorithm:
         for i in range(NUMB_OF_ELITE_SCHEDULES):
             crossover_pop.get_schedules().append(pop.get_schedules()[i])
         i = NUMB_OF_ELITE_SCHEDULES
-        while i < POPULATION_SIZE:
+        while i < 9:
             schedule1 = self._select_tournament_population(pop).get_schedules()[
                 0]
             schedule2 = self._select_tournament_population(pop).get_schedules()[
@@ -577,7 +587,7 @@ class GeneticAlgorithm:
         return crossover_pop
 
     def _mutate_population(self, population):
-        for i in range(NUMB_OF_ELITE_SCHEDULES, POPULATION_SIZE):
+        for i in range(NUMB_OF_ELITE_SCHEDULES, 9):
             self._mutate_schedule(population.get_schedules()[i])
         return population
 
@@ -602,7 +612,7 @@ class GeneticAlgorithm:
         i = 0
         while i < TOURNAMENT_SELECTION_SIZE:
             tournament_pop.get_schedules().append(
-                pop.get_schedules()[rnd.randrange(0, POPULATION_SIZE)])
+                pop.get_schedules()[rnd.randrange(0, 9)])
             i += 1
         tournament_pop.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         return tournament_pop
@@ -636,9 +646,10 @@ def context_manager(schedule):
     return context
 
 
+
 def routinegeneration(request):
     schedule = []
-    population = Population(POPULATION_SIZE)
+    population = Population(9)
     generation_num = 0
     population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
     geneticAlgorithm = GeneticAlgorithm()
@@ -654,24 +665,6 @@ def routinegeneration(request):
 
 
 
-def teacherroutinegeneration(request):
-    schedule = []
-    population = Population(POPULATION_SIZE)
-    generation_num = 0
-    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
-    geneticAlgorithm = GeneticAlgorithm()
-    while population.get_schedules()[0].get_fitness() != 1.0:
-        generation_num += 1
-        print('\n> Generation #' + str(generation_num))
-        population = geneticAlgorithm.evolve(population)
-        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
-        schedule = population.get_schedules()[0].get_classes()
-      
-    return render(request, 'teacherroutine.html', {'schedule': schedule, 'sections': Section.objects.all(),
-                                              'times': MeetingTime.objects.all()})
-
-
-
 
 
 def alltime(request):
@@ -683,17 +676,10 @@ def signup(request):
 
 
 def course(request):
-    coursename= Courses.objects.all()
-    context={'courses':coursename}  
-    return render(request, 'course.html', context)
-
+    return render(request, 'course.html', {'navbar': 'course'})
 
 
 def about(request):
-    details= Homedetails.objects.all()
-    context={'sdet':details}  
-    return render(request, 'about.html', context)
-
     return render(request, 'about.html', {'navbar': 'about'})
 
 
@@ -714,6 +700,9 @@ def basepage(request):
 def teacher(request):
     return render(request, 'teacher.html', {'navbar': 'teacher'})
 
+
+def homepage(request):
+    return render(request, 'homepage.html', {'navbar': 'homepage'})
 
 
 # def attendance(request, stud_id):

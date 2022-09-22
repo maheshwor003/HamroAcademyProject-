@@ -42,9 +42,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <strong><i class="fas fa-user-md mr-1"></i> Username</strong>
+                            <strong><i class="fas fa-user-md mr-1"></i> Occupation</strong>
                             <p class="text-muted">
-                              {{user.username}}
+                                Writter and Admin
                             </p>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> About</strong>
@@ -61,10 +61,10 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Teacher Details</a>
+                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a>
                                     </li>
-                                    <!-- <li class="nav-item"><a class="nav-link" href="#photo" data-toggle="tab">Photo</a>
-                                    </li> -->
+                                    <li class="nav-item"><a class="nav-link" href="#photo" data-toggle="tab">Photo</a>
+                                    </li>
                                 </ul>
                             </div>
                             <!-- /.card-header -->
@@ -75,39 +75,25 @@
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="{{user.teacher.id}}">
-                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="{{user.id}}">
-                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="{{user.teacher.name}}">
+                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="John Doe">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username" value="{{user.username}}">
+                                                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username" value="admin">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="{{user.email}}">
+                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="admin@example.com">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail" class="col-sm-2 col-form-label">Gender</label>
+                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Occupation</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="{{user.teacher.sex}}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail" class="col-sm-2 col-form-label">Date of Birth</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="{{user.teacher.DOB}}">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Department</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Occupation" value="{{user.teacher.dept}}">
+                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Occupation" value="Writter and Admin">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -116,11 +102,65 @@
                                                 <textarea class="form-control" name="about" id="inputAbout" placeholder="About">someone who likes to write and teach</textarea>
                                             </div>
                                         </div>
-                                        
-                                    
+                                        <div class="form-group row">
+                                            <label for="socialmedia" class="col-sm-2 col-form-label">Social Media</label>
+                                            <div class="col-sm-10">
+                                                <select id="socialmedia" name="socialmedia" class="select2 form-control select2-hidden-accessible" data-placeholder="Select Social Media" style="width: 100%;" data-select2-id="socialmedia" tabindex="-1" aria-hidden="true"></select>
+                                                <span class="select2 select2-container select2-container--bootstrap4" dir="ltr" data-select2-id="4" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-socialmedia-container"><span class="select2-selection__rendered" id="select2-socialmedia-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select Social Media</span></span>
+                                                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
+                                                </span>
+                                                </span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                            </div>
+                                        </div>
+                                        <div class="socmed">
+                                            <div class="form-group row" id="socmed1">
+                                                <label for="" class="col-sm-2 col-form-label">Facebook</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-facebook"></i></span></div>
+                                                        <input type="text" name="facebook" class="form-control" placeholder="https://www.facebook.com" value="https://www.facebook.com/johndoe">
+                                                        <div class="input-group-append" onclick="removeInput(1)"><span class="input-group-text"><i class="fas fa-times"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><input type="hidden" name="socmed[]" value="1">
+                                            <div class="form-group row" id="socmed2">
+                                                <label for="" class="col-sm-2 col-form-label">Twitter</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-twitter"></i></span></div>
+                                                        <input type="text" name="twitter" class="form-control" placeholder="https://www.twitter.com" value="https://www.twitter.com/johndoe">
+                                                        <div class="input-group-append" onclick="removeInput(2)"><span class="input-group-text"><i class="fas fa-times"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><input type="hidden" name="socmed[]" value="2">
+                                            <div class="form-group row" id="socmed3">
+                                                <label for="" class="col-sm-2 col-form-label">YouTube</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-youtube"></i></span></div>
+                                                        <input type="text" name="youtube" class="form-control" placeholder="https://www.youtube.com" value="https://www.youtube.com/c/johndoe">
+                                                        <div class="input-group-append" onclick="removeInput(3)"><span class="input-group-text"><i class="fas fa-times"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><input type="hidden" name="socmed[]" value="3">
+                                            <div class="form-group row" id="socmed4">
+                                                <label for="" class="col-sm-2 col-form-label">Instagram</label>
+                                                <div class="col-sm-10">
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-instagram"></i></span></div>
+                                                        <input type="text" name="instagram" class="form-control" placeholder="https://www.instagram.com" value="https://www.instagram.com/johndoe">
+                                                        <div class="input-group-append" onclick="removeInput(4)"><span class="input-group-text"><i class="fas fa-times"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div><input type="hidden" name="socmed[]" value="4">
+                                        </div>
 
                                     </div>
-                                    <!-- <div class="tab-pane" id="photo">
+                                    <div class="tab-pane" id="photo">
                                         <div class="form-group">
                                             <div class="upload-photo ready result ">
                                                 <input type="file" id="upload" name="image" value="Choose a file" accept="image/*" data-role="none" hidden="">
@@ -147,7 +187,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <!-- /.tab-pane -->
                                 </div>
                                 <!-- /.tab-content -->

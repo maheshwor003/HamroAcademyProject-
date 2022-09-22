@@ -21,7 +21,7 @@ urlpatterns = [
     path('addroom/',views.add_room,name='addroom'),
     path('alltime/',views.alltime,name='alltime'),
     path('routinegeneration/',views.routinegeneration,name='routinegeneration'),
-    path('teacherroutine/',views.teacherroutinegeneration,name='teacherroutine'),
+    #path('teacherroutine/',views.teacherroutinegeneration,name='teacherroutine'),
 
     path('addtime/', views.add_time, name='addtime'),
     path('allsection/', views.all_section, name='allsection'),
@@ -31,7 +31,7 @@ urlpatterns = [
     path('dashboard/', views.all_dashboard, name='dashboard'),
     path('edit/', views.edit_data, name="edit"),
     path('getinstructors/', views.instruct_list, name="getinstructors"),
-   
+    path('homepage/', views.homepage, name='homepage'),
     path('about/', views.about, name='about'),
     path('course/', views.course, name='course'),
     path('updatecourse/<str:course_number>',

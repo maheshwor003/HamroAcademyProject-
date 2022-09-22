@@ -30,14 +30,14 @@
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
 
                     <div class="p-5" style="width: 100%; max-width: 900px;">
-
-                        <h5 class="text-white text-uppercase mb-md-3">{{ st.comp_name}}</h5>
-                        <h1 class="display-3 text-white mb-md-4">{{ st.comp_title}} </h1>
+                        <h5 class="text-white text-uppercase mb-md-3">{{st.comp_name}}</h5>
+                        <h1 class="display-3 text-white mb-md-4">{{st.comp_title}}</h1>
                         <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
-                        {% endfor %}
+                       
                     </div>
                 </div>
             </div>
+          {% endfor %}
             <div class="carousel-item" style="min-height: 300px;">
                 <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg"
                     style="min-height: 300px; object-fit: cover;">
@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
-
+         
         </div>
     </div>
 </div>
@@ -68,19 +68,15 @@
 
 
 <!-- About Start -->
-
+{% for st in homepage_view %}
 <div class="container-fluid py-5">
-    {% for st in homepage_view %}
+   
     <div class="container py-5">
 
         <div class="row align-items-center">
             <div class="col-lg-5">
-                <div>
-                    <img class="img-fluid rounded mb-4 mb-lg-0" src="../../static/design/img/about.jpg" alt="">
-                </div>
+                <img class="img-fluid rounded mb-4 mb-lg-0" src="../../static/design/img/about.jpg" alt="">
             </div>
-                
-            
             <div class="col-lg-7">
                 <div class="text-left mb-4">
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
@@ -275,5 +271,6 @@
     </div>
 </div>
 
+<!-- Blog End -->
 <!-- Blog End -->
 {% endblock %}
