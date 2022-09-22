@@ -1,6 +1,10 @@
 {% extends "base.html" %} {% block content %}
 <!-- Content Wrapper. Contains page content -->
+
+
+{% load static %} 
 <div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
@@ -10,10 +14,7 @@
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Meeting Time</a></li>
-                        <li class="breadcrumb-item active">Add Meeting Time</li>
-                    </ol>
+                   
                 </div>
                 <!-- /.col -->
             </div>
@@ -29,8 +30,8 @@
                 <div class="flexcreate">
                     <div>
                         <div class="crdbtn">
-                            <a href="{% url 'alltime' %}" class="btn"></a>
-                            <button type="button" class="btn btn-primary"></button>
+                            <a href="{% url 'routinegeneration' %}" class="btn"></a>
+                            <button type="button" class="btn btn-primary">Routine Generation</button>
                         </div>
                     </div>
                     <div>
@@ -49,8 +50,7 @@
                             <th>Venue(Block- Room)</th>
                             <th>Instructor</th>
                             <th>Class Timing</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                   
                         </tr>
                         <thead>
                             <tbody>
@@ -61,13 +61,7 @@
                                     <td>{{class.room}}</td>
                                     <td>{{class.instructor}}</td>
                                     <td>{{class.meeting_time}}</td>
-                                    <td>
-                                        <form action="{% url 'deletetime' st.uid %}" method="post">
-                                            {% csrf_token %} {{ form.as_p }}
-
-
-                                            <input type="submit" value="Delete" class="btn btn-danger"></td>
-                                </tr>
+                               </tr>
                                 {% endif %} {% endfor %}
                             </tbody>
                 </table>
@@ -78,21 +72,15 @@
     <!-- /.content -->
 
 
-</div>
-<!-- /.content-wrapper -->
-<footer class="main-footer ">
-    <strong>Copyright  <a href="{% url 'dashboard' %}">Hamro academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block ">
-    </div>
-</footer>
+
+
 
 <!-- Control Sidebar -->
-<aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-</aside>
+
 <!-- /.control-sidebar -->
 <!-- /.control-sidebar -->
 </div>
+
 <script type="text/javascript ">
     function readURL(input) {
         if (input.files && input.files[0]) {
@@ -127,4 +115,5 @@
         $('.image-upload-wrap').removeClass('image-dropping');
     });
 </script>
+</div>
 {% endblock %}

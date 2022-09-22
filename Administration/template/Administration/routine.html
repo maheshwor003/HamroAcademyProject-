@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Routine Generation </h1>
+                    <h1 class="m-0">Routine Generation  Student</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -61,13 +61,7 @@
                                     <td>{{class.room}}</td>
                                     <td>{{class.instructor}}</td>
                                     <td>{{class.meeting_time}}</td>
-                                    <td>
-                                        <form action="{% url 'deletetime' st.uid %}" method="post">
-                                            {% csrf_token %} {{ form.as_p }}
-
-
-                                            <input type="submit" value="Delete" class="btn btn-danger"></td>
-                                </tr>
+                                          </tr>
                                 {% endif %} {% endfor %}
                             </tbody>
                 </table>
