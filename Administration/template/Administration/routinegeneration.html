@@ -1,0 +1,114 @@
+{% extends "studentnavbar.html" %} {% block content %}
+<!-- Content Wrapper. Contains page content -->
+
+
+{% load static %} 
+<div class="content-wrapper">
+<!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Routine Generation </h1>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-6">
+                   
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="Allpost">
+                <div class="flexcreate">
+                    <div>
+                       
+                    </div>
+                    
+                </div>
+                {% for section in sections %}
+                <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+                <table class="table table-striped table-bordered">
+                    <thead>
+
+
+                        <tr>
+                            <th>Class #</th>
+                            <th>Course</th>
+                            <th>Venue(Block- Room)</th>
+                            <th>Instructor</th>
+                            <th>Class Timing</th>
+                   
+                        </tr>
+                        <thead>
+                            <tbody>
+                                {% for class in schedule %} {% if class.section == section.section_id %}
+                                <tr>
+                                    <th>{{class.section_id}}</th>
+                                    <td>{{class.course}}</td>
+                                    <td>{{class.room}}</td>
+                                    <td>{{class.instructor}}</td>
+                                    <td>{{class.meeting_time}}</td>
+                               </tr>
+                                {% endif %} {% endfor %}
+                            </tbody>
+                </table>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+
+
+
+
+
+<!-- Control Sidebar -->
+
+<!-- /.control-sidebar -->
+<!-- /.control-sidebar -->
+</div>
+
+<script type="text/javascript ">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('.image-upload-wrap').hide();
+
+                $('.file-upload-image').attr('src', e.target.result);
+                $('.file-upload-content').show();
+
+                $('.image-title').html(input.files[0].name);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+
+        } else {
+            removeUpload();
+        }
+    }
+
+    function removeUpload() {
+        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
+        $('.file-upload-content').hide();
+        $('.image-upload-wrap').show();
+    }
+    $('.image-upload-wrap').bind('dragover', function() {
+        $('.image-upload-wrap').addClass('image-dropping');
+    });
+    $('.image-upload-wrap').bind('dragleave', function() {
+        $('.image-upload-wrap').removeClass('image-dropping');
+    });
+</script>
+</div>
+{% endblock %}

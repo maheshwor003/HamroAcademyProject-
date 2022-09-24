@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'SystemLogin',
     'Administration',
+    'TeacherAndStudent',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [ './SystemLogin/template/SystemLogin',
         './Administration/template/Administration',
+          './TeacherAndStudent/templates/info',
             os.path.join(BASE_DIR, 'template') ,
             ],
         'APP_DIRS': True,
@@ -127,3 +129,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'SystemLogin.User'
+MEDIA_ROOT = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_DISR = (
+    os.path.join(BASE_DIR, 'static'),
+)
