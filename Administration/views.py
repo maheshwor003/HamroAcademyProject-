@@ -73,9 +73,8 @@ def add_student(request):
 
 
 def all_teacher(request):
-    subjects = Instructor.objects.all()
-    dataread = Instructor.objects.all()
-    context = {'teachers_view': subjects, 'data_read': dataread}
+    subjects = Teacher.objects.all()
+    context = {'teachers_view': subjects}
     return render(request, 'all-teacher.html', context)
 
 def all_student(request):
@@ -85,11 +84,28 @@ def all_student(request):
     return render(request, 'all-student.html', context)
 
 
-def delete_instructor(request, uid):
-    inss = Instructor.objects.filter(uid=uid)
+def deleteinstructor(request, pk):
+    ss=Teacher.objects.filter(id=pk)
+    inss = Instructor.objects.filter(uid=pk)
+   
     if request.method == 'POST':
+        ss.delete()
         inss.delete()
+      
         return redirect('allteacher')
+
+def deleteteacher(request):
+     if request.method == "POST":
+      id=request.POST.get('sid');
+      pi=Teacher.objects.get(id=id)
+      pis=Instructor.objects.get(uid=id)
+      pi.delete();
+      pis.delete();
+      return JsonResponse({'status':1})
+     else:
+      return JsonResponse({'status':0})
+
+
 
 def deletestudent_data(request, USN):
     inss = Student.objects.filter(USN=USN)
@@ -135,11 +151,73 @@ def delete_time(request, pid):
         return redirect('alltime')
 
 
-def delete_department(request, id):
-    department = Department.objects.filter(id=id)
-    if request.method == 'POST':
-        department.delete()
-        return redirect('alldepartment')
+
+def delete_department(request):
+    if request.method == "POST":
+      id=request.POST.get('sid');
+      pi=Department.objects.get(pk=id)
+      pis=Departments.objects.get(id=id)
+      pi.delete();
+      pis.delete();
+      return JsonResponse({'status':1})
+    else:
+      return JsonResponse({'status':0})
+  
+
+def saveteacher(request):
+     if request.method == "POST":
+
+           course_code= request.POST.get('id')
+           course_name= request.POST['dept']
+           ins = Departments.objects.get(id=course_name)
+           max_numb_students=request.POST['name']
+           instructors= request.POST['sex']
+           inst= request.POST['DOB']
+           use= request.POST['user']
+           usser=User.objects.get(id=use)
+ 
+
+           usr= Teacher(user=usser,id=course_code,dept=ins,name=max_numb_students, sex=instructors, DOB=inst)
+
+           usr.save()
+           return JsonResponse({'status':'Save'})
+     else:
+           return JsonResponse({'status':0})
+
+
+
+def savecoursedata(request):
+     if request.method == "POST":
+
+           course_code= request.POST.get('id')
+           course_name= request.POST['dept']
+           ins = Department.objects.get(id=course_name)
+           coursename=request.POST['name']
+           sname= request.POST['shortname']
+    
+           usr= Teacher(dept=ins,id=course_code,name=coursename, shortname=sname)
+
+           usr.save()
+           return JsonResponse({'status':'Save'})
+     else:
+           return JsonResponse({'status':0})
+
+ 
+def savedepartment(request):
+    if request.method == "POST":
+
+        course_number = request.POST['id']
+        dept_name = request.POST['dept']
+  
+
+        usr = Departments(id=course_number, name=dept_name)
+        print(usr)
+        usr.save()
+       
+        return JsonResponse({'status': 'Save'})
+    else:
+        return JsonResponse({'status': 0})
+
 
 
 def savecourse_data(request):
@@ -188,6 +266,7 @@ def updatecourse_data(request, course_number):
         form = CourseForm(instance=course)
 
     return render(request, 'update.html', {'form': form})
+
 
 
 def updateinstructor_data(request, uid):
@@ -409,12 +488,11 @@ def add_time(request):
     return render(request, 'addtime.html', context)
 
 
-# def all_time(request):
+def all_time(request):
+     subjects = MeetingTime.objects.all()
+     context = {'schedule': subjects}
 
-#     subjects = MeetingTime.objects.all()
-#     context = {'schedule': subjects}
-
-#     return render(request, 'alltime.html', context)
+     return render(request, 'alltime.html', context)
 
 
 def all_profile(request):
@@ -426,10 +504,12 @@ def all_change(request):
 
 
 def all_dashboard(request):
-
+    student= Student.objects.count()
     courses = Course.objects.count()
+    section = Section.objects.count()
     teacher = Instructor.objects.count()
-    context = {'courses': courses, 'teacher': teacher}
+    room=Room.objects.count()
+    context = {'courses': courses, 'teacher': teacher,'sec':section,'stu':student,'rm':room }
     return render(request, 'dashboard.html', context)
 
 
@@ -576,7 +656,7 @@ class GeneticAlgorithm:
         for i in range(NUMB_OF_ELITE_SCHEDULES):
             crossover_pop.get_schedules().append(pop.get_schedules()[i])
         i = NUMB_OF_ELITE_SCHEDULES
-        while i < 9:
+        while i < POPULATION_SIZE:
             schedule1 = self._select_tournament_population(pop).get_schedules()[
                 0]
             schedule2 = self._select_tournament_population(pop).get_schedules()[
@@ -587,7 +667,7 @@ class GeneticAlgorithm:
         return crossover_pop
 
     def _mutate_population(self, population):
-        for i in range(NUMB_OF_ELITE_SCHEDULES, 9):
+        for i in range(NUMB_OF_ELITE_SCHEDULES, POPULATION_SIZE):
             self._mutate_schedule(population.get_schedules()[i])
         return population
 
@@ -612,7 +692,7 @@ class GeneticAlgorithm:
         i = 0
         while i < TOURNAMENT_SELECTION_SIZE:
             tournament_pop.get_schedules().append(
-                pop.get_schedules()[rnd.randrange(0, 9)])
+                pop.get_schedules()[rnd.randrange(0, POPULATION_SIZE)])
             i += 1
         tournament_pop.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
         return tournament_pop
@@ -647,9 +727,25 @@ def context_manager(schedule):
 
 
 
-def routinegeneration(request):
+def routinegenerationteacher(request):
     schedule = []
-    population = Population(9)
+    population = Population(POPULATION_SIZE)
+    generation_num = 0
+    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+    geneticAlgorithm = GeneticAlgorithm()
+    while population.get_schedules()[0].get_fitness() != 1.0:
+        generation_num += 1
+        print('\n> Generation #' + str(generation_num))
+        population = geneticAlgorithm.evolve(population)
+        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        schedule = population.get_schedules()[0].get_classes()
+
+    return render(request, 'teacherroutine.html', {'schedule': schedule, 'sections': Section.objects.all(),
+                                                      'times': MeetingTime.objects.all()})
+
+def routinegenerationstudent(request):
+    schedule = []
+    population = Population(POPULATION_SIZE)
     generation_num = 0
     population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
     geneticAlgorithm = GeneticAlgorithm()
@@ -664,31 +760,35 @@ def routinegeneration(request):
                                                       'times': MeetingTime.objects.all()})
 
 
+def routine(request):
+    schedule = []
+    population = Population(POPULATION_SIZE)
+    generation_num = 0
+    population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+    geneticAlgorithm = GeneticAlgorithm()
+    while population.get_schedules()[0].get_fitness() != 1.0:
+        generation_num += 1
+        print('\n> Generation #' + str(generation_num))
+        population = geneticAlgorithm.evolve(population)
+        population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
+        schedule = population.get_schedules()[0].get_classes()
+
+    return render(request, 'routine.html', {'schedule': schedule, 'sections': Section.objects.all(),
+                                                      'times': MeetingTime.objects.all()})
 
 
 
-def alltime(request):
-    return render(request,'alltime.html') 
-    
-    
+
+
+
+
+
 def signup(request):
     return render(request, 'signup.html')
 
 
-def course(request):
-    return render(request, 'course.html', {'navbar': 'course'})
 
 
-def about(request):
-    return render(request, 'about.html', {'navbar': 'about'})
-
-
-def single(request):
-    return render(request, 'single.html', {'navbar': 'single'})
-
-
-def contact(request):
-    return render(request, 'contact.html', {'navbar': 'contact'})
 
 
 def basepage(request):
@@ -697,12 +797,8 @@ def basepage(request):
     return render(request, 'base.html')
 
 
-def teacher(request):
-    return render(request, 'teacher.html', {'navbar': 'teacher'})
 
 
-def homepage(request):
-    return render(request, 'homepage.html', {'navbar': 'homepage'})
 
 
 # def attendance(request, stud_id):
@@ -806,23 +902,4 @@ def teacherdashboard(request):
     return render(request, 'teacherdashboard.html')
 
 
-def routine(request):
-    return render(request, 'routine.html')
 
-
-def saveteacher(request):
-     if request.method == "POST":
-
-           course_code= request.POST.get('id')
-           course_name= request.POST['dept']
-           max_numb_students=request.POST['name']
-           instructors= request.POST['sex']
-           inst= request.POST['DOB']
- 
-
-           usr= Teacher(id=course_code,dept=course_name,name=max_numb_students, sex=instructors, DOB=inst)
-
-           usr.save()
-           return JsonResponse({'status':'Save'})
-     else:
-           return JsonResponse({'status':0})

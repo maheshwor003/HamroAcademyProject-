@@ -41,29 +41,34 @@
                                     <label for="email">Email</label> {{ form.email}}
                                 </div>
                                 <div class="form-group last mb-4">
+                                    <label for="password">Address</label> {{ form.address }}
+                                </div>
+                                <div class="form-group last mb-4">
                                     <label for="password">Password</label> {{ form.password1 }}
                                 </div>
                                 <div class="form-group last mb-4">
                                     <label for="password">confirm Password</label> {{ form.password2 }}
                                 </div>
-                                <div class="d-flex mb-5 align-items-center">
+
+                                <!-- <div class="d-flex mb-5 align-items-center">
                                     <label class="control control--checkbox mb-0"><span class="caption">Admin</span>
                                         {{ form.is_admin }}
                                       <div class="control__indicator"></div>
                                     </label>
-                                </div>
+                                </div> -->
                                 <div class="d-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-0"><span class="caption">customer</span>
-                                        {{ form.is_student }}
-                                      <div class="control__indicator"></div>
-                                    </label>
-                                </div>
-                                <div class="d-flex mb-5 align-items-center">
-                                    <label class="control control--checkbox mb-0"><span class="caption">employee</span>
+                                    <label class="control control--checkbox mb-0"><span class="caption">Teacher</span>
                                         {{ form.is_teacher }}
                                       <div class="control__indicator"></div>
                                     </label>
                                 </div>
+                                <div class="d-flex mb-5 align-items-center">
+                                    <label class="control control--checkbox mb-0"><span class="caption">Student</span>
+                                        {{ form.is_student }}
+                                      <div class="control__indicator"></div>
+                                    </label>
+                                </div>
+                             
                                 <span class="text-error">{{ form.errors }}</span>
                                 <input type="submit" value="Register" class="btn btn-pill text-white btn-block btn-primary">
                             </form>

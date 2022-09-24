@@ -1,4 +1,6 @@
 {% extends "base.html" %} {% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/toastr.css' %}" />
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -40,7 +42,8 @@
                             <tr>
                                 <th>Teachers ID</th>
                                 <th>Teachers Name</th>
-                                <th>Edit</th>
+                                <th>Gender</th>
+                              
                                 <th>Delete</th>
 
                             </tr>
@@ -48,27 +51,11 @@
                         <tbody id="teacherbody">
                             {% for st in teachers_view %}
                             <tr>
-                                <td>{{st.uid}}</td>
+                                <td>{{st.id}}</td>
                                 <td>{{st.name}}</td>
-                                <td>
-                                    <a href="{%url 'updateinstructor' st.uid %}">
-                                        <button type="submit" class="btn btn-danger">
-                                   
-                                  
-
-                                    <i class='far fa-edit'></i>
-                                </button>
-                                    </a>
-                                </td>
-                                <td>
-
-                                    <form action="{% url 'deleteinstructor' st.uid %}" method="post">
-                                        {% csrf_token %} {{ form.as_p }}
-
-                                        <button type="submit" class="btn btn-danger">
-                                                <i class="far fa-trash-alt"></i>
-                                            </button>
-
+                                <td>{{st.sex}}</td>
+                                <td> 
+                                    <input type="button" data-sid="{{st.id}}" value="Delete" class="btn btn-danger btn-sm btn-del" />
                                 </td>
 
 
@@ -98,38 +85,52 @@
 </aside>
 <!-- /.control-sidebar -->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{% static 'js/toastr.js' %}"></script>
 <script type="text/javascript ">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
 
-            var reader = new FileReader();
+const BASE_URL = "http://127.0.0.1:8000/"
 
-            reader.onload = function(e) {
-                $('.image-upload-wrap').hide();
-
-                $('.file-upload-image').attr('src', e.target.result);
-                $('.file-upload-content').show();
-
-                $('.image-title').html(input.files[0].name);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-
-        } else {
-            removeUpload();
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
         }
     }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
 
-    function removeUpload() {
-        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-        $('.file-upload-content').hide();
-        $('.image-upload-wrap').show();
-    }
-    $('.image-upload-wrap').bind('dragover', function() {
-        $('.image-upload-wrap').addClass('image-dropping');
-    });
-    $('.image-upload-wrap').bind('dragleave', function() {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
+     $("#teacherbody").on("click",".btn-del",function() {
+    debugger;
+   let id =$(this).attr("data-sid");
+   let csr = csrftoken
+
+   mydata={sid:id,csrfmiddlewaretoken: csr };
+   mythis=this;
+   $.ajax({
+     url:"{% url 'deleteteacher' %}",
+     method: "POST",
+     data: mydata,
+     success: function(data){
+      if(data.status ==1){
+        toastr.error("Teacher Deleted!");
+        $(mythis).closest('tr').fadeOut();
+      }
+      if(data.status==0){
+    
+        toastr.error("Unable to Delete Teacher!");
+      }
+     },
+   });
+  });
+
 </script>
 {% endblock %}

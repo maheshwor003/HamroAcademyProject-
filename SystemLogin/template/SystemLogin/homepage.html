@@ -3,18 +3,8 @@
 {% load static %}
 <!-- Carousel Start -->
 
-
-
-
-
-
-
-
-
-
-
-
-<div class="container-fluid p-0 pb-5 mb-5">
+ <!-- Carousel Start -->
+ <div class="container-fluid p-0 pb-5 mb-5">
     <div id="header-carousel" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
@@ -22,25 +12,8 @@
             <li data-target="#header-carousel" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner">
-            {% for st in homepage_view %}
-
             <div class="carousel-item active" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg"
-                    style="min-height: 300px; object-fit: cover;">
-                <div class="carousel-caption d-flex align-items-center justify-content-center">
-
-                    <div class="p-5" style="width: 100%; max-width: 900px;">
-                        <h5 class="text-white text-uppercase mb-md-3">{{st.comp_name}}</h5>
-                        <h1 class="display-3 text-white mb-md-4">{{st.comp_title}}</h1>
-                        <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
-                       
-                    </div>
-                </div>
-            </div>
-          {% endfor %}
-            <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg"
-                    style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-1.jpg" style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -50,8 +23,7 @@
                 </div>
             </div>
             <div class="carousel-item" style="min-height: 300px;">
-                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg"
-                    style="min-height: 300px; object-fit: cover;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-2.jpg" style="min-height: 300px; object-fit: cover;">
                 <div class="carousel-caption d-flex align-items-center justify-content-center">
                     <div class="p-5" style="width: 100%; max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
@@ -60,10 +32,26 @@
                     </div>
                 </div>
             </div>
-         
+            <div class="carousel-item" style="min-height: 300px;">
+                <img class="position-relative w-100" src="../../static/design/img/carousel-3.jpg" style="min-height: 300px; object-fit: cover;">
+                <div class="carousel-caption d-flex align-items-center justify-content-center">
+                    <div class="p-5" style="width: 100%; max-width: 900px;">
+                        <h5 class="text-white text-uppercase mb-md-3">Hamro academy</h5>
+                        <h1 class="display-3 text-white mb-md-4">For your better future</h1>
+                        <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+<!-- Carousel End -->
+
+
+
+
+
+
 <!-- Carousel End -->
 
 
@@ -105,7 +93,7 @@
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" src="../../static/design/img/cat-1.jpg" alt="">
                     <a class="cat-overlay text-white text-decoration-none" >
-                        <h4 class="text-white font-weight-medium">{{st.name}}</h4>
+                        <h4 class="text-white font-weight-medium">{{st.dept_name}}</h4>
                     </a>
                     
                 </div>
@@ -135,7 +123,7 @@
                     
                     <div class="bg-secondary p-4">
 
-                        <a class="h5" href="">{{sc.name}}</a>
+                        <a class="h5" href="">{{sc.course_name}}</a>
 
                     </div>
                 </div>

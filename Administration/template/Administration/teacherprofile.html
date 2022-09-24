@@ -26,10 +26,10 @@
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="../../static/design/images/userss.JPG" alt="User profile picture">
+                                <img class="profile-user-img img-fluid img-circle" src="https://myrepublica.nagariknetwork.com/uploads/media/ddddd_20201129155325.jpg" alt="User profile picture">
                             </div>
-                            <h3 class="profile-username text-center">John Doe</h3>
-                            <p class="text-muted text-center">admin</p>
+                            <h3 class="profile-username text-center">{{ user.teacher.name}}</h3>
+                            <p class="text-muted text-center">{{user.username}}</p>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -42,9 +42,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <strong><i class="fas fa-user-md mr-1"></i> Occupation</strong>
+                            <strong><i class="fas fa-user-md mr-1"></i> Address</strong>
                             <p class="text-muted">
-                                Writter and Admin
+                               {{user.address}}
                             </p>
                             <hr>
                             <strong><i class="far fa-file-alt mr-1"></i> About</strong>
@@ -61,10 +61,9 @@
                         <div class="card">
                             <div class="card-header p-2">
                                 <ul class="nav nav-pills">
-                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Settings</a>
+                                    <li class="nav-item"><a class="nav-link active" href="#settings" data-toggle="tab">Teacher Details</a>
                                     </li>
-                                    <li class="nav-item"><a class="nav-link" href="#photo" data-toggle="tab">Photo</a>
-                                    </li>
+                                   
                                 </ul>
                             </div>
                             <!-- /.card-header -->
@@ -75,25 +74,43 @@
                                         <div class="form-group row">
                                             <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="John Doe">
+                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="Name" value="{{user.teacher.name}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username" value="admin">
+                                                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="{{user.username}}" value="admin">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                             <div class="col-sm-10">
-                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="admin@example.com">
+                                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" value="{{user.email}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Occupation</label>
+                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Address</label>
                                             <div class="col-sm-10">
-                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Occupation" value="Writter and Admin">
+                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Address" value="{{user.address}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Gender</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Gender" value="{{user.teacher.sex}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Department</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="Department" value="{{user.teacher.dept}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputOccupation" class="col-sm-2 col-form-label">Date of Birth</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="occupation" class="form-control" id="inputOccupation" placeholder="DOB" value="{{user.teacher.DOB}}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -102,62 +119,8 @@
                                                 <textarea class="form-control" name="about" id="inputAbout" placeholder="About">someone who likes to write and teach</textarea>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="socialmedia" class="col-sm-2 col-form-label">Social Media</label>
-                                            <div class="col-sm-10">
-                                                <select id="socialmedia" name="socialmedia" class="select2 form-control select2-hidden-accessible" data-placeholder="Select Social Media" style="width: 100%;" data-select2-id="socialmedia" tabindex="-1" aria-hidden="true"></select>
-                                                <span class="select2 select2-container select2-container--bootstrap4" dir="ltr" data-select2-id="4" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-socialmedia-container"><span class="select2-selection__rendered" id="select2-socialmedia-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select Social Media</span></span>
-                                                <span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span>
-                                                </span>
-                                                </span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                            </div>
-                                        </div>
-                                        <div class="socmed">
-                                            <div class="form-group row" id="socmed1">
-                                                <label for="" class="col-sm-2 col-form-label">Facebook</label>
-                                                <div class="col-sm-10">
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-facebook"></i></span></div>
-                                                        <input type="text" name="facebook" class="form-control" placeholder="https://www.facebook.com" value="https://www.facebook.com/johndoe">
-                                                        <div class="input-group-append" onclick="removeInput(1)"><span class="input-group-text"><i class="fas fa-times"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><input type="hidden" name="socmed[]" value="1">
-                                            <div class="form-group row" id="socmed2">
-                                                <label for="" class="col-sm-2 col-form-label">Twitter</label>
-                                                <div class="col-sm-10">
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-twitter"></i></span></div>
-                                                        <input type="text" name="twitter" class="form-control" placeholder="https://www.twitter.com" value="https://www.twitter.com/johndoe">
-                                                        <div class="input-group-append" onclick="removeInput(2)"><span class="input-group-text"><i class="fas fa-times"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><input type="hidden" name="socmed[]" value="2">
-                                            <div class="form-group row" id="socmed3">
-                                                <label for="" class="col-sm-2 col-form-label">YouTube</label>
-                                                <div class="col-sm-10">
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-youtube"></i></span></div>
-                                                        <input type="text" name="youtube" class="form-control" placeholder="https://www.youtube.com" value="https://www.youtube.com/c/johndoe">
-                                                        <div class="input-group-append" onclick="removeInput(3)"><span class="input-group-text"><i class="fas fa-times"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><input type="hidden" name="socmed[]" value="3">
-                                            <div class="form-group row" id="socmed4">
-                                                <label for="" class="col-sm-2 col-form-label">Instagram</label>
-                                                <div class="col-sm-10">
-                                                    <div class="input-group mb-3">
-                                                        <div class="input-group-prepend"><span class="input-group-text"> <i class="fab fa-instagram"></i></span></div>
-                                                        <input type="text" name="instagram" class="form-control" placeholder="https://www.instagram.com" value="https://www.instagram.com/johndoe">
-                                                        <div class="input-group-append" onclick="removeInput(4)"><span class="input-group-text"><i class="fas fa-times"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div><input type="hidden" name="socmed[]" value="4">
-                                        </div>
+                                       
+                                     
 
                                     </div>
                                     <div class="tab-pane" id="photo">
@@ -175,7 +138,7 @@
                                                         <div class="cr-slider-wrap"><input class="cr-slider" type="range" step="0.0001" aria-label="zoom"></div>
                                                     </div>
                                                     <div id="display-i" class="mx-auto">
-                                                        <img src="data:image/jpeg;base64,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"
+                                                        <img src="https://www.faceapp.com/static/img/content/compare/beard-example-before@3x.jpg"
                                                             alt="" style="width:200px">
                                                     </div>
                                                     <div class="buttons text-center">
@@ -193,9 +156,9 @@
                                 <!-- /.tab-content -->
                             </div>
                             <!-- /.card-body -->
-                            <div class="card-footer">
+                            <!-- <div class="card-footer">
                                 <button type="submit" class="btn btn-primary float-right">Update Profile</button>
-                            </div>
+                            </div> -->
                         </div>
                     </form>
                     <!-- /.nav-tabs-custom -->
@@ -207,12 +170,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<footer class="main-footer">
-    <strong>Copyright  <a href="{% url 'dashboard' %}">Hamro Academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
 
-    </div>
-</footer>
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">

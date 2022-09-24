@@ -38,7 +38,7 @@ class StudentForm(ModelForm):
  required_css_class='requiredfield'
  USN=forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" USN"}))
  name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" Student Name"}))
- YEARS= [x for x in range(1940,2021)]
+ YEARS= [x for x in range(1980,2000)]
  DOB= forms.DateField(label='Birthdate', widget=forms.SelectDateWidget)
  class Meta:
         model = Student
@@ -110,4 +110,4 @@ class SectionForm(ModelForm):
   num_class_in_week= forms.IntegerField(label="Total number of class in a week", widget=forms.Select(choices=INTEGER_CHOICES))
   class Meta:
         model = Section
-        fields = ['section_id', 'department', 'num_class_in_week']
+        fields = ['section_id', 'department', 'num_class_in_week','instructor','course','meeting_time','room']

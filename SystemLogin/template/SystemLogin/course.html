@@ -24,215 +24,47 @@
             <h1>Explore Top faculty</h1>
         </div>
         <div class="row">
+            {% for st in home_depview %}
             <div class="col-lg-3 col-md-6 mb-4">
                 <div class="cat-item position-relative overflow-hidden rounded mb-2">
                     <img class="img-fluid" src="../../static/design/img/cat-1.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">Civil faculty</h4>
+                    <a class="cat-overlay text-white text-decoration-none" >
+                        <h4 class="text-white font-weight-medium">{{st.dept_name}}</h4>
                     </a>
+                    
                 </div>
+                
             </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="../../static/design/img/cat-2.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">computer faculty</h4>
-                    </a>
-                </div>
+            {% endfor %}
             </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="../../static/design/img/cat-3.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">Electronics and Communication Faculty</h4>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="../../static/design/img/cat-4.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">Electrical Faculty</h4>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="../../static/design/img/cat-5.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">Civil and Rural Faculty</h4>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="../../static/design/img/cat-6.jpg" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="">
-                        <h4 class="text-white font-weight-medium">Architecture Faculty</h4>
-                    </a>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <!-- Category end-->
 
 
 <!-- Courses Start -->
+<!-- Courses Start -->
 <div class="container-fluid py-5">
     <div class="container py-5">
         <div class="text-center mb-5">
             <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Courses</h5>
-            <h1>Courses for Civil Faculty</h1>
+            <h1> Our Courses Include </h1>
         </div>
         <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
+            {% for sc in courses %}
+            <div class="col-lg-3 col-md-4 mb-3">
                 <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-A.jpg" alt="">
+                    
                     <div class="bg-secondary p-4">
 
-                        <a class="h5" href="">Engineering Mathmatics</a>
+                        <a class="h5" href="">{{sc.course_name}}</a>
 
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-bb.jpg" alt="">
-                    <div class="bg-secondary p-4">
-
-                        <a class="h5" href="">Programming in C</a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="rounded overflow-hidden mb-2">
-                    <img class="img-fluid" src="../../static/design/img/course-c.jpg" alt="">
-                    <div class="bg-secondary p-4">
-
-                        <a class="h5" href="">Engineering Drawing</a>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid py-5">
-            <div class="container py-5">
-                <div class="text-center mb-5">
-                    <h1>Courses for Computer Faculty</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-A.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Engineering Mathmatics</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-bb.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Programming in C</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-c.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Engineering Drawing</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid py-5">
-            <div class="container py-5">
-                <div class="text-center mb-5">
-                    <h1>Courses for Electronics and Communication Faculty</h1>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-A.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Engineering Mathmatics</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-bb.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Programming in C</a>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <div class="rounded overflow-hidden mb-2">
-                            <img class="img-fluid" src="../../static/design/img/course-c.jpg" alt="">
-                            <div class="bg-secondary p-4">
-
-                                <a class="h5" href="">Engineering Drawing</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="container-fluid py-5">
-                    <div class="container py-5">
-                        <div class="text-center mb-5">
-                            <h1>Courses for Architecture Faculty</h1>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="rounded overflow-hidden mb-2">
-                                    <img class="img-fluid" src="../../static/design/img/course-A.jpg" alt="">
-                                    <div class="bg-secondary p-4">
-
-                                        <a class="h5" href="">Engineering Mathmatics</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="rounded overflow-hidden mb-2">
-                                    <img class="img-fluid" src="../../static/design/img/course-bb.jpg" alt="">
-                                    <div class="bg-secondary p-4">
-
-                                        <a class="h5" href="">Programming in C</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 mb-4">
-                                <div class="rounded overflow-hidden mb-2">
-                                    <img class="img-fluid" src="../../static/design/img/course-c.jpg" alt="">
-                                    <div class="bg-secondary p-4">
-
-                                        <a class="h5" href="">Engineering Drawing</a>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+           
+            
         </div>
     </div>
 </div>

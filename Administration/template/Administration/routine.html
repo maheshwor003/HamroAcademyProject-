@@ -1,5 +1,4 @@
-
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 {% load static %} 
 {% block content %}
 <!-- Content Wrapper. Contains page content -->
@@ -9,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Routine Generation  Student</h1>
+                    <h1 class="m-0">Routine Generation  Admin</h1>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -28,49 +27,38 @@
             <div class="Allpost">
                 <div class="flexcreate">
                     <div>
-                        <div class="crdbtn">
-                            <a href="{% url 'routinegeneration' %}" class="btn">
-                            <button type="button" class="btn btn-primary">Routine Generation</button>
-                        </a>
-                        </div>
+                      
                     </div>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
+              
                 </div>
-             
-{% for section in sections %}
-<h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
-    <table class="table2">
-      <colgroup>
-        <col >
-        <col >
-        <col>
-        <col>
-        <col >
-        <col>
-      </colgroup>
-      <tr>
-        <th>Class #</th>
-        <th>Course</th>
-        <th>Venue(Block- Room)</th>
-        <th>Instructor</th>
-        <th>Class Timing</th>
-      </tr>
-      {% for class in schedule %}
-        {% if class.section == section.section_id %}
-        <tr>
-          <th>{{class.section_id}}</th>
-          <td>{{class.course}}</td>
-          <td>{{class.room}}</td>
-          <td>{{class.instructor}}</td>
-          <td>{{class.meeting_time}}</td>
-        </tr>
-        {% endif %}
-      {% endfor %}
-    </table>
+                {% for section in sections %}
+                <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+                <table class="table table-striped table-bordered">
+                    <thead>
 
-{% endfor %}
+
+                        <tr>
+                            <th>Class #</th>
+                            <th>Course</th>
+                            <th>Venue(Block- Room)</th>
+                            <th>Instructor</th>
+                            <th>Class Timing</th>
+                   
+                        </tr>
+                        <thead>
+                            <tbody>
+                                {% for class in schedule %} {% if class.section == section.section_id %}
+                                <tr>
+                                    <th>{{class.section_id}}</th>
+                                    <td>{{class.course}}</td>
+                                    <td>{{class.room}}</td>
+                                    <td>{{class.instructor}}</td>
+                                    <td>{{class.meeting_time}}</td>
+                               </tr>
+                                {% endif %} {% endfor %}
+                            </tbody>
+                </table>
+                {% endfor %}
             </div>
         </div>
     </section>

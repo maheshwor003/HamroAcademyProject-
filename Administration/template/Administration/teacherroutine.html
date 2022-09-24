@@ -28,14 +28,9 @@
             <div class="Allpost">
                 <div class="flexcreate">
                     <div>
-                        <div class="crdbtn">
-                            <a href="{% url 'routinegeneration' %}" class="btn"></a>
-                            <button type="button" class="btn btn-primary">Routine Generation</button>
-                        </div>
+                      
                     </div>
-                    <div>
-                        <input type="text" class="form-control" placeholder="Search">
-                    </div>
+              
                 </div>
                 {% for section in sections %}
                 <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>

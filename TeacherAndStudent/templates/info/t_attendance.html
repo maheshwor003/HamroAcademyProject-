@@ -2,7 +2,7 @@
 {% block content %}
 
 {% if c.student_set.all %}
-<div class="content-wrapper">
+
 <form action="{% url 'confirm' assc.id %}" method="post">
             {% csrf_token %}
      
@@ -46,7 +46,7 @@
 
     <input class="btn btn-success" type="submit" value="Submit">
 </form>
-</div>
+
 
     {% else %}
     <p>No students in Class</p>
