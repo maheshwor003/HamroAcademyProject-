@@ -1,5 +1,8 @@
+from distutils.command.upload import upload
+import re
+from telnetlib import DO
 from django.shortcuts import render, redirect
-
+from django.core.files.storage import FileSystemStorage
 from TeacherAndStudent.models import Departments
 from .models import Course, Instructor
 from django.http import JsonResponse
@@ -12,7 +15,8 @@ from .forms import *
 import random as rnd
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 
 # Create your views here.
 
@@ -26,7 +30,11 @@ def teacher(request):
 
 
 def student(request):
-    return render(request, 'studentpage.html')
+    subjects = Document.objects.all()
+    print(subjects)
+    context = {'routineview': subjects}
+    return render(request, 'studentpage.html',context)
+    
 
 
 def logout_out(request):
@@ -35,7 +43,10 @@ def logout_out(request):
 
 
 def base(request):
-    return render(request, 'dashboard.html')
+    subjects = Document.objects.all()
+    print(subjects)
+    context = {'routineview': subjects}
+    return render(request, 'dashboard.html',context)
 
 
 def add_teacher(request):
@@ -70,7 +81,23 @@ def add_student(request):
     }
     return render(request, 'add-student.html', context)
 
-
+def addroutine(request):
+    subjects = Document.objects.all()
+    print(subjects)
+    context = {'routineview': subjects}
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('addroutine')
+    else:
+        form = DocumentForm()
+    context = {
+        'form': form,'routineview':subjects
+    }
+    return render(request, 'addroutine.html', context)
+  
+  
 
 def all_teacher(request):
     subjects = Teacher.objects.all()
@@ -150,6 +177,12 @@ def delete_time(request, pid):
         section.delete()
         return redirect('alltime')
 
+def deleteroutine(request):
+    section = Document.objects.all()
+    if request.method == 'POST':
+        section.delete()
+        return redirect('addroutine')
+
 
 
 def delete_department(request):
@@ -181,6 +214,24 @@ def saveteacher(request):
 
            usr.save()
            return JsonResponse({'status':'Save'})
+     else:
+           return JsonResponse({'status':0})
+
+def saveroutine(request):
+     if request.method == "POST":
+      
+           
+           for i in sn['sn']:
+            sn= request.POST.get('sn')
+            course= request.POST['course'][i]
+            room=request.POST['room'][i]
+            instructor= request.POST['instructor'][i]
+            meetingtime= request.POST['meetingtime'][i]
+            section= request.POST['section'][i]
+            department= request.POST['department'][i]
+            usr= Routine(section_header=section,department_header=department,class_id=sn,course=course,venue=room,instructor=instructor,meeting_timing=meetingtime)
+            usr.save()
+            return JsonResponse({'status':'Save'})
      else:
            return JsonResponse({'status':0})
 
@@ -491,7 +542,7 @@ def add_time(request):
 def all_time(request):
      subjects = MeetingTime.objects.all()
      context = {'schedule': subjects}
-
+     print(context)
      return render(request, 'alltime.html', context)
 
 
@@ -513,7 +564,7 @@ def all_dashboard(request):
     return render(request, 'dashboard.html', context)
 
 
-POPULATION_SIZE = 9
+POPULATION_SIZE = 15
 NUMB_OF_ELITE_SCHEDULES = 1
 TOURNAMENT_SELECTION_SIZE = 3
 MUTATION_RATE = 0.05
@@ -771,8 +822,8 @@ def routine(request):
         print('\n> Generation #' + str(generation_num))
         population = geneticAlgorithm.evolve(population)
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
-        schedule = population.get_schedules()[0].get_classes()
-
+        schedule = population.get_schedules()[0].get_classes()     
+    print(schedule)   
     return render(request, 'routine.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                                       'times': MeetingTime.objects.all()})
 
@@ -792,9 +843,10 @@ def signup(request):
 
 
 def basepage(request):
-    csw = {'subjects': Instructor.objects.all().count()}
-    print(csw)
-    return render(request, 'base.html')
+    subjects = Document.objects.all()
+    print(subjects)
+    context = {'routineview': subjects}
+    return render(request, 'base.html',context)
 
 
 
@@ -883,7 +935,11 @@ def result(request):
 
 
 def teachernavbar(request):
-    return render(request, 'teachernavbar.html')
+    subjects = Document.objects.all()
+   
+    context = {'routineview': subjects}
+    return render(request, 'teachernavbar.html',context)
+   
 
 
 def t_result(request):
@@ -899,7 +955,11 @@ def teacherprofile(request):
 
 
 def teacherdashboard(request):
-    return render(request, 'teacherdashboard.html')
+    subjects = Document.objects.all()
+    print(subjects)
+    context = {'routineview': subjects}
+    return render(request, 'teacherdashboard.html',context)
+   
 
 
 

@@ -87,7 +87,7 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{% url 'studentpage' %}" class="brand-link">
+            <a href="" class="brand-link">
                 <img src="{% static 'design/images/hamroacademy.jpg' %}" alt="Logo">
             </a>
 
@@ -143,12 +143,17 @@
 
                      
 
+                               
                             <li class="nav-item">
-                                <a href="{% url 'routineteacher' %}" class="nav-link">
+                                {% for st in routineview %}
+                                 <a href="{{st.document.url}}" class="nav-link">
                                     <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>View Routine</p>
-                                </a>
-                            </li>
+                                    
+                                     <p>{{st.description}}</p>
+                                     {% endfor %}
+                                 </a>
+                             
+                             </li>
 
                        
 
