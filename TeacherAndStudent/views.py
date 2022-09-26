@@ -5,7 +5,7 @@ from .models import Departments, Class, Student, Attendance, Courses, Teacher, A
 from django.urls import reverse
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
-
+from Administration.models import Document
 
 # Create your views here.
 
@@ -49,8 +49,11 @@ def attendance_detail(request, stud_id, course_id):
 
 
 def t_clas(request, teacher_id, choice):
+    subjects = Document.objects.all()
     teacher1 = get_object_or_404(Teacher, id=teacher_id)
-    return render(request, 'info/t_clas.html', {'teacher1': teacher1, 'choice': choice})
+    context = {'routineview': subjects,'teacher1': teacher1, 'choice': choice}
+  
+    return render(request, 'info/t_clas.html', context)
 
 
 @login_required()
@@ -85,6 +88,7 @@ def cancel_class(request, ass_c_id):
 
 @login_required()
 def t_attendance(request, ass_c_id):
+    
     assc = get_object_or_404(AttendanceClass, id=ass_c_id)
     ass = assc.assign
     c = ass.class_id

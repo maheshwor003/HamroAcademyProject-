@@ -31,29 +31,32 @@
                         <a href="{% url 'addstudent' %}" class="btn btn-primary">Add Student</a>
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input type="text" class="form-control" id="studentid" placeholder="Search">
                     </div>
                 </div>
                 <div class="postable TBL">
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
+                                <th>Student ID</th>
                                 <th>User</th>
-                                <th>Class ID</th>
-                                <th>USN</th>
+                                <th>Class</th>
+                               
                                 <th>Student Name</th>
-                                <th>Sex</th>
-                                <th>DOB</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
 
                             </tr>
                         </thead>
+                        <tbody id="studentbody">
                             {% for st in student_view %}
                             <tr>
+                                <td>{{st.USN}}</td>
                                 <td>{{st.user}}</td>
                                 <td>{{st.class_id}}</td>
-                                <td>{{st.USN}}</td>
+                               
                                 <td>{{st.name}}</td>
                                 <td>{{st.sex}}</td>
                                 <td>{{st.DOB}}</td>
@@ -108,38 +111,17 @@
 </aside>
 <!-- /.control-sidebar -->
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript ">
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('.image-upload-wrap').hide();
-
-                $('.file-upload-image').attr('src', e.target.result);
-                $('.file-upload-content').show();
-
-                $('.image-title').html(input.files[0].name);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-
-        } else {
-            removeUpload();
-        }
-    }
-
-    function removeUpload() {
-        $('.file-upload-input').replaceWith($('.file-upload-input').clone());
-        $('.file-upload-content').hide();
-        $('.image-upload-wrap').show();
-    }
-    $('.image-upload-wrap').bind('dragover', function() {
-        $('.image-upload-wrap').addClass('image-dropping');
+  
+    $("#studentid").on("keyup", function () {
+          debugger;
+           var value = $(this).val().toLowerCase();
+           $("#studentbody tr").filter(function () {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
     });
-    $('.image-upload-wrap').bind('dragleave', function() {
-        $('.image-upload-wrap').removeClass('image-dropping');
-    });
+
+   
 </script>
 {% endblock %}

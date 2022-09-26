@@ -40,6 +40,10 @@
                             <tr class="table-headers">
                                 <th>Section Id</th>
                                 <th>Department</th>
+                                <th>Teacher Name</th>
+                                <th>Course</th>
+                                <th>Meeting Time</th>
+                                <th>Room No</th>
                                 <th>Total Classes</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
@@ -53,6 +57,10 @@
                             <tr>
                                 <td>{{sec.section_id}}</td>
                                 <td>{{sec.department}}</td>
+                                <td>{{sec.instructor.name}}</td>
+                                <td>{{sec.course.course_name}}</td>
+                                <td>{{sec.meeting_time}}</td>
+                                <td>{{sec.room}}</td>
                                 <td>{{sec.num_class_in_week }}</td>
                                 <td>
                                     <a href="{%url 'updatesection' sec.section_id %}">

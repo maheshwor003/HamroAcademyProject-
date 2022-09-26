@@ -177,6 +177,16 @@ def delete_time(request, pid):
         section.delete()
         return redirect('alltime')
 
+
+def deletedepartment(request, dept_name):
+    section = Departments.objects.filter(name=dept_name)
+    sections = Department.objects.filter(dept_name=dept_name)
+    if request.method == 'POST':
+        section.delete()
+        sections.delete()
+        return redirect('alldepartment')
+
+
 def deleteroutine(request):
     section = Document.objects.all()
     if request.method == 'POST':
@@ -242,7 +252,7 @@ def savecoursedata(request):
 
            course_code= request.POST.get('id')
            course_name= request.POST['dept']
-           ins = Department.objects.get(id=course_name)
+           ins = Departments.objects.get(id=course_name)
            coursename=request.POST['name']
            sname= request.POST['shortname']
     
@@ -420,7 +430,6 @@ def add_course(request):
     listdepartment = Departments.objects.all()
     form = CourseForm(request.POST or None)
     if request.method == 'POST':
-
         if form.is_valid():
             form.save()
             return redirect('addcourse')
@@ -567,7 +576,7 @@ def all_dashboard(request):
 POPULATION_SIZE = 15
 NUMB_OF_ELITE_SCHEDULES = 1
 TOURNAMENT_SELECTION_SIZE = 3
-MUTATION_RATE = 0.05
+MUTATION_RATE = 0.02
 
 
 class Data:
@@ -773,7 +782,6 @@ def context_manager(schedule):
         cls['meeting_time'] = [classes[i].meeting_time.pid,
                                classes[i].meeting_time.day, classes[i].meeting_time.time]
         context.append(cls)
-        print(context)
     return context
 
 
@@ -822,8 +830,7 @@ def routine(request):
         print('\n> Generation #' + str(generation_num))
         population = geneticAlgorithm.evolve(population)
         population.get_schedules().sort(key=lambda x: x.get_fitness(), reverse=True)
-        schedule = population.get_schedules()[0].get_classes()     
-    print(schedule)   
+        schedule = population.get_schedules()[0].get_classes()       
     return render(request, 'routine.html', {'schedule': schedule, 'sections': Section.objects.all(),
                                                       'times': MeetingTime.objects.all()})
 

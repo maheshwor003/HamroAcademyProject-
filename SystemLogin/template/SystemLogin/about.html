@@ -17,10 +17,11 @@
 </div>
 <!-- Header End -->
 
-
-<!-- About Start -->
+{% for st in homepage_view %}
 <div class="container-fluid py-5">
+   
     <div class="container py-5">
+
         <div class="row align-items-center">
             <div class="col-lg-5">
                 <img class="img-fluid rounded mb-4 mb-lg-0" src="../../static/design/img/about.jpg" alt="">
@@ -28,16 +29,15 @@
             <div class="col-lg-7">
                 <div class="text-left mb-4">
                     <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">About Us</h5>
-                    <h1>For your better future</h1>
+                    <h1>{{st.comp_title}}</h1>
                 </div>
-                <p>Ac dictum vulputate a facilisi euismod mi adipiscing mus fames a a consectetur arcu felis accumsan parturient in fusce enim ac nostra ridiculus sit nulla at et parturient etiam.Ad risus ac elementum per sociosqu id class vestibulum suspendisse
-                    dui ut dis parturient scelerisque semper consequat turpis augue torquent eget venenatis condimentum a condimentum pharetra.Gravida vestibulum arcu cras parturient curae convallis est a arcu etiam mollis ut semper hac adipiscing taciti
-                    condimentum blandit scelerisque a curabitur dis vestibulum a a scelerisque id a.Laoreet suscipit condimentum a mus mattis.</p>
+                <p>{{st.comp_details}}</p>
                 <a href="" class="btn btn-primary py-md-2 px-md-4 font-weight-semi-bold mt-2">Learn More</a>
             </div>
         </div>
     </div>
 </div>
+{% endfor %}
 <!-- About End -->
 
 

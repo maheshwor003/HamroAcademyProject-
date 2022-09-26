@@ -121,20 +121,20 @@
                             </li>
 
                       
-                            <!-- {{ request.user.student.USN}}
-                            <a class="nav-link" href="{% url 'attendance' request.user.student.USN %}">
+                        
                          
-                      -->
+                   {% if request.user.student.USN %}
                             <li class="nav-item">
                                 <a href="{% url 'attendance' request.user.student.USN %}" class="nav-link">
                                     <i class="nav-icon fas  ion ion-stats-bars "></i>
                                     <p>View Attendence</p>
                                 </a>
                             </li>
+                   
 
                     
                        
-
+                      
                             <li class="nav-item">
                                 <a href="{% url 'marks_list' request.user.student.USN %}" class="nav-link">
                                     <i class="nav-icon fas  ion ion-stats-bars"></i>
@@ -142,7 +142,7 @@
                                 </a>
                             </li>
 
-                       
+                     
                        
                             <li class="nav-item">
                                 {% for st in routineview %}
@@ -155,7 +155,7 @@
                              
                              </li>
                        
-
+                             {% endif %}
                         <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->

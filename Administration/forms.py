@@ -38,7 +38,7 @@ class StudentForm(ModelForm):
  required_css_class='requiredfield'
  USN=forms.IntegerField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" USN"}))
  name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":" Student Name"}))
- YEARS= [x for x in range(1980,2000)]
+ YEARS= [x for x in range(0,20)]
  DOB= forms.DateField(label='Birthdate', widget=forms.SelectDateWidget)
  class Meta:
         model = Student
@@ -86,12 +86,11 @@ class CourseForm(ModelForm):
     queryset=Instructor.objects.all(),
     widget=forms.CheckboxSelectMultiple
   )
-  short_name=forms.CharField(widget=forms.TextInput(attrs={"class":"form-control","placeholder":"short name"}))
-
+ 
 
   class Meta:
         model = Course
-        fields = ['course_number', 'course_name', 'max_numb_students', 'instructors','short_name']
+        fields = ['course_number', 'course_name', 'max_numb_students', 'instructors']
 
 
 class DepartmentForm(ModelForm):

@@ -2,7 +2,7 @@
 {% load static %} 
 {% block content %}
 <link rel="stylesheet" href="../../static/css/toastr.css">
-<link rel="stylesheet" href="../../static/css/style.css">
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -12,13 +12,11 @@
                 <div class="col-sm-6">
                     <h1 class="m-0">Routine Generation  Admin</h1>
 
-                    <button onclick="saveroutine();">save rotuine </button>
-                    <button onclick="window.print();">Print </button>
+                  
+                    <button class="btn btn-secondary" onclick="window.print();">Print Generation </button>
                 </div>
                 <!-- /.col -->
-                <div class="col-sm-6">
-                   
-                </div>
+             
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -50,12 +48,12 @@
                             <tbody>
                                 {% for class in schedule %} {% if class.section == section.section_id %}
                                 <tr class="routinegenerate">
-                                    <th class="sec" name="sn" id-sn="{{class.section_id}}">{{class.section_id}}</th>
-                                    <td class="course" name="course" id-course='{{class.course}}'>{{class.course}}</td>
-                                    <td classs="room" name="room" id-room="{{class.room}}">{{class.room}}</td>
+                                    <th>{{class.section_id}}</th>
+                                    <td>{{class.course}}</td>
+                                    <td>{{class.room}}</td>
                                     
-                                    <td class="instructor" name="instructor" id-instructor="{{class.instructor}}">{{class.instructor.name}}</td>
-                                    <td class="meetingtime" name="meetingtime" id-meetingtime="{{class.meeting_time}}">{{class.meeting_time}}</td>
+                                    <td>{{class.instructor.name}}</td>
+                                    <td> {{class.meeting_time.day}}|| {{class.meeting_time.time}}</td>
                                </tr>
                                 {% endif %} {% endfor %}
                             </tbody>
@@ -80,12 +78,12 @@
 <!-- /.control-sidebar -->
 <!-- /.control-sidebar -->
 </div>
-<script src="../../static/js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="../../static/js/toastr.js"></script>
 <script>
    $('document').ready(function () {
 
-toastr.success('Category List');
+toastr.success('Routine');
 
 
 
@@ -106,77 +104,77 @@ function getCookie(name) {
         return cookieValue;
     }
     const csrftoken = getCookie('csrftoken');
-function saveroutine(){
-    {
-            debugger;
-            var sn = [];
-            var course=[];
-            var room=[];
-            var instructor=[];
-            var meetingtime=[];
-            var section=[];
-            var department=[];
-            var csr=$("input[name=csrfmiddlewaretoken").val();
-            $.each($("[name='sn']"), function () {
+// function saveroutine(){
+//     {
+//             debugger;
+//             var sn = [];
+//             var course=[];
+//             var room=[];
+//             var instructor=[];
+//             var meetingtime=[];
+//             var section=[];
+//             var department=[];
+//             var csr=$("input[name=csrfmiddlewaretoken").val();
+//             $.each($("[name='sn']"), function () {
 
-               sn.push($(this).attr("id-sn"));
-                 });
-            $.each($("[name='course']"), function () {
+//                sn.push($(this).attr("id-sn"));
+//                  });
+//             $.each($("[name='course']"), function () {
 
-              course.push($(this).attr("id-course"));
-               });
-               $.each($("[name='room']"), function () {
+//               course.push($(this).attr("id-course"));
+//                });
+//                $.each($("[name='room']"), function () {
 
-                   room.push($(this).attr("id-room"));
-                });
-                $.each($("[name='instructor']"), function () {
+//                    room.push($(this).attr("id-room"));
+//                 });
+//                 $.each($("[name='instructor']"), function () {
 
-                    instructor.push($(this).attr("id-instructor"));
-                    });
-                $.each($("[name='meetingtime']"), function () {
+//                     instructor.push($(this).attr("id-instructor"));
+//                     });
+//                 $.each($("[name='meetingtime']"), function () {
 
-                meetingtime.push($(this).attr("id-meetingtime"));
-                    });
-                    $.each($("[name='sectionhead']"), function () {
+//                 meetingtime.push($(this).attr("id-meetingtime"));
+//                     });
+//                     $.each($("[name='sectionhead']"), function () {
 
-                    section.push($(this).attr("id-section"));
-                    department.push($(this).attr("id-department"));
-                        });
+//                     section.push($(this).attr("id-section"));
+//                     department.push($(this).attr("id-department"));
+//                         });
                
 
     
-        debugger;
-            var obj = {
-                sn: sn,
-                course:course,
-                room:room,
-                instructor:instructor,
-                meetingtime:meetingtime,
-                section:section,
-                department:department,
-                csrfmiddlewaretoken: csr
+//         debugger;
+//             var obj = {
+//                 sn: sn,
+//                 course:course,
+//                 room:room,
+//                 instructor:instructor,
+//                 meetingtime:meetingtime,
+//                 section:section,
+//                 department:department,
+//                 csrfmiddlewaretoken: csr
                 
 
-            };
-            debugger;
-            $.ajax({
-                url:"{% url 'saveroutine' %}",
-                type: "POST",
-                data: obj,
-                success: function () {
+//             };
+//             debugger;
+//             $.ajax({
+//                 url:"{% url 'saveroutine' %}",
+//                 type: "POST",
+//                 data: obj,
+//                 success: function () {
 
-                    debugger;
-                    toastr.success("Success");
+//                     debugger;
+//                     toastr.success("Success");
 
                   
-                    location.reload();
-                },
-                error: function () {
-                    toastr.error('Error. Please try again.');
-                }
-            });
-        }
-}
+//                     location.reload();
+//                 },
+//                 error: function () {
+//                     toastr.error('Error. Please try again.');
+//                 }
+//             });
+//         }
+// }
     
 </script>
 {% endblock %}

@@ -56,6 +56,10 @@ urlpatterns = [
     path('delete_room/<str:r_number>/', views.delete_room, name='deleteroom'),
     path('delete_time/<str:pid>/', views.delete_time, name='deletetime'),
     path('delete_department',views.delete_department, name='delete_department'),
+    path('deletedepartment/<str:dept_name>/', views.deletedepartment, name='deletedepartment'),
+
+
+
     path('delete_section/<str:section_id>/',
          views.delete_section, name='deletesection'),
      path('deletetudent/<str:USN>',

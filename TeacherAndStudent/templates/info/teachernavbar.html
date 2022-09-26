@@ -55,7 +55,7 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link" data-toggle="dropdown" href="#">
-                        {{ request.user.id }}  ||    {{ request.user.username }}    <i class="nav-icon fas fa-fw fa-user "></i>
+                        {{ request.user.teacher.id }}  ||    {{ request.user.username }}    <i class="nav-icon fas fa-fw fa-user "></i>
                     
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -124,7 +124,7 @@
 
                        
 
-
+                            {% if request.user.teacher.id %}
                       
                             <li class="nav-item">
                                 <a href="{% url 't_clas' request.user.teacher.id 1 %}" class="nav-link">
@@ -155,7 +155,7 @@
                              
                              </li>
 
-                       
+                             {% endif %}
 
                         <!-- /.sidebar-menu -->
             </div>
