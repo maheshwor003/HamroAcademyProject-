@@ -1,3 +1,4 @@
+from re import T
 from django.db import models
 import random as rnd
 from django.db import models
@@ -105,6 +106,23 @@ class Section(models.Model):
         section = Section.objects.get(pk=self.section_id)
         section.instructor = instructor
         section.save()
+
+class Routine(models.Model):
+    section_header = models.CharField(max_length=20, blank=True)
+    department_header = models.CharField(max_length=20, blank=True)
+    class_id = models.CharField(max_length=20, primary_key=True, blank=True)
+    course = models.CharField(max_length=20,  blank=True)
+    venue = models.CharField(max_length=20, blank=True)
+    instructor = models.CharField(max_length=20, blank=True)
+    meeting_timing = models.CharField(max_length=20, blank=True)
+
+class Document(models.Model):
+    description=models.CharField(max_length=255,blank=True)
+    document=models.FileField(upload_to='documents/')
+    uploaded_at =models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table="myapp_document"
 
 '''
 class Data(models.Manager):

@@ -46,8 +46,9 @@ urlpatterns = [
      path('updatestudent/<str:USN>',
          views.updatestudent_data, name='updatestudent'),
     path('update/<str:id>', views.update_data, name="updatedata"),
-    
-    
+    path('addroutine/', views.addroutine, name='addroutine'),
+    path('deleteroutine/', views.deleteroutine, name='deleteroutine'),
+    path('saveroutine/', views.saveroutine, name='saveroutine'),
     path('base/', views.basepage, name='base'),
     path('savecourse/', views.savecourse_data, name='savecourse'),
     path('delete_course/<str:pk>/', views.delete_course, name='deletecourse'),
@@ -83,6 +84,7 @@ urlpatterns = [
     path('alltime/', views.all_time, name='alltime'),
     path('saveteacher/', views.saveteacher, name='saveteacher'),
     path('savecoursedata/', views.savecoursedata, name='savecoursedata'),
+    
 
 
 

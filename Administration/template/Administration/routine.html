@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% load static %} 
 {% block content %}
+<link rel="stylesheet" href="../../static/css/toastr.css">
+<link rel="stylesheet" href="../../static/css/style.css">
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -9,6 +11,9 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0">Routine Generation  Admin</h1>
+
+                    <button onclick="saveroutine();">save rotuine </button>
+                    <button onclick="window.print();">Print </button>
                 </div>
                 <!-- /.col -->
                 <div class="col-sm-6">
@@ -24,21 +29,17 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="Allpost">
-                <div class="flexcreate">
-                    <div>
-                      
-                    </div>
-              
-                </div>
+            <div class="my-section">
+               
                 {% for section in sections %}
-                <h2 class="secHead">{{ section.section_id }} ({{ section.department }})</h2>
+                {% csrf_token %}
+                <h2 class="secHead" name="sectionhead" id-section="{{section.section_id}}" id-department="{{ section.department }}">{{ section.section_id }} ({{ section.department }})</h2>
                 <table class="table table-striped table-bordered">
                     <thead>
 
 
                         <tr>
-                            <th>Class #</th>
+                            <th>S.N</th>
                             <th>Course</th>
                             <th>Venue(Block- Room)</th>
                             <th>Instructor</th>
@@ -48,18 +49,21 @@
                         <thead>
                             <tbody>
                                 {% for class in schedule %} {% if class.section == section.section_id %}
-                                <tr>
-                                    <th>{{class.section_id}}</th>
-                                    <td>{{class.course}}</td>
-                                    <td>{{class.room}}</td>
-                                    <td>{{class.instructor}}</td>
-                                    <td>{{class.meeting_time}}</td>
+                                <tr class="routinegenerate">
+                                    <th class="sec" name="sn" id-sn="{{class.section_id}}">{{class.section_id}}</th>
+                                    <td class="course" name="course" id-course='{{class.course}}'>{{class.course}}</td>
+                                    <td classs="room" name="room" id-room="{{class.room}}">{{class.room}}</td>
+                                    
+                                    <td class="instructor" name="instructor" id-instructor="{{class.instructor}}">{{class.instructor.name}}</td>
+                                    <td class="meetingtime" name="meetingtime" id-meetingtime="{{class.meeting_time}}">{{class.meeting_time}}</td>
                                </tr>
                                 {% endif %} {% endfor %}
                             </tbody>
                 </table>
                 {% endfor %}
+                
             </div>
+        
         </div>
     </section>
     <!-- /.content -->
@@ -67,11 +71,7 @@
 
 </div>
 <!-- /.content-wrapper -->
-<footer class="main-footer ">
-    <strong>Copyright  <a href="{% url 'dashboard' %}">Hamro academy</a>.</strong> All rights reserved.
-    <div class="float-right d-none d-sm-inline-block ">
-    </div>
-</footer>
+
 
 <!-- Control Sidebar -->
 <aside class="control-sidebar control-sidebar-dark">
@@ -80,5 +80,103 @@
 <!-- /.control-sidebar -->
 <!-- /.control-sidebar -->
 </div>
+<script src="../../static/js/jquery.min.js"></script>
+<script src="../../static/js/toastr.js"></script>
+<script>
+   $('document').ready(function () {
 
+toastr.success('Category List');
+
+
+
+});
+function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
+function saveroutine(){
+    {
+            debugger;
+            var sn = [];
+            var course=[];
+            var room=[];
+            var instructor=[];
+            var meetingtime=[];
+            var section=[];
+            var department=[];
+            var csr=$("input[name=csrfmiddlewaretoken").val();
+            $.each($("[name='sn']"), function () {
+
+               sn.push($(this).attr("id-sn"));
+                 });
+            $.each($("[name='course']"), function () {
+
+              course.push($(this).attr("id-course"));
+               });
+               $.each($("[name='room']"), function () {
+
+                   room.push($(this).attr("id-room"));
+                });
+                $.each($("[name='instructor']"), function () {
+
+                    instructor.push($(this).attr("id-instructor"));
+                    });
+                $.each($("[name='meetingtime']"), function () {
+
+                meetingtime.push($(this).attr("id-meetingtime"));
+                    });
+                    $.each($("[name='sectionhead']"), function () {
+
+                    section.push($(this).attr("id-section"));
+                    department.push($(this).attr("id-department"));
+                        });
+               
+
+    
+        debugger;
+            var obj = {
+                sn: sn,
+                course:course,
+                room:room,
+                instructor:instructor,
+                meetingtime:meetingtime,
+                section:section,
+                department:department,
+                csrfmiddlewaretoken: csr
+                
+
+            };
+            debugger;
+            $.ajax({
+                url:"{% url 'saveroutine' %}",
+                type: "POST",
+                data: obj,
+                success: function () {
+
+                    debugger;
+                    toastr.success("Success");
+
+                  
+                    location.reload();
+                },
+                error: function () {
+                    toastr.error('Error. Please try again.');
+                }
+            });
+        }
+}
+    
+</script>
 {% endblock %}

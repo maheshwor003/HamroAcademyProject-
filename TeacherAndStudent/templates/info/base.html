@@ -146,11 +146,15 @@
                        
                        
                             <li class="nav-item">
-                                <a href="{% url 'routinestudent' %}" class="nav-link">
+                                {% for st in routineview %}
+                                 <a href="{{st.document.url}}" class="nav-link">
                                     <i class="nav-icon far fa-calendar-alt"></i>
-                                    <p>View Routine</p>
-                                </a>
-                            </li>
+                                    
+                                     <p>{{st.description}}</p>
+                                     {% endfor %}
+                                 </a>
+                             
+                             </li>
 
                        
 

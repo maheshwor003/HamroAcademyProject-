@@ -8,4 +8,5 @@ admin.site.register(MeetingTime)
 admin.site.register(Course)
 admin.site.register(Department)
 admin.site.register(Section)
-
+admin.site.register(Routine)
+admin.site.register(Document)

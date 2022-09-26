@@ -68,6 +68,12 @@ class MeetingTimeForm(ModelForm):
             'day': forms.Select(),
         }
 
+class DocumentForm(ModelForm):
+   class Meta:
+        model = Document
+        fields = ('description','document',)
+        
+
 
 class CourseForm(ModelForm):
   error_css_class='error-field'

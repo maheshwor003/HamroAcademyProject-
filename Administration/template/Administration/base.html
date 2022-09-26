@@ -274,13 +274,43 @@
                         
                         </li>
                         <li class="nav-item">
-                            <a href="{% url 'routine' %}" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                   Routine Generation
-                                   
+                                    Routine
+                                    <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{% url 'routine' %}" class="nav-link">
+                                        <i class="nav-icon fas fa-copy"></i>
+                                        <p>
+                                           Routine Generation
+                                           
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{% url 'addroutine' %}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Add New Routine</p>
+                                    </a>
+                                </li>
+                               
+                                <li class="nav-item">
+                                   {% for st in routineview %}
+                                    <a href="{{st.document.url}}" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                       
+                                        <p>{{st.description}}</p>
+                                        {% endfor %}
+                                    </a>
+                                
+                                </li>
+                              
+                            </ul>
+                           
                           
                          
                         
